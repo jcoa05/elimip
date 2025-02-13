@@ -1,30 +1,292 @@
 ---
 title: "Mosquito-borne disease and protective behavior in metropolitan France: a pre-registered discrete-choice experiment"
-author: "Juan Ocampo"
+author: "Juan Carlos Ocampo"
 date: "`r Sys.Date()`"
-output: html_document
+output:
+  word_document: default
+  html_document:
+    df_print: paged
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+# Introduction
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r Introduction, results = "asis"}
+#In November 2023, we conducted a cross-sectional knowledge, attitude, and protective behavior survey among a general sample (n=2,087) of adults aged 18 to 79 in metropolitan France.
 ```
 
-## Including Plots
+### Packages
 
-You can also embed plots, for example:
+```{r Packages: Load, message=FALSE, warning=FALSE}
+#Data wrangling
+library(tidyverse)
+library(haven) 
+library(dplyr) 
+library(labelled)
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+#Modelling
+library(lme4)
+library(glmmTMB)
+library(ordinal)
+library(splines2)
+
+#Performance
+library(lmtest)
+library(performance)
+library(DHARMa)
+library(bbmle) #AICtab
+
+#Visuals
+library(ggplot2)
+library(sjPlot)
+library(gtsummary)
+library(webshot)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r Packages: Versions, warning=FALSE, echo = FALSE}
+#Package versions
+installed.packages()[names(sessionInfo()$otherPkgs), "Version"]
+```
+
+### Dataframe
+
+```{r Dataframe}
+# Load dataframe
+df <- read.csv("elimip.csv")
+```
+
+### Data preparation
+
+```{r Dataframe: Variable creation, message=FALSE, echo = FALSE}
+# Calculate var count_prev
+values_to_replace <- c("Autre", "AUCUN", "aucun", "rien", "rien de spÃ©cial", "rien de spécial", "Nous avons eu peu de moustiques") #delete inappropriate values (e.g., aucun, rien)
+prev_activity_cols <- paste0("prev_activity", 1:9)
+df[, prev_activity_cols][df[, prev_activity_cols] %in% values_to_replace] <- ""
+df$prev_activity_other[df$prev_activity_other %in% values_to_replace] <- ""
+df$count_prev <- rowSums(df[, c(prev_activity_cols, "prev_activity_other")] != "")
+prev_activity_cols <- paste0("prev_activity", 1:9)
+df$count_prev <- as.numeric(df$count_prev) #manual calculation was performed for 21 subjects (1%) at random and compared to calculation through code
+
+#create prev_activity variables
+df <- df %>%
+    rowwise() %>%
+    mutate(activity_gouttieres = if_else(any(c_across(starts_with("prev_activity")) == "L’entretien des gouttières pour faciliter le bon écoulement des eaux"), "Yes", "No")) %>%
+    ungroup()
+
+df <- df %>%
+    rowwise() %>%
+    mutate(activity_pieges = if_else(any(c_across(starts_with("prev_activity")) == "Usage des pièges à moustiques"), "Yes", "No")) %>%
+    ungroup()
+
+df <- df %>%
+    rowwise() %>%
+    mutate(activity_vetements = if_else(any(c_across(starts_with("prev_activity")) == "Le port des vêtements longs, amples et clairs"), "Yes", "No")) %>%
+    ungroup()
+
+df <- df %>%
+    rowwise() %>%
+    mutate(activity_insecticide = if_else(any(c_across(starts_with("prev_activity")) == "L’application d’insecticides (ou la fumigation) à l'intérieur ou à l'extérieur de la maison"), "Yes", "No")) %>%
+    ungroup()
+
+df <- df %>%
+    rowwise() %>%
+    mutate(activity_moustiquaires = if_else(any(c_across(starts_with("prev_activity")) == "Utilisation de moustiquaires (sur les fenêtres)"), "Yes", "No")) %>%
+    ungroup()
+
+df <- df %>%
+    rowwise() %>%
+    mutate(activity_vidage = if_else(any(c_across(starts_with("prev_activity")) == "Le vidage régulier ou la suppression des coupelles sous les pots de fleurs, vases (ou le remplissage avec de sable afin de conserver l’humidité sans qu’il y ait d’eau stagnante)"), "Yes", "No")) %>%
+    ungroup()
+
+df <- df %>%
+    rowwise() %>%
+    mutate(activity_spirales = if_else(any(c_across(starts_with("prev_activity")) == "Usage de bougies et/ou de spirales anti-moustiques"), "Yes", "No")) %>%
+    ungroup()
+
+df <- df %>%
+    rowwise() %>%
+    mutate(activity_repulsif = if_else(any(c_across(starts_with("prev_activity")) == "Usage des répulsifs cutanés"), "Yes", "No")) %>%
+    ungroup()
+
+df <- df %>%
+    rowwise() %>%
+    mutate(activity_recipients = if_else(any(c_across(starts_with("prev_activity")) == "Le rangement des récipients divers (les seaux, le matériel de jardinage, les jouets, etc.) à l’abri de la pluie pour éviter l’eau stagnante"), "Yes", "No")) %>%
+    ungroup()
+
+# Calculate var mbd_knowledge 
+calculate_score = function(row) {
+    contains_mosquitoes <- any(row %in% "Les moustiques transmettent des maladies, mais je ne les connais pas")
+    contains_no_disease <- any(row %in% "Les moustiques ne transmettent aucune maladie")
+    contains_dengue <- any(row %in% c("La dengue"))
+    contains_chikungunya <- any(row %in% c("Le chikungunya"))
+    contains_malaria <- any(row %in% c("Le paludisme"))
+    contains_zika <- any(row %in% c("Le Zika"))
+    contains_hiv <- any(row %in% c("VIH"))
+    contains_diabetes <- any(row %in% c("La diabète"))
+    contains_covid <- any(row %in% c("Le COVID"))
+    if (contains_mosquitoes) {
+        return(0)
+    } else if (contains_no_disease) {
+        return(-1)
+    } else {
+        score <- 0
+        score <- score + contains_dengue + contains_chikungunya + contains_malaria + contains_zika
+        score <- score - contains_hiv - contains_diabetes - contains_covid
+        return(score)
+    }
+}
+df$mbd_maladie <- apply(df[, c("maladies1", "maladies2", "maladies3", "maladies4", "maladies5", "maladies6", "maladies7", "maladies8")], 1, calculate_score)
+df$mbd_know <- ifelse(df$tf_femalemosq == 1, df$mbd_maladie - 1,
+               ifelse(df$tf_femalemosq == 2, df$mbd_maladie + 1, 
+               ifelse(df$tf_femalemosq == 3, df$mbd_maladie, df$mbd_maladie))) 
+df$mbd_know <- as.numeric(df$mbd_know) #manual calculation was performed for 21 subjects (1%) at random and compared to calculation through code
+
+# Calculate confiance 
+df$confiance <- (df$confiance_nat + df$confiance_reg) / 2
+df$confiance <- as.numeric(df$confiance)
+
+# Calculate threat
+df <- df %>% mutate_at(c("disease_prob", "disease_fear"), as.numeric)
+df$threat <- (df$disease_prob + df$disease_fear) / 2
+
+# Calculate place
+df$place <- paste(df$region, df$commune_type, sep = " ")
+df$place <- as.factor(df$place)
+
+# Create edu2
+df$edu2 <- case_when(
+  df$edu %in% c("Aucun diplôme", "Brevet de collèges ou BEPC", "CAP/BEP (ou autre diplôme technique)") ~ "Lower than secondary school",
+  df$edu %in% c("Bac (général, pro et technologique)") ~ "Equal to secondary school",
+  df$edu %in% c("Bac+2 (BTS ou autre)", "Bac+3/4 (Licence, Maîtrise)") ~ "2–4 years beyond secondary school",
+  df$edu %in% c("Bac+5 (Master, écoles d'ingénieurs, écoles d'arts, DEA, DESS, etc.)", "Bac+7 et au‐delà (Doctorat, post‐doc, thèse)") ~ "5 or more years beyond secondary school", TRUE ~ NA_character_)
+
+# Calculate precarity2
+df$precarity2 <- case_when(
+  df$precarity %in% c("Non, jamais") ~ "No",
+  df$precarity %in% c("Oui, parfois", "Oui, souvent") ~ "Yes",
+  TRUE ~ NA_character_)
+
+# Create age_group2
+df$age_group2 <- case_when(
+  df$age_group %in% c("18 to 29", "30 to 39") ~ "18 to 39",
+  df$age_group %in% c("40 to 49", "50 to 59") ~ "40 to 59",
+  df$age_group %in% c("60 to 69", "70 to 79") ~ "60 to 79",
+  TRUE ~ NA_character_)
+
+# Create Aedes expansion zones based on public data
+df$risk <- dplyr::case_when(
+  df$departement %in% c(
+    "Hérault - (34)", "Loire - (42)", "Paris - (75)", "Pyrénées-Atlantiques - (64)", "Var - (83)", "Rhône - (69)", "Bas-Rhin - (67)", "Gard - (30)", "Isère - (38)", "Gironde - (33)","Dordogne - (24)", "Landes - (40)", "Pyrénées-Orientales - (66)", "Aveyron - (12)", "Hauts-de-Seine - (92)","Bouches-du-Rhône - (13)", "Savoie - (73)", "Aude - (11)", "Haute-Garonne - (31)", "Ain - (1)", "Alpes-Maritimes - (6)", "Hautes-Pyrénées - (65)", "Lot-et-Garonne - (47)", "Vaucluse - (84)","Alpes-de-Haute-Provence - (4)", "Hautes-Alpes - (5)", "Lot - (46)", "Côte-d'or - (21)","Ardèche - (7)", "Gers - (32)", "Ariège - (9)", "Tarn-et-Garonne - (82)", "Drôme - (26)","Tarn - (81)", "Haute-Corse - (2b)", "Corse-du-Sud - (2a)"
+  ) ~ "High exposure",
+  
+  df$departement %in% c(
+    "Finistère - (29)", "Seine-Maritime - (76)", "Orne - (61)", "Somme - (80)", "Oise - (60)","Pas-de-Calais - (62)", "Morbihan - (56)", "Marne - (51)", "Calvados - (14)", "Ille-et-Vilaine - (35)", "Nord - (59)", "Manche - (50)", "Eure - (27)", "Moselle - (57)", "Yonne - (89)", "Allier - (3)","Côtes-d'armor - (22)", "Sarthe - (72)", "Haute-Saône - (70)", "Ardennes - (8)", "Haute-Loire - (43)","Vosges - (88)", "Aube - (10)","Loir-et-Cher - (41)", "Eure-et-Loir - (28)", "Meuse - (55)","Creuse - (23)", "Haute-Marne - (52)", "Territoire de Belfort - (90)"
+  ) ~ "Low exposure",
+  
+  df$departement %in% c(
+    "Maine-et-Loire - (49)", "Vendée - (85)", "Loiret - (45)", "Val-d'oise - (95)", "Seine-et-Marne - (77)","Mayenne - (53)", "Deux-Sèvres - (79)", "Haute-Vienne - (87)", "Lozère - (48)", "Yvelines - (78)","Saône-et-Loire - (71)", "Charente - (16)", "Haute-Savoie - (74)", "Jura - (39)", "Nièvre - (58)","Val-de-Marne - (94)","Loire-Atlantique - (44)", "Seine-Saint-Denis - (93)", "Doubs - (25)", "Indre - (36)","Aisne - (2)", "Vienne - (86)", "Meurthe-et-Moselle - (54)", "Essonne - (91)", "Indre-et-Loire - (37)",  "Haut-Rhin - (68)", "Charente-Maritime - (17)", "Puy-de-Dôme - (63)", "Cher - (18)", "Corrèze - (19)", "Cantal - (15)"
+  ) ~ "Medium exposure",
+  TRUE ~ "NA"
+)
+
+# Create a level "never" for freq_bites_num
+df$freq_bites_num[df$freq_bites_num == ""] <- "Never"
+
+#Remove objects
+rm(values_to_replace, prev_activity_cols, calculate_score) #remove objects
+
+```
+
+```{r Dataframe: Variable recoding, message=FALSE, echo = FALSE}
+# Convert variables to numeric or factor
+df <- df %>% 
+  mutate_at(c("age", "disease_prob", "disease_fear", "gmo_mosquito", "confiance_nat", "confiance_reg"), as.numeric)
+df <- df %>% 
+  mutate_at(c("freq_prevention", "freq_bites_cat", "precarity", "gender", "edu", "hist_mborne", "commune_type", "chronic_dis", "langue", "pregnant", "region", "region_uda5", "age_group", "dep_children", "freq_bites_num", "diet", "activity_gouttieres", "activity_pieges", "activity_vetements", "activity_insecticide", "activity_moustiquaires", "activity_vidage", "activity_spirales", "activity_repulsif", "activity_recipients"), as.factor)
+
+# Recode values
+df$gender <- recode(df$gender, "Un homme" = "Man", "Une femme" = "Woman")
+df$region_uda5 <- recode(df$region_uda5, "Ile-de-France" = "Paris region", "Nord-Est" = "North East", "Nord-Ouest"="North West", "Sud-Est"="South East", "Sud-Ouest"="South West")
+df$age_group <- recode(df$age_group, "18-29 ans" = "18 to 29", "30-39 ans" = "30 to 39", "40-49 ans"="40 to 49", "50-59 ans"= "50 to 59", "60-69 ans" = "60 to 69", "70-79 ans" = "70 to 79")
+df$precarity <- recode(df$precarity, "Non, jamais" = "No, never", "Oui, parfois" = "Yes, sometimes", "Oui, souvent"="Yes, often")
+df$freq_bites_cat <- recode(df$freq_bites_cat, "Jamais ou presque jamais" = "Never or almost never", "Parfois" = "Sometimes", "Souvent" = "Often")
+df$freq_prevention <- recode(df$freq_prevention, "Quelques fois seulement" = "A few times", "Plusieurs fois par semaine" = "Several times a week", "Jamais" = "Never")
+df$commune_type <- recode(df$commune_type, "Grande ville (plus de 100 000 habitants)" = "Large city (>100 000 inhabitants)", "Village / Zone rurale (moins de 2 000 habitants)" = "Village (<2 000 inhabitants)", "Ville (entre 20 000 et 100 000 habitants)" = "Medium-sized city (between 20 000 and 100 000 inhabitants)", "Ville de taille moyenne (entre 2 000 et moins de 20 000 habitants)" = "Small town (between 2.000 and 20.000 inhabitants)")
+df$langue <- recode(df$langue, "Non" = "No", "Oui" = "Yes")
+df$chronic_dis <- recode(df$chronic_dis, "Non" = "No", "Oui" = "Yes")
+df$dep_children <- recode(df$dep_children, "Non" = "No", "Oui" = "Yes")
+df$pregnant <- recode(df$pregnant, "Non" = "No", "Oui" = "Yes", "Je ne souhaite pas répondre" = "I rather not respond")
+df$hist_mborne <- recode(df$hist_mborne, "Je ne suis pas sûr(e)" = "No or unsure", "Non" = "No or unsure", "Oui" = "Yes")
+df$langue <- recode(df$langue, "Non" = "No", "Oui" = "Yes")
+df$freq_bites_num[df$freq_bites_num == ""] <- "Never"
+df$freq_bites_num <- recode(df$freq_bites_num, "Moins souvent" = "Less than once a week", "Environ 1 à 5 fois par semaine" = "1 to 5 times per week", "Environ 5 à 10 fois par semaine" = "5 to 10 times per week", "Plus que 10 fois par semaine" = "More than 10 times per week")
+df$diet <- recode(df$diet, "Je suis omnivore et je mange sans restriction" = "Omnivore", "J’essaie de diminuer ma consommation de viande, mais je ne suis pas strictement un régime" = "Reduced-meat diet", "Je suis végétarien (pas de viande ni poisson, mais des produits laitiers et des œufs)" = "Vegetarian", "Je suis végan (pas de produits d’origine animale)" = "Vegan", "Autre" = "Other")
+
+
+# Relevel variables
+df$gender <- relevel(df$gender, ref = "Man")
+df$precarity <- relevel(df$precarity, ref = "No, never")
+df$freq_prevention <- relevel(df$freq_prevention, ref = "Never")
+df$chronic_dis <- relevel(df$chronic_dis, ref = "No")
+df$langue <- relevel(df$langue, ref = "No")
+df$pregnant <- relevel(df$pregnant, ref = "No")
+df$region <- relevel(df$region, ref = "Ile-de-France")
+df$region_uda5 <- relevel(df$region_uda5, ref = "Paris region")
+df$freq_prevention <- factor(df$freq_prevention, levels = c("Never", "A few times", "Several times a week"))
+df$commune_type <- factor(df$commune_type, levels = c("Village (<2 000 inhabitants)", "Small town (between 2.000 and 20.000 inhabitants)", "Medium-sized city (between 20 000 and 100 000 inhabitants)", "Large city (>100 000 inhabitants)"))
+df$edu2 <- factor(df$edu2, levels = c("Lower than secondary school", "Equal to secondary school", "2–4 years beyond secondary school", "5 or more years beyond secondary school"))
+df$hist_mborne <- relevel(df$hist_mborne, ref = "No or unsure")
+df$risk <- factor(df$risk, levels = c("Low exposure", "Medium exposure", "High exposure"))
+df$freq_bites_num <- factor(df$freq_bites_num, levels = c("Never", "Less than once a week", "1 to 5 times per week", "5 to 10 times per week", "More than 10 times per week"))
+df$diet <- factor(df$diet, levels = c("Omnivore", "Reduced-meat diet", "Vegetarian", "Vegan", "Other"))
+df$freq_bites_cat <- factor(df$freq_bites_cat, levels = c("Never or almost never", "Sometimes", "Often"))
+
+# Relabel variables
+var_label(df) <- list(
+  gender = "Gender", 
+  age = "Age (in years)",
+  age_group = "Age group (in years)",
+  age_group2 = "Age group (in years)",
+  edu = "Educational attainment",
+  edu2 = "Educational attainment",
+  dep_children = "Dependent children",
+  work_status = "Work status",
+  commune_type = "Type of settlement",
+  freq_prevention = "Frequency of preventive behaviour",
+  tf_femalemosq = "True or false: all mosquitoes, regardless of sex, bite",
+  housing_type = "Type of housing",
+  precarity = "Financial difficulty in the past 12 months",
+  precarity2 = "Financial difficulty in the past 12 months",
+  pregnant = "Pregnancy status",
+  freq_bites_cat = "Frequency of mosquito bites",
+  freq_bites_num = "Frequency of mosquito bites",
+  diet = "Diet",
+  region_uda5 = "Region",
+  region = "Region",
+  langue = "Language other than French spoken at home",
+  CSP = "Socioprofessional category",
+  count_prev = "Count of preventive behaviour",
+  mbd_know = "Mosquito-borne disease knowledge score",
+  disease_prob = "Perceived likelihood of contracting a mosquito-borne disease",
+  disease_fear = "Concern of contracting a mosquito-borne disease",
+  confiance_nat = "Confidence in national authorities in the management of health crises",
+  confiance_reg = "Confidence in regional authorities in the management of health crises",
+  gmo_mosquito = "Acceptance of mosquito genetic modification",
+  dep_children = "Dependent children",
+  chronic_dis = "Has a chronic disease",
+  hist_mborne = "Had a mosquito-borne disease",
+  activity_gouttieres = "Maintaining gutters to ensure drainage",
+  activity_pieges = "Using mosquito traps",
+  activity_vetements = "Wearing long, loose, light-coloured clothing",
+  activity_insecticide = "Using insecticide or fumigating",
+  activity_moustiquaires = "Using mosquito nets in windows",
+  activity_vidage = "Avoiding stagnant water at the base of flowerpots and vases",
+  activity_spirales = "Using mosquito candles and coils",
+  activity_repulsif = "Using skin repellents",
+  activity_recipients = "Storing containers out of the rain to avoid stagnant water"
+)
+```
