@@ -145,18 +145,6 @@ df$mbd_know <- ifelse(df$tf_femalemosq == 1, df$mbd_maladie - 1,
                ifelse(df$tf_femalemosq == 3, df$mbd_maladie, df$mbd_maladie))) 
 df$mbd_know <- as.numeric(df$mbd_know) #manual calculation was performed for 21 subjects (1%) at random and compared to calculation through code
 
-# Calculate confiance 
-df$confiance <- (df$confiance_nat + df$confiance_reg) / 2
-df$confiance <- as.numeric(df$confiance)
-
-# Calculate threat
-df <- df %>% mutate_at(c("disease_prob", "disease_fear"), as.numeric)
-df$threat <- (df$disease_prob + df$disease_fear) / 2
-
-# Calculate place
-df$place <- paste(df$region, df$commune_type, sep = " ")
-df$place <- as.factor(df$place)
-
 # Create edu2
 df$edu2 <- case_when(
   df$edu %in% c("Aucun diplôme", "Brevet de collèges ou BEPC", "CAP/BEP (ou autre diplôme technique)") ~ "Lower than secondary school",
@@ -290,3 +278,53 @@ var_label(df) <- list(
   activity_recipients = "Storing containers out of the rain to avoid stagnant water"
 )
 ```
+
+
+# 1. Descriptive statistics
+
+## 1.2.Per UDA5 region
+
+```{r Table: Sample description per UDA5 region}
+# Create a descriptive table per UDA5 region
+df %>% 
+     dplyr::select(gender, age_group2, region_uda5, commune_type, edu2, precarity2, chronic_dis, freq_bites_cat, freq_prevention) %>%
+  tbl_summary(percent = "column",
+              by=region_uda5,
+              missing = "no") %>%
+  add_overall() %>%
+  modify_spanning_header (c("stat_1", "stat_2", "stat_3", "stat_4", "stat_5") ~ "**Region**") %>%
+  modify_header(label ~ "**Characteristic**") %>%
+  modify_caption("**Table. Description of the study population.**")
+```
+
+```{r Table: Knowledge, attitudes, and practices per UDA5 region}
+# Create a KAP table per UDA5 region
+df %>%
+     dplyr::select(count_prev, disease_prob, disease_fear, confiance_nat, confiance_reg, mbd_know, region_uda5) %>%
+  tbl_summary(percent = "column",
+                by=region_uda5,
+                statistic = c("mbd_know") ~ "{mean} ({sd})",
+                type = list(mbd_know ~ 'continuous'),
+                missing = "no",
+                digits = list(count_prev ~ 0, disease_prob ~ 0, disease_fear ~ 0, confiance_nat ~ 0, confiance_reg ~ 0,  mbd_know ~ 2)) %>%
+  modify_header(label ~ "**Indicator**") %>%
+  add_overall() %>%
+  modify_spanning_header(c("stat_1", "stat_2", "stat_3", "stat_4", "stat_5") ~ "**Region**") %>%
+  modify_footnote(all_stat_cols() ~ "Median (IQR); Mean (SD)") %>%
+  modify_caption("**Table 2. Knowledge, attitudes, and practices of mosquito-borne diseases and prevention of the study population per UDA5 region**")
+```
+
+```{r Table: Protective behaviours per UDA5 region}
+# Create a protective behaviours table per UDA5 region
+df %>% 
+     dplyr::select(region_uda5, activity_gouttieres, activity_pieges, activity_vetements, activity_insecticide, activity_moustiquaires, activity_vidage, activity_spirales, activity_repulsif, activity_recipients) %>%
+  tbl_summary(percent = "column",
+              by=region_uda5,
+              missing = "no") %>%
+  add_overall() %>%
+  modify_spanning_header(c("stat_1", "stat_2", "stat_3", "stat_4", "stat_5") ~ "**Region**") %>%
+  modify_header(label ~ "**Protective behaviour**") %>%
+  modify_caption("**Table. Mosquito-borne disease protective behaviours per region per UDA5 region**") 
+```
+
+
