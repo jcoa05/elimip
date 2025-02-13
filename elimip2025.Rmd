@@ -3,10 +3,7 @@ title: "Mosquito-borne disease and protective behavior in metropolitan France: a
 author: "Juan Carlos Ocampo"
 date: "`r Sys.Date()`"
 output:
-  word_document: default
-  html_document:
-    df_print: paged
-  pdf_document: default
+  html_document: github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -279,7 +276,6 @@ var_label(df) <- list(
 )
 ```
 
-
 # 1. Descriptive statistics
 
 ## 1.2.Per UDA5 region
@@ -327,4 +323,120 @@ df %>%
   modify_caption("**Table. Mosquito-borne disease protective behaviours per region per UDA5 region**") 
 ```
 
+# 2. Modelling
+
+## 2.1. Frequency of protective behaviour
+
+```{r Frequency of protective behaviour: Model selection}
+# Theory-informed model that includes a minimally sufficient set of confounding variables of the exposure-outcome relationship
+cmm2 <- clmm(freq_prevention ~ freq_bites_num + disease_fear + disease_prob + age + precarity2 + gender + edu2 + mbd_know + chronic_dis + confiance_nat + confiance_reg + hist_mborne + commune_type + (1|departement), data=df, Hess=T, nAGQ=10)
+
+# We remove independent variables that have non significant associations with the outcome variable (p-value<0.05) in one block
+# Confounders age and sex are kept regardless
+cmm1 <- clmm(freq_prevention ~ freq_bites_num + disease_fear + precarity2 + age + gender + (1|departement), data=df, Hess=T, nAGQ=10)
+#OLD ONE cmm1 <- clmm(freq_prevention ~ freq_bites_cat + disease_fear + disease_prob + precarity2 + age + gender + (1|departement), data=df, Hess=T, nAGQ=10)
+
+# Likelihood-ratio test: It evaluates if the model with fewer parameters performs significantly worse than the full mode
+cmm_lrt <- lrtest(cmm1, cmm2)
+#alternative: anova(cmm1, cmm2, test="LRT") #both are equivalent in this case
+cmm_lrt
+```
+
+```{r Frequency of protective behaviour: LRT, echo=FALSE}
+# Interpretation of likelihood ratio test results
+if (cmm_lrt$"Pr(>Chisq)"[2] < 0.05) 
+{
+  cat("Reject the null hypothesis. The full model is significantly better than 
+        the nested model.\n")
+} else {
+  cat("Fail to reject the null hypothesis. The nested model is sufficient.\n")
+}
+```
+
+```{r Frequency of protective behaviour: Model evaluation, warning = FALSE}
+# Test collinearity
+cmm_coll <- check_collinearity(cmm1)
+cmm_coll
+if (all(cmm_coll$VIF < 2)) {
+  cat("All VIFs are below the conventional threshold of 2.\n")
+} else {
+  cat("At least one VIF is above the conventional threshold of 2.\n")
+}
+
+# Test links
+links <- c("logit", "probit", "cloglog", "loglog", "cauchit")
+sapply(links, function(link) {
+clmm(freq_prevention ~ freq_bites_num + disease_fear + precarity2 + age + gender + (1|departement), data=df, Hess=T, nAGQ=10, link=link)$logLik }) #loglik lower for cauchit by 7 points
+
+# Test thresholds
+thresholds <- c("symmetric", "symmetric2", "flexible", "equidistant")
+sapply(thresholds, function(threshold){
+clmm(freq_prevention ~ freq_bites_num + disease_fear + precarity2 + age + gender + (1|departement), data=df, Hess=T, nAGQ=10, link="logit",threshold=threshold)$logLik
+}) #no change in loglik
+
+#Test approximation method: Laplace vs AGHQ
+nAGQ_values <- c(1, 10, 50)  # Corresponding AGQ values for each method
+sapply(seq_along(nAGQ_values), function(i) {
+  clmm(freq_prevention ~ freq_bites_num + disease_fear + precarity2 + age + gender + (1|departement),data = df, Hess = T, nAGQ = nAGQ_values[i])$logLik #Laplace performs slightly worse than AGQ, while nAGQ of 10 and 50 perform the same.
+})
+```
+
+```{r Frequency of protective behaviour: Final model}
+sjPlot:: tab_model(cmm1, show.se= T, show.stat= T)
+```
+
+## 2.2. Count of protective behaviours
+
+```{r Count of protective behaviours: Model selection, echo = T, results = "hide"}
+# Theory-informed model that includes a minimally sufficient set of confounding variables of the exposure-outcome relationship
+compois2 <- glmmTMB(count_prev ~ freq_bites_num + disease_fear + disease_prob + age + precarity2 + gender + edu2 + mbd_know + chronic_dis + confiance_nat + confiance_reg + hist_mborne + commune_type + (1|departement), data=df, ziformula=~1+freq_bites_num, family=compois(), control = glmmTMBControl(optCtrl = list(trace = 1), parallel = 8))
+
+# We remove independent variables that have non significant associations with the outcome variable (p-value<0.05) in one block
+# Confounders age and sex are kept regardless
+compois1 <- glmmTMB(count_prev ~ freq_bites_num + disease_fear + edu2 + mbd_know + chronic_dis + + gender + age + (1|departement), data=df, ziformula=~1+freq_bites_num, family=compois(), control = glmmTMBControl(optCtrl = list(trace = 1), parallel = 8))
+
+# Likelihood-ratio test: It evaluates if the model with fewer parameters performs significantly worse than the full mode
+compois_lrt <- lrtest(compois1, compois2)
+#alternative: anova(compois1, compois2, test="LRT") #both are equivalent in this case
+compois_lrt
+```
+
+```{r Count of protective behaviours: LRT, echo=FALSE}
+# Interpretation of likelihood ratio test results
+if (compois_lrt$"Pr(>Chisq)"[2] < 0.05) 
+{
+  cat("Reject the null hypothesis. The full model is significantly better than 
+        the nested model.\n")
+} else {
+  cat("Fail to reject the null hypothesis. The nested model is sufficient.\n")
+}
+```
+
+```{r Count of protective behaviours: Model evaluation}
+#Check collinearity
+compois_coll <- check_collinearity(compois1, ci = 0.95, verbose = TRUE)
+compois_coll
+if (all(compois_coll$VIF < 2)) {
+  cat("All VIFs are below the conventional threshold of 2.\n")
+} else {
+  cat("At least one VIF is above the conventional threshold of 2.\n")
+}
+
+#Check dispersion
+check_overdispersion(compois1) #no over- or under-dispersion
+
+#Check zero-inflation
+testZeroInflation(compois1) #no zero-inflation
+
+#Check simulated residuals
+simres_compois1 <- simulateResiduals(fittedModel = compois1, re.form = NULL)
+plot(simres_compois1)
+
+#Running diagnostics on the model
+diagnose(compois1)
+```
+
+```{r Count of protective behaviours: Final model}
+sjPlot:: tab_model(compois1, show.se= T, show.stat= T)
+```
 
