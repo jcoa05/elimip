@@ -42,6 +42,18 @@ library(ggplot2)
 library(sjPlot)
 library(gtsummary)
 library(webshot)
+
+#Spatial
+library(sf)
+library(terra)
+library(tmap)
+library(dplyr)
+library(geojsonsf)
+library(stringdist)
+library(fuzzyjoin)
+library(raster)
+library(spatstat)
+library(leaflet)
 ```
 
 ```{r Packages: Versions, warning=FALSE, echo = FALSE}
@@ -280,7 +292,7 @@ var_label(df) <- list(
 
 ## 1.2.Per UDA5 region
 
-```{r Table: Sample description per UDA5 region}
+```{r Table: Sample description per UDA5 region, echo = FALSE}
 # Create a descriptive table per UDA5 region
 df %>% 
      dplyr::select(gender, age_group2, region_uda5, commune_type, edu2, precarity2, chronic_dis, freq_bites_cat, freq_prevention) %>%
@@ -293,7 +305,7 @@ df %>%
   modify_caption("**Table. Description of the study population.**")
 ```
 
-```{r Table: Knowledge, attitudes, and practices per UDA5 region}
+```{r Table: Knowledge, attitudes, and practices per UDA5 region, echo = FALSE}
 # Create a KAP table per UDA5 region
 df %>%
      dplyr::select(count_prev, disease_prob, disease_fear, confiance_nat, confiance_reg, mbd_know, region_uda5) %>%
@@ -310,7 +322,7 @@ df %>%
   modify_caption("**Table 2. Knowledge, attitudes, and practices of mosquito-borne diseases and prevention of the study population per UDA5 region**")
 ```
 
-```{r Table: Protective behaviours per UDA5 region}
+```{r Table: Protective behaviours per UDA5 region, echo = FALSE}
 # Create a protective behaviours table per UDA5 region
 df %>% 
      dplyr::select(region_uda5, activity_gouttieres, activity_pieges, activity_vetements, activity_insecticide, activity_moustiquaires, activity_vidage, activity_spirales, activity_repulsif, activity_recipients) %>%
@@ -438,5 +450,288 @@ diagnose(compois1)
 
 ```{r Count of protective behaviours: Final model}
 sjPlot:: tab_model(compois1, show.se= T, show.stat= T)
+```
+
+
+
+
+
+## 4.1. Interactive map
+```{r Interactive map: Match geometry}
+#Departement geometry
+map_fr <- geojson_sf("departements.geojson")
+plot(map_fr$geometry)
+map_fr$departement <- map_fr$code
+map_fr$departement <- paste(map_fr$nom,map_fr$code)
+
+fr <- stringdist_full_join(
+  df, map_fr,
+  by = "departement",  # Column to match on
+  method = "jw",  # Jaro-Winkler distance metric
+  max_dist = 0.21,  # Maximum allowable distance for a match
+  distance_col = "fuzzy_dist"
+) #fuzzy match departments in survey with geom map
+
+fr_check <- fr %>%
+    dplyr:: select(departement.x, departement.y)
+View(fr_check) #checked
+```
+
+```{r Interactive map: Data for maps}
+##Departement
+#get averages of count_prev for each departement
+mean_counts <- fr %>%
+  group_by(nom) %>%
+  summarise(count_prev_avg = mean(count_prev, na.rm = TRUE))
+map_fr <- map_fr %>%
+  full_join(mean_counts, by = "nom")
+#get medians of count_prev for each departement
+median_counts <- fr %>%
+  group_by(nom) %>%
+  summarise(count_prev_median = median(count_prev, na.rm = TRUE))
+map_fr <- map_fr %>%
+  full_join(median_counts, by = "nom")
+#get n of count_prev for each departement
+sample_counts <- fr %>%
+  group_by(nom) %>%
+  summarise(sample_size = n())
+map_fr <- map_fr %>%
+  full_join(sample_counts, by = "nom")
+
+#get region based on dpt
+dep2region <- read.csv("dep2region.csv")
+
+
+##REGION
+
+#Region geometry
+regions_fr <- geojson_sf("regions.geojson")
+plot(regions_fr$geometry)
+
+#rename variable
+regions_fr <- regions_fr %>%
+  rename(region = nom)
+
+#fuzzy match names of regions
+regions_fr2 <- stringdist_inner_join(
+  df, regions_fr,
+  by = "region",  # Column to match on
+  method = "jw",  # Jaro-Winkler distance metric
+  max_dist = 0.21,  # Maximum allowable distance for a match
+  distance_col = "fuzzy_dist") #fuzzy match departments in survey with geom map
+#check that it fuzzy matched correctly
+regions_fr3 <- regions_fr2 %>%
+    dplyr::select(region.x, region.y)#checked
+regions_fr2 <- regions_fr2 %>%
+  rename(nom = region.y)
+regions_fr2 <- regions_fr2 %>%
+  rename(region = region.x)
+#rename variable
+regions_fr <- regions_fr %>%
+  rename(nom = region)
+
+#join both sides
+regions_fr2_unique <- regions_fr2 %>%
+  distinct(nom, .keep_all = TRUE)
+regions_fr <- regions_fr %>%
+  left_join(regions_fr2_unique %>% dplyr::select(nom, region), by = "nom")
+
+#get averages for each region
+mean_counts_region <- fr %>%
+  group_by(region) %>%
+  summarise(count_prev_avg_region = mean(count_prev, na.rm = TRUE))
+#join mean_counts_region to region map
+regions_fr <- regions_fr %>%
+  full_join(mean_counts_region, by = "region")
+
+#get median for each region
+median_counts_region <- fr %>%
+  group_by(region) %>%
+  summarise(count_prev_median_region = median(count_prev, na.rm = TRUE))
+#join mean_counts_region to region map
+regions_fr <- regions_fr %>%
+  full_join(median_counts_region, by = "region")
+
+#get n of count_prev for each departement
+sample_counts_region <- fr %>%
+  group_by(region) %>%
+  summarise(sample_size = n())
+regions_fr <- regions_fr %>%
+  full_join(sample_counts_region, by = "region")
+
+#get % of people who often protect themselves
+regions_fr <- regions_fr %>%
+  left_join(
+    fr %>%
+      filter(freq_prevention == "Several times a week") %>%
+      group_by(region) %>%
+      summarise(often_freq = n()) %>%
+      right_join(
+        fr %>%
+          group_by(region) %>%
+          summarise(total = n()),
+        by = "region"
+      ) %>%
+      mutate(often_freq = ifelse(is.na(often_freq), 0, often_freq / total * 100)) %>%
+      mutate(often_freq = paste0(format(round(often_freq, 2), nsmall = 2))),
+    by = "region"
+  )
+regions_fr$often_freq <- as.numeric(regions_fr$often_freq)
+
+#map_fr <- map_fr %>% dplyr::select(-count_prev_avg.x,-count_prev_avg.y)
+```
+
+```{r Interactive map: Map execute, warning=FALSE, out.width = '100%'}
+#colour palette for department count_prev_avg
+pal1 <- colorNumeric("Greys", domain = map_fr$count_prev_avg)
+pal2 <- colorNumeric("Greys", domain = map_fr$count_prev_median)
+pal3 <- colorNumeric("Greys", domain = regions_fr$count_prev_avg_region)
+pal4 <- colorNumeric("Greys", domain = regions_fr$count_prev_median_region)
+pal5 <- colorNumeric("Greys", domain = regions_fr$often_freq)
+
+#make the interactive map
+basemap <- leaflet() %>%
+#add map provider tiles
+  addProviderTiles(providers$OpenStreetMap) %>%
+#add AVG COUNT polygons
+  addPolygons(
+    data = map_fr,
+    fillColor = ~pal1(count_prev_avg),
+    weight = 2,
+    opacity = 1,
+    color = "grey",
+    highlightOptions = highlightOptions(
+      weight = 5,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE),
+    dashArray = "3",
+    fillOpacity = 0.7,
+    label = ~paste0(nom, " (n=", sample_size, ") - Count of protective behaviours (average): ",
+      formatC(count_prev_avg, big.mark = "'")),
+      labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "15px",
+      direction = "auto"),
+    group = "Department:Count of protective behaviours (average)"
+  ) %>%
+  addLegend(
+    pal = pal1,
+    values = map_fr$count_prev_avg,
+    opacity = 0.5, 
+    labFormat = labelFormat(big.mark = "'"),
+    title = "Count of protective behaviours (average)",
+    position = "bottomright"
+  ) %>%
+#add MEDIAN COUNT polygons
+  addPolygons(
+    data = map_fr,
+    fillColor = ~pal2(count_prev_median),
+    weight = 2,
+    opacity = 1,
+    color = "grey",
+    highlightOptions = highlightOptions(
+      weight = 5,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE),
+    dashArray = "3",
+    fillOpacity = 0.7,
+    label = ~paste0(nom, " (n=", sample_size, ") - Count of protective behaviours: ",
+      formatC(count_prev_median, big.mark = "'")),
+      labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "15px",
+      direction = "auto"),
+    group = "Department: Count of protective behaviours (median)"
+  ) %>%
+#add Count prev avg per region  
+  addPolygons(
+    data = regions_fr,
+    fillColor = ~pal3(count_prev_avg_region),
+    weight = 2,
+    opacity = 1,
+    color = "grey",
+    highlightOptions = highlightOptions(
+      weight = 5,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE),
+    dashArray = "3",
+    fillOpacity = 0.7,
+    label = ~paste0(nom, " (n=", sample_size, ") - Count of protective behaviours (average): ",
+      formatC(count_prev_avg_region, big.mark = "'")),
+      labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "15px",
+      direction = "auto"),
+    group = "Region: Count of protective behaviours (average)"
+  ) %>%
+#add Count prev median per region  
+  addPolygons(
+    data = regions_fr,
+    fillColor = ~pal4(count_prev_median_region),
+    weight = 2,
+    opacity = 1,
+    color = "grey",
+    highlightOptions = highlightOptions(
+      weight = 5,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE),
+    dashArray = "3",
+    fillOpacity = 0.7,
+    label = ~paste0(nom, " (n=", sample_size, ") - Count of protective behaviours (median): ",
+      formatC(count_prev_median_region, big.mark = "'")),
+      labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "15px",
+      direction = "auto"),
+    group = "Region: Count of protective behaviours (median)"
+  ) %>%
+# add often_freq polygon for region
+    addPolygons(
+    data = regions_fr,
+    fillColor = ~pal5(often_freq),
+    weight = 2,
+    opacity = 1,
+    color = "grey",
+    highlightOptions = highlightOptions(
+      weight = 5,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE),
+    dashArray = "3",
+    fillOpacity = 0.7,
+    label = ~paste0(nom, " (n=", sample_size, ") - High frequency of protective behaviour : ",
+      formatC(often_freq, big.mark = "'"), "%"),
+      labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "15px",
+      direction = "auto"),
+    group = "Region: High frequency of protective behaviour (%)"
+  ) %>%
+  addLegend(
+    pal = pal5,
+    values = regions_fr$often_freq,
+    opacity = 0.5, 
+    labFormat = labelFormat(suffix = "%"),
+    title = "High frequency of protective behaviour",
+    position = "bottomright",
+    group = "Region: High frequency of protective behaviour (%)"
+  ) %>%
+#add layer controls
+  addLayersControl(
+    overlayGroups = c("Department:Count of protective behaviours (average)","Department: Count of protective behaviours (median)", "Region: Count of protective behaviours (average)", "Region: Count of protective behaviours (median)","Region: High frequency of protective behaviour (%)"),
+    position = "topleft",
+    options = layersControlOptions(collapsed = FALSE, autoZIndex = T))
+
+#launch
+basemap
 ```
 
