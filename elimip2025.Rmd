@@ -452,11 +452,9 @@ diagnose(compois1)
 sjPlot:: tab_model(compois1, show.se= T, show.stat= T)
 ```
 
+# 3. Data visualization
 
-
-
-
-## 4.1. Interactive map
+## 3.1. Interactive map
 ```{r Interactive map: Match geometry}
 #Departement geometry
 map_fr <- geojson_sf("departements.geojson")
@@ -474,7 +472,6 @@ fr <- stringdist_full_join(
 
 fr_check <- fr %>%
     dplyr:: select(departement.x, departement.y)
-View(fr_check) #checked
 ```
 
 ```{r Interactive map: Data for maps}
@@ -608,20 +605,20 @@ basemap <- leaflet() %>%
       bringToFront = TRUE),
     dashArray = "3",
     fillOpacity = 0.7,
-    label = ~paste0(nom, " (n=", sample_size, ") - Count of protective behaviours (average): ",
+    label = ~paste0(nom, " (n=", sample_size, ") - Variety of protective behaviours (average): ",
       formatC(count_prev_avg, big.mark = "'")),
       labelOptions = labelOptions(
       style = list("font-weight" = "normal", padding = "3px 8px"),
       textsize = "15px",
       direction = "auto"),
-    group = "Department:Count of protective behaviours (average)"
+    group = "Department:Variety of protective behaviours (average)"
   ) %>%
   addLegend(
     pal = pal1,
     values = map_fr$count_prev_avg,
     opacity = 0.5, 
     labFormat = labelFormat(big.mark = "'"),
-    title = "Count of protective behaviours (average)",
+    title = "Variety of protective behaviours (average)",
     position = "bottomright"
   ) %>%
 #add MEDIAN COUNT polygons
@@ -639,13 +636,13 @@ basemap <- leaflet() %>%
       bringToFront = TRUE),
     dashArray = "3",
     fillOpacity = 0.7,
-    label = ~paste0(nom, " (n=", sample_size, ") - Count of protective behaviours: ",
+    label = ~paste0(nom, " (n=", sample_size, ") - Variety of protective behaviours: ",
       formatC(count_prev_median, big.mark = "'")),
       labelOptions = labelOptions(
       style = list("font-weight" = "normal", padding = "3px 8px"),
       textsize = "15px",
       direction = "auto"),
-    group = "Department: Count of protective behaviours (median)"
+    group = "Department: Variety of protective behaviours (median)"
   ) %>%
 #add Count prev avg per region  
   addPolygons(
@@ -662,13 +659,13 @@ basemap <- leaflet() %>%
       bringToFront = TRUE),
     dashArray = "3",
     fillOpacity = 0.7,
-    label = ~paste0(nom, " (n=", sample_size, ") - Count of protective behaviours (average): ",
+    label = ~paste0(nom, " (n=", sample_size, ") - Variety of protective behaviours (average): ",
       formatC(count_prev_avg_region, big.mark = "'")),
       labelOptions = labelOptions(
       style = list("font-weight" = "normal", padding = "3px 8px"),
       textsize = "15px",
       direction = "auto"),
-    group = "Region: Count of protective behaviours (average)"
+    group = "Region: Variety of protective behaviours (average)"
   ) %>%
 #add Count prev median per region  
   addPolygons(
@@ -685,13 +682,13 @@ basemap <- leaflet() %>%
       bringToFront = TRUE),
     dashArray = "3",
     fillOpacity = 0.7,
-    label = ~paste0(nom, " (n=", sample_size, ") - Count of protective behaviours (median): ",
+    label = ~paste0(nom, " (n=", sample_size, ") - Variety of protective behaviours (median): ",
       formatC(count_prev_median_region, big.mark = "'")),
       labelOptions = labelOptions(
       style = list("font-weight" = "normal", padding = "3px 8px"),
       textsize = "15px",
       direction = "auto"),
-    group = "Region: Count of protective behaviours (median)"
+    group = "Region: Variety of protective behaviours (median)"
   ) %>%
 # add often_freq polygon for region
     addPolygons(
@@ -727,7 +724,7 @@ basemap <- leaflet() %>%
   ) %>%
 #add layer controls
   addLayersControl(
-    overlayGroups = c("Department:Count of protective behaviours (average)","Department: Count of protective behaviours (median)", "Region: Count of protective behaviours (average)", "Region: Count of protective behaviours (median)","Region: High frequency of protective behaviour (%)"),
+    overlayGroups = c("Department:Variety of protective behaviours (average)","Department: Variety of protective behaviours (median)", "Region: Variety of protective behaviours (average)", "Region: Variety of protective behaviours (median)","Region: High frequency of protective behaviour (%)"),
     position = "topleft",
     options = layersControlOptions(collapsed = FALSE, autoZIndex = T))
 
