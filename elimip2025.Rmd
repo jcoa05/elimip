@@ -21,7 +21,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r Packages: Load, message=FALSE, warning=FALSE}
 #Data wrangling
 library(tidyverse)
-library(haven) 
 library(dplyr) 
 library(labelled)
 
@@ -29,31 +28,16 @@ library(labelled)
 library(lme4)
 library(glmmTMB)
 library(ordinal)
-library(splines2)
 
 #Performance
 library(lmtest)
 library(performance)
 library(DHARMa)
-library(bbmle) #AICtab
 
 #Visuals
 library(ggplot2)
 library(sjPlot)
 library(gtsummary)
-library(webshot)
-
-#Spatial
-library(sf)
-library(terra)
-library(tmap)
-library(dplyr)
-library(geojsonsf)
-library(stringdist)
-library(fuzzyjoin)
-library(raster)
-library(spatstat)
-library(leaflet)
 ```
 
 ```{r Packages: Versions, warning=FALSE, echo = FALSE}
@@ -321,8 +305,7 @@ df %>%
   modify_spanning_header(c("stat_1", "stat_2", "stat_3", "stat_4", "stat_5") ~ "**Region**") %>%
   modify_footnote(all_stat_cols() ~ "Median (IQR); Mean (SD)") %>%
   modify_caption("**Table 2. Knowledge, attitudes, and practices of mosquito-borne diseases and prevention of the study population per UDA5 region**") %>% 
-  as_gt() %>% 
-  gt::as_raw_html(., inline_css = F)
+  gt::render_gt()
 ```
 
 ```{r Table: Protective behaviours per UDA5 region, echo = FALSE}
@@ -337,7 +320,7 @@ df %>%
   modify_header(label ~ "**Protective behaviour**") %>%
   modify_caption("**Table. Mosquito-borne disease protective behaviours per region per UDA5 region**") %>% 
   as_gt() %>% 
-  gt::as_raw_html(., inline_css = F)
+  gt::render_gt()
 ```
 
 # 2. Modelling
@@ -402,7 +385,7 @@ sapply(seq_along(nAGQ_values), function(i) {
 sjPlot:: tab_model(cmm1, show.se= T, show.stat= T)
 ```
 
-```{r Frequency of protective behaviour: Random effects plot}
+```{r Frequency of protective behaviour: Random effects plot, dpi=500}
 plotcmm.ranef <- function(cmm1) {
   rn <- names(cmm1[["stDev"]]) 
   nc <- length(cmm1[["ranef"]]) 
@@ -420,7 +403,7 @@ plotcmm.ranef <- function(cmm1) {
          x = paste0(rn, "Departments"),
          y = paste0(rn, "Effect via conditional modes"))
 }
-ggsave("random_effects_cmm1.png", plot = plotcmm.ranef(cmm1), dpi = 500, width = 10, height = 6, units = "in")
+plotcompois.ranef(cmm1)
 ```
 
 ## 2.2. Count of protective behaviours
@@ -487,7 +470,7 @@ plotResiduals(simres_compois1, form = df$age)
 sjPlot:: tab_model(compois1, show.se= T, show.stat= T)
 ```
 
-```{r Count of protective behaviours: Random effects plot}
+```{r Count of protective behaviours: Random effects plot, dpi=500}
 plotcompois.ranef <- function(compois1) {
   re_compois1_data <- data.frame(
     "intercepts" = ranef(compois1)$cond$departement$`(Intercept)`,
@@ -511,8 +494,7 @@ plotcompois.ranef <- function(compois1) {
       y = "Effect via conditional modes"
     )
 }
-
-ggsave("random_effects_compois1.png", plot = plotcompois.ranef(compois1), dpi = 500, width = 10, height = 6, units = "in")
+plotcompois.ranef(compois1)
 ```
 
 ```{r Extra bits}
