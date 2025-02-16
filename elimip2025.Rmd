@@ -304,7 +304,7 @@ df %>%
   modify_header(label ~ "**Characteristic**") %>%
   modify_caption("**Table. Description of the study population.**") %>% 
   as_gt() %>% 
-  gt::as_raw_html(., inline_css = F)
+  gt::as_raw_html(., inline_css = FALSE)
 ```
 
 ```{r Table: Knowledge, attitudes, and practices per UDA5 region, echo = FALSE}
