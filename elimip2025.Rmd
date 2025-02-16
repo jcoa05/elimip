@@ -286,7 +286,7 @@ df %>%
   add_overall() %>%
   modify_spanning_header (c("stat_1", "stat_2", "stat_3", "stat_4", "stat_5") ~ "**Region**") %>%
   modify_header(label ~ "**Characteristic**") %>%
-  modify_caption("**Table. Description of the study population.**") %>% 
+  modify_caption("**Table 1. Description of the study population.**") %>% 
   gt::render_gt()
 ```
 
@@ -318,7 +318,7 @@ df %>%
   add_overall() %>%
   modify_spanning_header(c("stat_1", "stat_2", "stat_3", "stat_4", "stat_5") ~ "**Region**") %>%
   modify_header(label ~ "**Protective behaviour**") %>%
-  modify_caption("**Table. Mosquito-borne disease protective behaviours per region per UDA5 region**") %>% 
+  modify_caption("**Table 3. Mosquito-borne disease protective behaviours per region per UDA5 region**") %>% 
   as_gt() %>% 
   gt::render_gt()
 ```
