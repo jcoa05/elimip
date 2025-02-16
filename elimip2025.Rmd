@@ -411,19 +411,18 @@ plotcmm.ranef <- function(cmm1) {
   ord.re <- order(cmm1$ranef)
   ci <- ci[order(cmm1$ranef), ]
   ggplot() +
-    geom_point(aes(x = 1:nc, y = cmm1$ranef[ord.re])) +  # Points for random effects
-    geom_errorbar(aes(x = 1:nc, ymin = ci[,1], ymax = ci[,2]), width = 0.2) +  # Confidence intervals
-    geom_hline(yintercept = 0, linetype = "dashed") +  # Reference line at 0
+    geom_point(aes(x = 1:nc, y = cmm1$ranef[ord.re])) + 
+    geom_errorbar(aes(x = 1:nc, ymin = ci[,1], ymax = ci[,2]), width = 0.2) + 
+    geom_hline(yintercept = 0, linetype = "dashed") + 
     theme_minimal() +
-    theme(axis.text.x = element_blank(),  # Remove x-axis labels
-          axis.ticks.x = element_blank()) +  # Remove x-axis ticks
+    theme(axis.text.x = element_blank(),
+          axis.ticks.x = element_blank()) + 
     labs(title = "Effect of department place of residence via conditional modes on frequency of preventive behaviour",
          x = paste0(rn, "Departments"),
          y = paste0(rn, "Effect via conditional modes"))
 }
 ggsave("random_effects_cmm1.png", plot = plotcmm.ranef(cmm1), dpi = 500, width = 10, height = 6, units = "in")
 ```
-
 
 ## 2.2. Count of protective behaviours
 
@@ -463,17 +462,26 @@ if (all(compois_coll$VIF < 2)) {
 }
 
 #Check dispersion
-check_overdispersion(compois1) #no over- or under-dispersion
+check_overdispersion(compois1)
 
 #Check zero-inflation
-testZeroInflation(compois1) #no zero-inflation
+testZeroInflation(compois1)
+
+#Running diagnostics on the model
+diagnose(compois1)
 
 #Check simulated residuals
 simres_compois1 <- simulateResiduals(fittedModel = compois1, re.form = NULL)
 plot(simres_compois1)
 
-#Running diagnostics on the model
-diagnose(compois1)
+#Plot residuals for each predictor to examine misfits
+testCategorical(simres_compois1, catPred = df$freq_bites_num)
+testCategorical(simres_compois1, catPred = df$edu2)
+testCategorical(simres_compois1, catPred = df$chronic_dis)
+testCategorical(simres_compois1, catPred = df$gender)
+testCategorical(simres_compois1, catPred = df$mbd_know)
+plotResiduals(simres_compois1, form = df$disease_fear)
+plotResiduals(simres_compois1, form = df$age)
 ```
 
 ```{r Count of protective behaviours: Final model}
@@ -482,22 +490,36 @@ sjPlot:: tab_model(compois1, show.se= T, show.stat= T)
 
 ```{r Count of protective behaviours: Random effects plot}
 plotcompois.ranef <- function(compois1) {
-  rn <- names(compois1[["stDev"]]) 
-  nc <- length(compois1[["ranef"]]) 
-  ci <- compois1$ranef + qnorm(0.975) * sqrt(compois1$condVar) %o% c(-1, 1)
-  ord.re <- order(compois1$ranef)
-  ci <- ci[order(compois1$ranef), ]
-
-  ggplot() +
-    geom_point(aes(x = 1:nc, y = compois1$ranef[ord.re])) +  # Points for random effects
-    geom_errorbar(aes(x = 1:nc, ymin = ci[,1], ymax = ci[,2]), width = 0.2) +  # Confidence intervals
-    geom_hline(yintercept = 0, linetype = "dashed") +  # Reference line at 0
+  re_compois1_data <- data.frame(
+    "intercepts" = ranef(compois1)$cond$departement$`(Intercept)`,
+    "sd" = sqrt(TMB::sdreport(compois1$obj, getJointPrecision=TRUE)$diag.cov.random),
+    "departement" = factor(row.names(ranef(compois1)$cond$departement))
+  )
+  
+  re_compois1_data$ucl <- re_compois1_data$intercepts + (re_compois1_data$sd * 1.96)
+  re_compois1_data$lcl <- re_compois1_data$intercepts - (re_compois1_data$sd * 1.96)
+  
+  ggplot(re_compois1_data, aes(x = reorder(departement, intercepts), y = intercepts)) +
+    geom_point() + 
+    geom_errorbar(aes(ymin = lcl, ymax = ucl), width = 0.2) +
+    geom_hline(yintercept = 0, linetype = "dashed") +
     theme_minimal() +
-    theme(axis.text.x = element_blank(),  # Remove x-axis labels
-          axis.ticks.x = element_blank()) +  # Remove x-axis ticks
-    labs(title = "Effect of department place of residence via conditional modes on frequency of preventive behaviour",
-         x = paste0(rn, "Departments"),
-         y = paste0(rn, "Effect via conditional modes"))
+    theme(axis.text.x = element_blank(),
+          axis.ticks.x = element_blank()) +
+    labs(
+      title = "Effect of department place of residence via conditional modes on variety of preventive behaviour",
+      x = "Departments",
+      y = "Effect via conditional modes"
+    )
 }
+
 ggsave("random_effects_compois1.png", plot = plotcompois.ranef(compois1), dpi = 500, width = 10, height = 6, units = "in")
 ```
+
+```{r Extra bits}
+#Calculate likelihood profile CIs
+#CI_zinbmm_final <- confint(zinbmm_final, trace=1, level = 0.95, method = c("profile"), estimate = TRUE, include_nonest = TRUE, full = TRUE) #similar to Wald-based CIs
+#likelihood profile CIs are more accurate but much slower
+#Fits natural splines separately to the points from each half of the profile for each specified parameter (i.e., values above and below the MLE), then finds the inverse functions to estimate the endpoints of the confidence interval
+```
+

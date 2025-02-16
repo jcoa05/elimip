@@ -85,20 +85,20 @@ df <- read.csv("elimip.csv")
 
 ## 1.2.Per UDA5 region
 
-<div id="wgzlsadbho" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-  <style>#wgzlsadbho table {
+<div id="ypbnouzvzc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+  <style>#ypbnouzvzc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-&#10;#wgzlsadbho thead, #wgzlsadbho tbody, #wgzlsadbho tfoot, #wgzlsadbho tr, #wgzlsadbho td, #wgzlsadbho th {
+&#10;#ypbnouzvzc thead, #ypbnouzvzc tbody, #ypbnouzvzc tfoot, #ypbnouzvzc tr, #ypbnouzvzc td, #ypbnouzvzc th {
   border-style: none;
 }
-&#10;#wgzlsadbho p {
+&#10;#ypbnouzvzc p {
   margin: 0;
   padding: 0;
 }
-&#10;#wgzlsadbho .gt_table {
+&#10;#ypbnouzvzc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -123,11 +123,11 @@ df <- read.csv("elimip.csv")
   border-left-width: 2px;
   border-left-color: #D3D3D3;
 }
-&#10;#wgzlsadbho .gt_caption {
+&#10;#ypbnouzvzc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
-&#10;#wgzlsadbho .gt_title {
+&#10;#ypbnouzvzc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -138,7 +138,7 @@ df <- read.csv("elimip.csv")
   border-bottom-color: #FFFFFF;
   border-bottom-width: 0;
 }
-&#10;#wgzlsadbho .gt_subtitle {
+&#10;#ypbnouzvzc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -149,7 +149,7 @@ df <- read.csv("elimip.csv")
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
-&#10;#wgzlsadbho .gt_heading {
+&#10;#ypbnouzvzc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -160,12 +160,12 @@ df <- read.csv("elimip.csv")
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#wgzlsadbho .gt_bottom_border {
+&#10;#ypbnouzvzc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#wgzlsadbho .gt_col_headings {
+&#10;#ypbnouzvzc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -179,7 +179,7 @@ df <- read.csv("elimip.csv")
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#wgzlsadbho .gt_col_heading {
+&#10;#ypbnouzvzc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -198,7 +198,7 @@ df <- read.csv("elimip.csv")
   padding-right: 5px;
   overflow-x: hidden;
 }
-&#10;#wgzlsadbho .gt_column_spanner_outer {
+&#10;#ypbnouzvzc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -209,13 +209,13 @@ df <- read.csv("elimip.csv")
   padding-left: 4px;
   padding-right: 4px;
 }
-&#10;#wgzlsadbho .gt_column_spanner_outer:first-child {
+&#10;#ypbnouzvzc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
-&#10;#wgzlsadbho .gt_column_spanner_outer:last-child {
+&#10;#ypbnouzvzc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
-&#10;#wgzlsadbho .gt_column_spanner {
+&#10;#ypbnouzvzc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -226,10 +226,10 @@ df <- read.csv("elimip.csv")
   display: inline-block;
   width: 100%;
 }
-&#10;#wgzlsadbho .gt_spanner_row {
+&#10;#ypbnouzvzc .gt_spanner_row {
   border-bottom-style: hidden;
 }
-&#10;#wgzlsadbho .gt_group_heading {
+&#10;#ypbnouzvzc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -254,7 +254,7 @@ df <- read.csv("elimip.csv")
   vertical-align: middle;
   text-align: left;
 }
-&#10;#wgzlsadbho .gt_empty_group_heading {
+&#10;#ypbnouzvzc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -268,13 +268,13 @@ df <- read.csv("elimip.csv")
   border-bottom-color: #D3D3D3;
   vertical-align: middle;
 }
-&#10;#wgzlsadbho .gt_from_md > :first-child {
+&#10;#ypbnouzvzc .gt_from_md > :first-child {
   margin-top: 0;
 }
-&#10;#wgzlsadbho .gt_from_md > :last-child {
+&#10;#ypbnouzvzc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
-&#10;#wgzlsadbho .gt_row {
+&#10;#ypbnouzvzc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -292,7 +292,7 @@ df <- read.csv("elimip.csv")
   vertical-align: middle;
   overflow-x: hidden;
 }
-&#10;#wgzlsadbho .gt_stub {
+&#10;#ypbnouzvzc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -304,7 +304,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#wgzlsadbho .gt_stub_row_group {
+&#10;#ypbnouzvzc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -317,13 +317,13 @@ df <- read.csv("elimip.csv")
   padding-right: 5px;
   vertical-align: top;
 }
-&#10;#wgzlsadbho .gt_row_group_first td {
+&#10;#ypbnouzvzc .gt_row_group_first td {
   border-top-width: 2px;
 }
-&#10;#wgzlsadbho .gt_row_group_first th {
+&#10;#ypbnouzvzc .gt_row_group_first th {
   border-top-width: 2px;
 }
-&#10;#wgzlsadbho .gt_summary_row {
+&#10;#ypbnouzvzc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -332,14 +332,14 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#wgzlsadbho .gt_first_summary_row {
+&#10;#ypbnouzvzc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
-&#10;#wgzlsadbho .gt_first_summary_row.thick {
+&#10;#ypbnouzvzc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
-&#10;#wgzlsadbho .gt_last_summary_row {
+&#10;#ypbnouzvzc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -348,7 +348,7 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#wgzlsadbho .gt_grand_summary_row {
+&#10;#ypbnouzvzc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -357,7 +357,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#wgzlsadbho .gt_first_grand_summary_row {
+&#10;#ypbnouzvzc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -366,7 +366,7 @@ df <- read.csv("elimip.csv")
   border-top-width: 6px;
   border-top-color: #D3D3D3;
 }
-&#10;#wgzlsadbho .gt_last_grand_summary_row_top {
+&#10;#ypbnouzvzc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -375,10 +375,10 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 6px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#wgzlsadbho .gt_striped {
+&#10;#ypbnouzvzc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
-&#10;#wgzlsadbho .gt_table_body {
+&#10;#ypbnouzvzc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -386,7 +386,7 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#wgzlsadbho .gt_footnotes {
+&#10;#ypbnouzvzc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -399,7 +399,7 @@ df <- read.csv("elimip.csv")
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#wgzlsadbho .gt_footnote {
+&#10;#ypbnouzvzc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -407,7 +407,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#wgzlsadbho .gt_sourcenotes {
+&#10;#ypbnouzvzc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -420,57 +420,57 @@ df <- read.csv("elimip.csv")
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#wgzlsadbho .gt_sourcenote {
+&#10;#ypbnouzvzc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#wgzlsadbho .gt_left {
+&#10;#ypbnouzvzc .gt_left {
   text-align: left;
 }
-&#10;#wgzlsadbho .gt_center {
+&#10;#ypbnouzvzc .gt_center {
   text-align: center;
 }
-&#10;#wgzlsadbho .gt_right {
+&#10;#ypbnouzvzc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
-&#10;#wgzlsadbho .gt_font_normal {
+&#10;#ypbnouzvzc .gt_font_normal {
   font-weight: normal;
 }
-&#10;#wgzlsadbho .gt_font_bold {
+&#10;#ypbnouzvzc .gt_font_bold {
   font-weight: bold;
 }
-&#10;#wgzlsadbho .gt_font_italic {
+&#10;#ypbnouzvzc .gt_font_italic {
   font-style: italic;
 }
-&#10;#wgzlsadbho .gt_super {
+&#10;#ypbnouzvzc .gt_super {
   font-size: 65%;
 }
-&#10;#wgzlsadbho .gt_footnote_marks {
+&#10;#ypbnouzvzc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
-&#10;#wgzlsadbho .gt_asterisk {
+&#10;#ypbnouzvzc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
-&#10;#wgzlsadbho .gt_indent_1 {
+&#10;#ypbnouzvzc .gt_indent_1 {
   text-indent: 5px;
 }
-&#10;#wgzlsadbho .gt_indent_2 {
+&#10;#ypbnouzvzc .gt_indent_2 {
   text-indent: 10px;
 }
-&#10;#wgzlsadbho .gt_indent_3 {
+&#10;#ypbnouzvzc .gt_indent_3 {
   text-indent: 15px;
 }
-&#10;#wgzlsadbho .gt_indent_4 {
+&#10;#ypbnouzvzc .gt_indent_4 {
   text-indent: 20px;
 }
-&#10;#wgzlsadbho .gt_indent_5 {
+&#10;#ypbnouzvzc .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -690,20 +690,20 @@ df <- read.csv("elimip.csv")
   </tfoot>
 </table>
 </div>
-<div id="eznfitxmjd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-  <style>#eznfitxmjd table {
+<div id="duzklulofs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+  <style>#duzklulofs table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-&#10;#eznfitxmjd thead, #eznfitxmjd tbody, #eznfitxmjd tfoot, #eznfitxmjd tr, #eznfitxmjd td, #eznfitxmjd th {
+&#10;#duzklulofs thead, #duzklulofs tbody, #duzklulofs tfoot, #duzklulofs tr, #duzklulofs td, #duzklulofs th {
   border-style: none;
 }
-&#10;#eznfitxmjd p {
+&#10;#duzklulofs p {
   margin: 0;
   padding: 0;
 }
-&#10;#eznfitxmjd .gt_table {
+&#10;#duzklulofs .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -728,11 +728,11 @@ df <- read.csv("elimip.csv")
   border-left-width: 2px;
   border-left-color: #D3D3D3;
 }
-&#10;#eznfitxmjd .gt_caption {
+&#10;#duzklulofs .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
-&#10;#eznfitxmjd .gt_title {
+&#10;#duzklulofs .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -743,7 +743,7 @@ df <- read.csv("elimip.csv")
   border-bottom-color: #FFFFFF;
   border-bottom-width: 0;
 }
-&#10;#eznfitxmjd .gt_subtitle {
+&#10;#duzklulofs .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -754,7 +754,7 @@ df <- read.csv("elimip.csv")
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
-&#10;#eznfitxmjd .gt_heading {
+&#10;#duzklulofs .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -765,12 +765,12 @@ df <- read.csv("elimip.csv")
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#eznfitxmjd .gt_bottom_border {
+&#10;#duzklulofs .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#eznfitxmjd .gt_col_headings {
+&#10;#duzklulofs .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -784,7 +784,7 @@ df <- read.csv("elimip.csv")
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#eznfitxmjd .gt_col_heading {
+&#10;#duzklulofs .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -803,7 +803,7 @@ df <- read.csv("elimip.csv")
   padding-right: 5px;
   overflow-x: hidden;
 }
-&#10;#eznfitxmjd .gt_column_spanner_outer {
+&#10;#duzklulofs .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -814,13 +814,13 @@ df <- read.csv("elimip.csv")
   padding-left: 4px;
   padding-right: 4px;
 }
-&#10;#eznfitxmjd .gt_column_spanner_outer:first-child {
+&#10;#duzklulofs .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
-&#10;#eznfitxmjd .gt_column_spanner_outer:last-child {
+&#10;#duzklulofs .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
-&#10;#eznfitxmjd .gt_column_spanner {
+&#10;#duzklulofs .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -831,10 +831,10 @@ df <- read.csv("elimip.csv")
   display: inline-block;
   width: 100%;
 }
-&#10;#eznfitxmjd .gt_spanner_row {
+&#10;#duzklulofs .gt_spanner_row {
   border-bottom-style: hidden;
 }
-&#10;#eznfitxmjd .gt_group_heading {
+&#10;#duzklulofs .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -859,7 +859,7 @@ df <- read.csv("elimip.csv")
   vertical-align: middle;
   text-align: left;
 }
-&#10;#eznfitxmjd .gt_empty_group_heading {
+&#10;#duzklulofs .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -873,13 +873,13 @@ df <- read.csv("elimip.csv")
   border-bottom-color: #D3D3D3;
   vertical-align: middle;
 }
-&#10;#eznfitxmjd .gt_from_md > :first-child {
+&#10;#duzklulofs .gt_from_md > :first-child {
   margin-top: 0;
 }
-&#10;#eznfitxmjd .gt_from_md > :last-child {
+&#10;#duzklulofs .gt_from_md > :last-child {
   margin-bottom: 0;
 }
-&#10;#eznfitxmjd .gt_row {
+&#10;#duzklulofs .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -897,7 +897,7 @@ df <- read.csv("elimip.csv")
   vertical-align: middle;
   overflow-x: hidden;
 }
-&#10;#eznfitxmjd .gt_stub {
+&#10;#duzklulofs .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -909,7 +909,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#eznfitxmjd .gt_stub_row_group {
+&#10;#duzklulofs .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -922,13 +922,13 @@ df <- read.csv("elimip.csv")
   padding-right: 5px;
   vertical-align: top;
 }
-&#10;#eznfitxmjd .gt_row_group_first td {
+&#10;#duzklulofs .gt_row_group_first td {
   border-top-width: 2px;
 }
-&#10;#eznfitxmjd .gt_row_group_first th {
+&#10;#duzklulofs .gt_row_group_first th {
   border-top-width: 2px;
 }
-&#10;#eznfitxmjd .gt_summary_row {
+&#10;#duzklulofs .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -937,14 +937,14 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#eznfitxmjd .gt_first_summary_row {
+&#10;#duzklulofs .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
-&#10;#eznfitxmjd .gt_first_summary_row.thick {
+&#10;#duzklulofs .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
-&#10;#eznfitxmjd .gt_last_summary_row {
+&#10;#duzklulofs .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -953,7 +953,7 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#eznfitxmjd .gt_grand_summary_row {
+&#10;#duzklulofs .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -962,7 +962,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#eznfitxmjd .gt_first_grand_summary_row {
+&#10;#duzklulofs .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -971,7 +971,7 @@ df <- read.csv("elimip.csv")
   border-top-width: 6px;
   border-top-color: #D3D3D3;
 }
-&#10;#eznfitxmjd .gt_last_grand_summary_row_top {
+&#10;#duzklulofs .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -980,10 +980,10 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 6px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#eznfitxmjd .gt_striped {
+&#10;#duzklulofs .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
-&#10;#eznfitxmjd .gt_table_body {
+&#10;#duzklulofs .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -991,7 +991,7 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#eznfitxmjd .gt_footnotes {
+&#10;#duzklulofs .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1004,7 +1004,7 @@ df <- read.csv("elimip.csv")
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#eznfitxmjd .gt_footnote {
+&#10;#duzklulofs .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1012,7 +1012,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#eznfitxmjd .gt_sourcenotes {
+&#10;#duzklulofs .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1025,57 +1025,57 @@ df <- read.csv("elimip.csv")
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#eznfitxmjd .gt_sourcenote {
+&#10;#duzklulofs .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#eznfitxmjd .gt_left {
+&#10;#duzklulofs .gt_left {
   text-align: left;
 }
-&#10;#eznfitxmjd .gt_center {
+&#10;#duzklulofs .gt_center {
   text-align: center;
 }
-&#10;#eznfitxmjd .gt_right {
+&#10;#duzklulofs .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
-&#10;#eznfitxmjd .gt_font_normal {
+&#10;#duzklulofs .gt_font_normal {
   font-weight: normal;
 }
-&#10;#eznfitxmjd .gt_font_bold {
+&#10;#duzklulofs .gt_font_bold {
   font-weight: bold;
 }
-&#10;#eznfitxmjd .gt_font_italic {
+&#10;#duzklulofs .gt_font_italic {
   font-style: italic;
 }
-&#10;#eznfitxmjd .gt_super {
+&#10;#duzklulofs .gt_super {
   font-size: 65%;
 }
-&#10;#eznfitxmjd .gt_footnote_marks {
+&#10;#duzklulofs .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
-&#10;#eznfitxmjd .gt_asterisk {
+&#10;#duzklulofs .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
-&#10;#eznfitxmjd .gt_indent_1 {
+&#10;#duzklulofs .gt_indent_1 {
   text-indent: 5px;
 }
-&#10;#eznfitxmjd .gt_indent_2 {
+&#10;#duzklulofs .gt_indent_2 {
   text-indent: 10px;
 }
-&#10;#eznfitxmjd .gt_indent_3 {
+&#10;#duzklulofs .gt_indent_3 {
   text-indent: 15px;
 }
-&#10;#eznfitxmjd .gt_indent_4 {
+&#10;#duzklulofs .gt_indent_4 {
   text-indent: 20px;
 }
-&#10;#eznfitxmjd .gt_indent_5 {
+&#10;#duzklulofs .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1148,20 +1148,20 @@ df <- read.csv("elimip.csv")
   </tfoot>
 </table>
 </div>
-<div id="psdwpfgucj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-  <style>#psdwpfgucj table {
+<div id="nrhubsyplj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+  <style>#nrhubsyplj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-&#10;#psdwpfgucj thead, #psdwpfgucj tbody, #psdwpfgucj tfoot, #psdwpfgucj tr, #psdwpfgucj td, #psdwpfgucj th {
+&#10;#nrhubsyplj thead, #nrhubsyplj tbody, #nrhubsyplj tfoot, #nrhubsyplj tr, #nrhubsyplj td, #nrhubsyplj th {
   border-style: none;
 }
-&#10;#psdwpfgucj p {
+&#10;#nrhubsyplj p {
   margin: 0;
   padding: 0;
 }
-&#10;#psdwpfgucj .gt_table {
+&#10;#nrhubsyplj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1186,11 +1186,11 @@ df <- read.csv("elimip.csv")
   border-left-width: 2px;
   border-left-color: #D3D3D3;
 }
-&#10;#psdwpfgucj .gt_caption {
+&#10;#nrhubsyplj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
-&#10;#psdwpfgucj .gt_title {
+&#10;#nrhubsyplj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1201,7 +1201,7 @@ df <- read.csv("elimip.csv")
   border-bottom-color: #FFFFFF;
   border-bottom-width: 0;
 }
-&#10;#psdwpfgucj .gt_subtitle {
+&#10;#nrhubsyplj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1212,7 +1212,7 @@ df <- read.csv("elimip.csv")
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
-&#10;#psdwpfgucj .gt_heading {
+&#10;#nrhubsyplj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1223,12 +1223,12 @@ df <- read.csv("elimip.csv")
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#psdwpfgucj .gt_bottom_border {
+&#10;#nrhubsyplj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#psdwpfgucj .gt_col_headings {
+&#10;#nrhubsyplj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1242,7 +1242,7 @@ df <- read.csv("elimip.csv")
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#psdwpfgucj .gt_col_heading {
+&#10;#nrhubsyplj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1261,7 +1261,7 @@ df <- read.csv("elimip.csv")
   padding-right: 5px;
   overflow-x: hidden;
 }
-&#10;#psdwpfgucj .gt_column_spanner_outer {
+&#10;#nrhubsyplj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1272,13 +1272,13 @@ df <- read.csv("elimip.csv")
   padding-left: 4px;
   padding-right: 4px;
 }
-&#10;#psdwpfgucj .gt_column_spanner_outer:first-child {
+&#10;#nrhubsyplj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
-&#10;#psdwpfgucj .gt_column_spanner_outer:last-child {
+&#10;#nrhubsyplj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
-&#10;#psdwpfgucj .gt_column_spanner {
+&#10;#nrhubsyplj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1289,10 +1289,10 @@ df <- read.csv("elimip.csv")
   display: inline-block;
   width: 100%;
 }
-&#10;#psdwpfgucj .gt_spanner_row {
+&#10;#nrhubsyplj .gt_spanner_row {
   border-bottom-style: hidden;
 }
-&#10;#psdwpfgucj .gt_group_heading {
+&#10;#nrhubsyplj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1317,7 +1317,7 @@ df <- read.csv("elimip.csv")
   vertical-align: middle;
   text-align: left;
 }
-&#10;#psdwpfgucj .gt_empty_group_heading {
+&#10;#nrhubsyplj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1331,13 +1331,13 @@ df <- read.csv("elimip.csv")
   border-bottom-color: #D3D3D3;
   vertical-align: middle;
 }
-&#10;#psdwpfgucj .gt_from_md > :first-child {
+&#10;#nrhubsyplj .gt_from_md > :first-child {
   margin-top: 0;
 }
-&#10;#psdwpfgucj .gt_from_md > :last-child {
+&#10;#nrhubsyplj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
-&#10;#psdwpfgucj .gt_row {
+&#10;#nrhubsyplj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1355,7 +1355,7 @@ df <- read.csv("elimip.csv")
   vertical-align: middle;
   overflow-x: hidden;
 }
-&#10;#psdwpfgucj .gt_stub {
+&#10;#nrhubsyplj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1367,7 +1367,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#psdwpfgucj .gt_stub_row_group {
+&#10;#nrhubsyplj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1380,13 +1380,13 @@ df <- read.csv("elimip.csv")
   padding-right: 5px;
   vertical-align: top;
 }
-&#10;#psdwpfgucj .gt_row_group_first td {
+&#10;#nrhubsyplj .gt_row_group_first td {
   border-top-width: 2px;
 }
-&#10;#psdwpfgucj .gt_row_group_first th {
+&#10;#nrhubsyplj .gt_row_group_first th {
   border-top-width: 2px;
 }
-&#10;#psdwpfgucj .gt_summary_row {
+&#10;#nrhubsyplj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1395,14 +1395,14 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#psdwpfgucj .gt_first_summary_row {
+&#10;#nrhubsyplj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
-&#10;#psdwpfgucj .gt_first_summary_row.thick {
+&#10;#nrhubsyplj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
-&#10;#psdwpfgucj .gt_last_summary_row {
+&#10;#nrhubsyplj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1411,7 +1411,7 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#psdwpfgucj .gt_grand_summary_row {
+&#10;#nrhubsyplj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1420,7 +1420,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#psdwpfgucj .gt_first_grand_summary_row {
+&#10;#nrhubsyplj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1429,7 +1429,7 @@ df <- read.csv("elimip.csv")
   border-top-width: 6px;
   border-top-color: #D3D3D3;
 }
-&#10;#psdwpfgucj .gt_last_grand_summary_row_top {
+&#10;#nrhubsyplj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1438,10 +1438,10 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 6px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#psdwpfgucj .gt_striped {
+&#10;#nrhubsyplj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
-&#10;#psdwpfgucj .gt_table_body {
+&#10;#nrhubsyplj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1449,7 +1449,7 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#psdwpfgucj .gt_footnotes {
+&#10;#nrhubsyplj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1462,7 +1462,7 @@ df <- read.csv("elimip.csv")
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#psdwpfgucj .gt_footnote {
+&#10;#nrhubsyplj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1470,7 +1470,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#psdwpfgucj .gt_sourcenotes {
+&#10;#nrhubsyplj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1483,57 +1483,57 @@ df <- read.csv("elimip.csv")
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#psdwpfgucj .gt_sourcenote {
+&#10;#nrhubsyplj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#psdwpfgucj .gt_left {
+&#10;#nrhubsyplj .gt_left {
   text-align: left;
 }
-&#10;#psdwpfgucj .gt_center {
+&#10;#nrhubsyplj .gt_center {
   text-align: center;
 }
-&#10;#psdwpfgucj .gt_right {
+&#10;#nrhubsyplj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
-&#10;#psdwpfgucj .gt_font_normal {
+&#10;#nrhubsyplj .gt_font_normal {
   font-weight: normal;
 }
-&#10;#psdwpfgucj .gt_font_bold {
+&#10;#nrhubsyplj .gt_font_bold {
   font-weight: bold;
 }
-&#10;#psdwpfgucj .gt_font_italic {
+&#10;#nrhubsyplj .gt_font_italic {
   font-style: italic;
 }
-&#10;#psdwpfgucj .gt_super {
+&#10;#nrhubsyplj .gt_super {
   font-size: 65%;
 }
-&#10;#psdwpfgucj .gt_footnote_marks {
+&#10;#nrhubsyplj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
-&#10;#psdwpfgucj .gt_asterisk {
+&#10;#nrhubsyplj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
-&#10;#psdwpfgucj .gt_indent_1 {
+&#10;#nrhubsyplj .gt_indent_1 {
   text-indent: 5px;
 }
-&#10;#psdwpfgucj .gt_indent_2 {
+&#10;#nrhubsyplj .gt_indent_2 {
   text-indent: 10px;
 }
-&#10;#psdwpfgucj .gt_indent_3 {
+&#10;#nrhubsyplj .gt_indent_3 {
   text-indent: 15px;
 }
-&#10;#psdwpfgucj .gt_indent_4 {
+&#10;#nrhubsyplj .gt_indent_4 {
   text-indent: 20px;
 }
-&#10;#psdwpfgucj .gt_indent_5 {
+&#10;#nrhubsyplj .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2012,11 +2012,32 @@ Marginal R<sup>2</sup> / Conditional R<sup>2</sup>
 </tr>
 </table>
 
+``` r
+plotcmm.ranef <- function(cmm1) {
+  rn <- names(cmm1[["stDev"]]) 
+  nc <- length(cmm1[["ranef"]]) 
+  ci <- cmm1$ranef + qnorm(0.975) * sqrt(cmm1$condVar) %o% c(-1, 1)
+  ord.re <- order(cmm1$ranef)
+  ci <- ci[order(cmm1$ranef), ]
+  ggplot() +
+    geom_point(aes(x = 1:nc, y = cmm1$ranef[ord.re])) + 
+    geom_errorbar(aes(x = 1:nc, ymin = ci[,1], ymax = ci[,2]), width = 0.2) + 
+    geom_hline(yintercept = 0, linetype = "dashed") + 
+    theme_minimal() +
+    theme(axis.text.x = element_blank(),
+          axis.ticks.x = element_blank()) + 
+    labs(title = "Effect of department place of residence via conditional modes on frequency of preventive behaviour",
+         x = paste0(rn, "Departments"),
+         y = paste0(rn, "Effect via conditional modes"))
+}
+ggsave("random_effects_cmm1.png", plot = plotcmm.ranef(cmm1), dpi = 500, width = 10, height = 6, units = "in")
+```
+
 ## 2.2. Count of protective behaviours
 
 ``` r
 # Theory-informed model that includes a minimally sufficient set of confounding variables of the exposure-outcome relationship
-compois2 <- glmmTMB(count_prev ~ freq_bites_num + disease_fear + disease_prob + age + precarity2 + gender + edu2 + mbd_know + chronic_dis + confiance_nat + confiance_reg + hist_mborne + commune_type + (1|departement), data=df, ziformula=~1+freq_bites_num, family=compois(), control = glmmTMBControl(optCtrl = list(trace = 1), parallel = 8))
+compois2 <- glmmTMB(count_prev ~ freq_bites_num + disease_fear + disease_prob + age + precarity2 + gender + edu2 + mbd_know + chronic_dis + confiance_nat + confiance_reg + hist_mborne + commune_type + (1|departement), data=df, ziformula=~1+freq_bites_num, family=compois(), control = glmmTMBControl(optCtrl = list(trace = 1), parallel = 4))
 ```
 
     ## Warning in finalizeTMB(TMBStruc, obj, fit, h, data.tmb.old): Model convergence
@@ -2026,7 +2047,7 @@ compois2 <- glmmTMB(count_prev ~ freq_bites_num + disease_fear + disease_prob + 
 ``` r
 # We remove independent variables that have non significant associations with the outcome variable (p-value<0.05) in one block
 # Confounders age and sex are kept regardless
-compois1 <- glmmTMB(count_prev ~ freq_bites_num + disease_fear + edu2 + mbd_know + chronic_dis + + gender + age + (1|departement), data=df, ziformula=~1+freq_bites_num, family=compois(), control = glmmTMBControl(optCtrl = list(trace = 1), parallel = 8))
+compois1 <- glmmTMB(count_prev ~ freq_bites_num + disease_fear + edu2 + mbd_know + chronic_dis + + gender + age + (1|departement), data=df, ziformula=~1+freq_bites_num, family=compois(), control = glmmTMBControl(optCtrl = list(trace = 1), parallel = 4))
 
 # Likelihood-ratio test: It evaluates if the model with fewer parameters performs significantly worse than the full mode
 compois_lrt <- lrtest(compois1, compois2)
@@ -2112,19 +2133,19 @@ diagnose(compois1)
     ## Unusually large Z-statistics (|x|>5):
     ## 
     ##         freq_bites_num5 to 10 times per week 
-    ##                                     7.132875 
+    ##                                     7.132810 
     ##    freq_bites_numMore than 10 times per week 
-    ##                                     9.374202 
+    ##                                     9.374139 
     ##                                          age 
-    ##                                     5.597146 
+    ##                                     5.597167 
     ##       zi~freq_bites_numLess than once a week 
-    ##                                    -7.425413 
+    ##                                    -7.425407 
     ##       zi~freq_bites_num1 to 5 times per week 
-    ##                                    -9.924108 
+    ##                                    -9.924013 
     ## zi~freq_bites_numMore than 10 times per week 
-    ##                                    -5.203476 
+    ##                                    -5.203307 
     ##                        theta_1|departement.1 
-    ##                                    -7.808177 
+    ##                                    -7.807861 
     ## 
     ## Large Z-statistics (estimate/std err) suggest a *possible* failure of
     ## the Wald approximation - often also associated with parameters that are
@@ -2612,4 +2633,37 @@ Marginal R<sup>2</sup> / Conditional R<sup>2</sup>
 </tr>
 </table>
 
-# 
+``` r
+plotcompois.ranef <- function(compois1) {
+  re_compois1_data <- data.frame(
+    "intercepts" = ranef(compois1)$cond$departement$`(Intercept)`,
+    "sd" = sqrt(TMB::sdreport(compois1$obj, getJointPrecision=TRUE)$diag.cov.random),
+    "departement" = factor(row.names(ranef(compois1)$cond$departement))
+  )
+  
+  re_compois1_data$ucl <- re_compois1_data$intercepts + (re_compois1_data$sd * 1.96)
+  re_compois1_data$lcl <- re_compois1_data$intercepts - (re_compois1_data$sd * 1.96)
+  
+  ggplot(re_compois1_data, aes(x = reorder(departement, intercepts), y = intercepts)) +
+    geom_point() + 
+    geom_errorbar(aes(ymin = lcl, ymax = ucl), width = 0.2) +
+    geom_hline(yintercept = 0, linetype = "dashed") +
+    theme_minimal() +
+    theme(axis.text.x = element_blank(),
+          axis.ticks.x = element_blank()) +
+    labs(
+      title = "Effect of department place of residence via conditional modes on variety of preventive behaviour",
+      x = "Departments",
+      y = "Effect via conditional modes"
+    )
+}
+
+ggsave("random_effects_compois1.png", plot = plotcompois.ranef(compois1), dpi = 500, width = 10, height = 6, units = "in")
+```
+
+``` r
+#Calculate likelihood profile CIs
+#CI_zinbmm_final <- confint(zinbmm_final, trace=1, level = 0.95, method = c("profile"), estimate = TRUE, include_nonest = TRUE, full = TRUE) #similar to Wald-based CIs
+#likelihood profile CIs are more accurate but much slower
+#Fits natural splines separately to the points from each half of the profile for each specified parameter (i.e., values above and below the MLE), then finds the inverse functions to estimate the endpoints of the confidence interval
+```
