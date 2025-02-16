@@ -403,7 +403,7 @@ plotcmm.ranef <- function(cmm1) {
          x = paste0(rn, "Departments"),
          y = paste0(rn, "Effect via conditional modes"))
 }
-plotcompois.ranef(cmm1)
+plotcmm.ranef(cmm1)
 ```
 
 ## 2.2. Count of protective behaviours
