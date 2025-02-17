@@ -52,8 +52,6 @@ installed.packages()[names(sessionInfo()$otherPkgs), "Version"]
 df <- read.csv("elimip.csv")
 ```
 
-### Data preparation
-
 ```{r Dataframe: Variable creation, message=FALSE, echo = FALSE}
 # Calculate var count_prev
 values_to_replace <- c("Autre", "AUCUN", "aucun", "rien", "rien de spÃ©cial", "rien de spécial", "Nous avons eu peu de moustiques") #delete inappropriate values (e.g., aucun, rien)
@@ -286,8 +284,7 @@ df %>%
   add_overall() %>%
   modify_spanning_header (c("stat_1", "stat_2", "stat_3", "stat_4", "stat_5") ~ "**Region**") %>%
   modify_header(label ~ "**Characteristic**") %>%
-  modify_caption("**Table 1. Description of the study population.**") %>% 
-  gt::render_gt()
+  modify_caption("**Table 1. Description of the study population.**")
 ```
 
 ```{r Table: Knowledge, attitudes, and practices per UDA5 region, echo = FALSE}
@@ -304,8 +301,7 @@ df %>%
   add_overall() %>%
   modify_spanning_header(c("stat_1", "stat_2", "stat_3", "stat_4", "stat_5") ~ "**Region**") %>%
   modify_footnote(all_stat_cols() ~ "Median (IQR); Mean (SD)") %>%
-  modify_caption("**Table 2. Knowledge, attitudes, and practices of mosquito-borne diseases and prevention of the study population per UDA5 region**") %>% 
-  gt::render_gt()
+  modify_caption("**Table 2. Knowledge, attitudes, and practices of mosquito-borne diseases and prevention of the study population per UDA5 region**")
 ```
 
 ```{r Table: Protective behaviours per UDA5 region, echo = FALSE}
@@ -319,8 +315,7 @@ df %>%
   modify_spanning_header(c("stat_1", "stat_2", "stat_3", "stat_4", "stat_5") ~ "**Region**") %>%
   modify_header(label ~ "**Protective behaviour**") %>%
   modify_caption("**Table 3. Mosquito-borne disease protective behaviours per region per UDA5 region**") %>% 
-  as_gt() %>% 
-  gt::render_gt()
+  as_gt()
 ```
 
 # 2. Modelling

@@ -1,7 +1,7 @@
 Mosquito-borne disease and protective behavior in metropolitan France
 ================
 Juan Carlos Ocampo
-2025-02-16
+2025-02-17
 
 # Introduction
 
@@ -31,16 +31,43 @@ library(DHARMa)
 library(ggplot2)
 library(sjPlot)
 library(gtsummary)
+
+#Spatial
+library(sf)
+library(terra)
+library(tmap)
+library(dplyr)
+library(geojsonsf)
+library(stringdist)
+library(fuzzyjoin)
+library(raster)
+library(spatstat)
+library(leaflet)
+library(htmlwidgets)
 ```
 
-    ##   gtsummary      sjPlot      DHARMa performance      lmtest         zoo 
-    ##     "1.7.2"    "2.8.15"     "0.4.6"    "0.11.0"    "0.9-40"    "1.8-12" 
-    ##     ordinal     glmmTMB        lme4      Matrix    labelled   lubridate 
-    ## "2023.12-4"     "1.1.9"  "1.1-35.1"     "1.6-5"    "2.12.0"     "1.9.3" 
-    ##     forcats     stringr       dplyr       purrr       readr       tidyr 
-    ##     "1.0.0"     "1.5.1"     "1.1.4"     "1.0.2"     "2.1.5"     "1.3.1" 
-    ##      tibble     ggplot2   tidyverse 
-    ##     "3.2.1"     "3.5.0"     "2.0.0"
+    ##      htmlwidgets          leaflet         spatstat  spatstat.linnet 
+    ##          "1.6.4"          "2.2.2"          "3.1-1"          "3.2-1" 
+    ##   spatstat.model            rpart spatstat.explore             nlme 
+    ##          "3.3-1"         "4.1.23"          "3.3-2"        "3.1-164" 
+    ##  spatstat.random    spatstat.geom  spatstat.univar    spatstat.data 
+    ##          "3.3-1"          "3.3-2"          "3.0-1"          "3.1-2" 
+    ##           raster               sp        fuzzyjoin       stringdist 
+    ##         "3.6-26"          "2.1-3"          "0.1.6"         "0.9.12" 
+    ##        geojsonsf             tmap            terra               sf 
+    ##          "2.0.3"          "3.3-4"         "1.7-78"         "1.0-16" 
+    ##        gtsummary           sjPlot           DHARMa      performance 
+    ##          "1.7.2"         "2.8.15"          "0.4.6"         "0.11.0" 
+    ##           lmtest              zoo          ordinal          glmmTMB 
+    ##         "0.9-40"         "1.8-12"      "2023.12-4"          "1.1.9" 
+    ##             lme4           Matrix         labelled        lubridate 
+    ##       "1.1-35.1"          "1.6-5"         "2.12.0"          "1.9.3" 
+    ##          forcats          stringr            dplyr            purrr 
+    ##          "1.0.0"          "1.5.1"          "1.1.4"          "1.0.2" 
+    ##            readr            tidyr           tibble          ggplot2 
+    ##          "2.1.5"          "1.3.1"          "3.2.1"          "3.5.0" 
+    ##        tidyverse 
+    ##          "2.0.0"
 
 ### Dataframe
 
@@ -49,15 +76,1552 @@ library(gtsummary)
 df <- read.csv("elimip.csv")
 ```
 
-### Data preparation
-
 # 1. Descriptive statistics
 
 ## 1.2.Per UDA5 region
 
-<div id="out181b585a814a5104" class="shiny-html-output"></div>
-<div id="outaa7487f75f41df1e" class="shiny-html-output"></div>
-<div id="out2c22f27617ef1c4c" class="shiny-html-output"></div>
+<div id="fpbafqgtbs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fpbafqgtbs table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+&#10;#fpbafqgtbs thead, #fpbafqgtbs tbody, #fpbafqgtbs tfoot, #fpbafqgtbs tr, #fpbafqgtbs td, #fpbafqgtbs th {
+  border-style: none;
+}
+&#10;#fpbafqgtbs p {
+  margin: 0;
+  padding: 0;
+}
+&#10;#fpbafqgtbs .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+&#10;#fpbafqgtbs .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+&#10;#fpbafqgtbs .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+&#10;#fpbafqgtbs .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+&#10;#fpbafqgtbs .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+&#10;#fpbafqgtbs .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+&#10;#fpbafqgtbs .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+&#10;#fpbafqgtbs .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+&#10;#fpbafqgtbs .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+&#10;#fpbafqgtbs .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+&#10;#fpbafqgtbs .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+&#10;#fpbafqgtbs .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+&#10;#fpbafqgtbs .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+&#10;#fpbafqgtbs .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+&#10;#fpbafqgtbs .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+&#10;#fpbafqgtbs .gt_from_md > :first-child {
+  margin-top: 0;
+}
+&#10;#fpbafqgtbs .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+&#10;#fpbafqgtbs .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+&#10;#fpbafqgtbs .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+&#10;#fpbafqgtbs .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+&#10;#fpbafqgtbs .gt_row_group_first td {
+  border-top-width: 2px;
+}
+&#10;#fpbafqgtbs .gt_row_group_first th {
+  border-top-width: 2px;
+}
+&#10;#fpbafqgtbs .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+&#10;#fpbafqgtbs .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+&#10;#fpbafqgtbs .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+&#10;#fpbafqgtbs .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+&#10;#fpbafqgtbs .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+&#10;#fpbafqgtbs .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+&#10;#fpbafqgtbs .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+&#10;#fpbafqgtbs .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+&#10;#fpbafqgtbs .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+&#10;#fpbafqgtbs .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+&#10;#fpbafqgtbs .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+&#10;#fpbafqgtbs .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+&#10;#fpbafqgtbs .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+&#10;#fpbafqgtbs .gt_left {
+  text-align: left;
+}
+&#10;#fpbafqgtbs .gt_center {
+  text-align: center;
+}
+&#10;#fpbafqgtbs .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+&#10;#fpbafqgtbs .gt_font_normal {
+  font-weight: normal;
+}
+&#10;#fpbafqgtbs .gt_font_bold {
+  font-weight: bold;
+}
+&#10;#fpbafqgtbs .gt_font_italic {
+  font-style: italic;
+}
+&#10;#fpbafqgtbs .gt_super {
+  font-size: 65%;
+}
+&#10;#fpbafqgtbs .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+&#10;#fpbafqgtbs .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+&#10;#fpbafqgtbs .gt_indent_1 {
+  text-indent: 5px;
+}
+&#10;#fpbafqgtbs .gt_indent_2 {
+  text-indent: 10px;
+}
+&#10;#fpbafqgtbs .gt_indent_3 {
+  text-indent: 15px;
+}
+&#10;#fpbafqgtbs .gt_indent_4 {
+  text-indent: 20px;
+}
+&#10;#fpbafqgtbs .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <caption><strong>Table 1. Description of the study population.</strong></caption>
+  <thead>
+    <tr class="gt_col_headings gt_spanner_row">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="&lt;strong&gt;Characteristic&lt;/strong&gt;"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" scope="col" id="&lt;strong&gt;Overall&lt;/strong&gt;, N = 2,087&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>Overall</strong>, N = 2,087<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="5" scope="colgroup" id="&lt;strong&gt;Region&lt;/strong&gt;">
+        <span class="gt_column_spanner"><strong>Region</strong></span>
+      </th>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Paris region&lt;/strong&gt;, N = 392&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>Paris region</strong>, N = 392<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;North East&lt;/strong&gt;, N = 458&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>North East</strong>, N = 458<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;North West&lt;/strong&gt;, N = 480&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>North West</strong>, N = 480<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;South East&lt;/strong&gt;, N = 521&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>South East</strong>, N = 521<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;South West&lt;/strong&gt;, N = 236&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>South West</strong>, N = 236<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">Gender</td>
+<td headers="stat_0" class="gt_row gt_center"><br /></td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td>
+<td headers="stat_3" class="gt_row gt_center"><br /></td>
+<td headers="stat_4" class="gt_row gt_center"><br /></td>
+<td headers="stat_5" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Man</td>
+<td headers="stat_0" class="gt_row gt_center">1,012 (48%)</td>
+<td headers="stat_1" class="gt_row gt_center">226 (58%)</td>
+<td headers="stat_2" class="gt_row gt_center">213 (47%)</td>
+<td headers="stat_3" class="gt_row gt_center">212 (44%)</td>
+<td headers="stat_4" class="gt_row gt_center">256 (49%)</td>
+<td headers="stat_5" class="gt_row gt_center">105 (44%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Woman</td>
+<td headers="stat_0" class="gt_row gt_center">1,075 (52%)</td>
+<td headers="stat_1" class="gt_row gt_center">166 (42%)</td>
+<td headers="stat_2" class="gt_row gt_center">245 (53%)</td>
+<td headers="stat_3" class="gt_row gt_center">268 (56%)</td>
+<td headers="stat_4" class="gt_row gt_center">265 (51%)</td>
+<td headers="stat_5" class="gt_row gt_center">131 (56%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Age group (in years)</td>
+<td headers="stat_0" class="gt_row gt_center"><br /></td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td>
+<td headers="stat_3" class="gt_row gt_center"><br /></td>
+<td headers="stat_4" class="gt_row gt_center"><br /></td>
+<td headers="stat_5" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    18 to 39</td>
+<td headers="stat_0" class="gt_row gt_center">736 (35%)</td>
+<td headers="stat_1" class="gt_row gt_center">206 (53%)</td>
+<td headers="stat_2" class="gt_row gt_center">128 (28%)</td>
+<td headers="stat_3" class="gt_row gt_center">141 (29%)</td>
+<td headers="stat_4" class="gt_row gt_center">195 (37%)</td>
+<td headers="stat_5" class="gt_row gt_center">66 (28%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    40 to 59</td>
+<td headers="stat_0" class="gt_row gt_center">738 (35%)</td>
+<td headers="stat_1" class="gt_row gt_center">125 (32%)</td>
+<td headers="stat_2" class="gt_row gt_center">169 (37%)</td>
+<td headers="stat_3" class="gt_row gt_center">174 (36%)</td>
+<td headers="stat_4" class="gt_row gt_center">182 (35%)</td>
+<td headers="stat_5" class="gt_row gt_center">88 (37%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    60 to 79</td>
+<td headers="stat_0" class="gt_row gt_center">613 (29%)</td>
+<td headers="stat_1" class="gt_row gt_center">61 (16%)</td>
+<td headers="stat_2" class="gt_row gt_center">161 (35%)</td>
+<td headers="stat_3" class="gt_row gt_center">165 (34%)</td>
+<td headers="stat_4" class="gt_row gt_center">144 (28%)</td>
+<td headers="stat_5" class="gt_row gt_center">82 (35%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Type of settlement</td>
+<td headers="stat_0" class="gt_row gt_center"><br /></td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td>
+<td headers="stat_3" class="gt_row gt_center"><br /></td>
+<td headers="stat_4" class="gt_row gt_center"><br /></td>
+<td headers="stat_5" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Village (&lt;2 000 inhabitants)</td>
+<td headers="stat_0" class="gt_row gt_center">482 (23%)</td>
+<td headers="stat_1" class="gt_row gt_center">8 (2.0%)</td>
+<td headers="stat_2" class="gt_row gt_center">158 (34%)</td>
+<td headers="stat_3" class="gt_row gt_center">138 (29%)</td>
+<td headers="stat_4" class="gt_row gt_center">98 (19%)</td>
+<td headers="stat_5" class="gt_row gt_center">80 (34%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Small town (between 2.000 and 20.000 inhabitants)</td>
+<td headers="stat_0" class="gt_row gt_center">631 (30%)</td>
+<td headers="stat_1" class="gt_row gt_center">71 (18%)</td>
+<td headers="stat_2" class="gt_row gt_center">149 (33%)</td>
+<td headers="stat_3" class="gt_row gt_center">180 (38%)</td>
+<td headers="stat_4" class="gt_row gt_center">166 (32%)</td>
+<td headers="stat_5" class="gt_row gt_center">65 (28%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Medium-sized city (between 20 000 and 100 000 inhabitants)</td>
+<td headers="stat_0" class="gt_row gt_center">557 (27%)</td>
+<td headers="stat_1" class="gt_row gt_center">166 (42%)</td>
+<td headers="stat_2" class="gt_row gt_center">91 (20%)</td>
+<td headers="stat_3" class="gt_row gt_center">102 (21%)</td>
+<td headers="stat_4" class="gt_row gt_center">145 (28%)</td>
+<td headers="stat_5" class="gt_row gt_center">53 (22%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Large city (&gt;100 000 inhabitants)</td>
+<td headers="stat_0" class="gt_row gt_center">417 (20%)</td>
+<td headers="stat_1" class="gt_row gt_center">147 (38%)</td>
+<td headers="stat_2" class="gt_row gt_center">60 (13%)</td>
+<td headers="stat_3" class="gt_row gt_center">60 (13%)</td>
+<td headers="stat_4" class="gt_row gt_center">112 (21%)</td>
+<td headers="stat_5" class="gt_row gt_center">38 (16%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Educational attainment</td>
+<td headers="stat_0" class="gt_row gt_center"><br /></td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td>
+<td headers="stat_3" class="gt_row gt_center"><br /></td>
+<td headers="stat_4" class="gt_row gt_center"><br /></td>
+<td headers="stat_5" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Lower than secondary school</td>
+<td headers="stat_0" class="gt_row gt_center">450 (22%)</td>
+<td headers="stat_1" class="gt_row gt_center">56 (14%)</td>
+<td headers="stat_2" class="gt_row gt_center">116 (25%)</td>
+<td headers="stat_3" class="gt_row gt_center">126 (26%)</td>
+<td headers="stat_4" class="gt_row gt_center">100 (19%)</td>
+<td headers="stat_5" class="gt_row gt_center">52 (22%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Equal to secondary school</td>
+<td headers="stat_0" class="gt_row gt_center">502 (24%)</td>
+<td headers="stat_1" class="gt_row gt_center">72 (18%)</td>
+<td headers="stat_2" class="gt_row gt_center">121 (26%)</td>
+<td headers="stat_3" class="gt_row gt_center">114 (24%)</td>
+<td headers="stat_4" class="gt_row gt_center">136 (26%)</td>
+<td headers="stat_5" class="gt_row gt_center">59 (25%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2–4 years beyond secondary school</td>
+<td headers="stat_0" class="gt_row gt_center">817 (39%)</td>
+<td headers="stat_1" class="gt_row gt_center">156 (40%)</td>
+<td headers="stat_2" class="gt_row gt_center">169 (37%)</td>
+<td headers="stat_3" class="gt_row gt_center">183 (38%)</td>
+<td headers="stat_4" class="gt_row gt_center">210 (40%)</td>
+<td headers="stat_5" class="gt_row gt_center">99 (42%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    5 or more years beyond secondary school</td>
+<td headers="stat_0" class="gt_row gt_center">318 (15%)</td>
+<td headers="stat_1" class="gt_row gt_center">108 (28%)</td>
+<td headers="stat_2" class="gt_row gt_center">52 (11%)</td>
+<td headers="stat_3" class="gt_row gt_center">57 (12%)</td>
+<td headers="stat_4" class="gt_row gt_center">75 (14%)</td>
+<td headers="stat_5" class="gt_row gt_center">26 (11%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Financial difficulty in the past 12 months</td>
+<td headers="stat_0" class="gt_row gt_center">572 (27%)</td>
+<td headers="stat_1" class="gt_row gt_center">134 (34%)</td>
+<td headers="stat_2" class="gt_row gt_center">110 (24%)</td>
+<td headers="stat_3" class="gt_row gt_center">118 (25%)</td>
+<td headers="stat_4" class="gt_row gt_center">148 (28%)</td>
+<td headers="stat_5" class="gt_row gt_center">62 (26%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Has a chronic disease</td>
+<td headers="stat_0" class="gt_row gt_center">653 (31%)</td>
+<td headers="stat_1" class="gt_row gt_center">107 (27%)</td>
+<td headers="stat_2" class="gt_row gt_center">154 (34%)</td>
+<td headers="stat_3" class="gt_row gt_center">170 (35%)</td>
+<td headers="stat_4" class="gt_row gt_center">147 (28%)</td>
+<td headers="stat_5" class="gt_row gt_center">75 (32%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Frequency of mosquito bites</td>
+<td headers="stat_0" class="gt_row gt_center"><br /></td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td>
+<td headers="stat_3" class="gt_row gt_center"><br /></td>
+<td headers="stat_4" class="gt_row gt_center"><br /></td>
+<td headers="stat_5" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Never or almost never</td>
+<td headers="stat_0" class="gt_row gt_center">575 (28%)</td>
+<td headers="stat_1" class="gt_row gt_center">73 (19%)</td>
+<td headers="stat_2" class="gt_row gt_center">185 (40%)</td>
+<td headers="stat_3" class="gt_row gt_center">179 (37%)</td>
+<td headers="stat_4" class="gt_row gt_center">103 (20%)</td>
+<td headers="stat_5" class="gt_row gt_center">35 (15%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Sometimes</td>
+<td headers="stat_0" class="gt_row gt_center">896 (43%)</td>
+<td headers="stat_1" class="gt_row gt_center">194 (49%)</td>
+<td headers="stat_2" class="gt_row gt_center">187 (41%)</td>
+<td headers="stat_3" class="gt_row gt_center">214 (45%)</td>
+<td headers="stat_4" class="gt_row gt_center">220 (42%)</td>
+<td headers="stat_5" class="gt_row gt_center">81 (34%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Often</td>
+<td headers="stat_0" class="gt_row gt_center">616 (30%)</td>
+<td headers="stat_1" class="gt_row gt_center">125 (32%)</td>
+<td headers="stat_2" class="gt_row gt_center">86 (19%)</td>
+<td headers="stat_3" class="gt_row gt_center">87 (18%)</td>
+<td headers="stat_4" class="gt_row gt_center">198 (38%)</td>
+<td headers="stat_5" class="gt_row gt_center">120 (51%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Frequency of preventive behaviour</td>
+<td headers="stat_0" class="gt_row gt_center"><br /></td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td>
+<td headers="stat_3" class="gt_row gt_center"><br /></td>
+<td headers="stat_4" class="gt_row gt_center"><br /></td>
+<td headers="stat_5" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Never</td>
+<td headers="stat_0" class="gt_row gt_center">414 (20%)</td>
+<td headers="stat_1" class="gt_row gt_center">62 (16%)</td>
+<td headers="stat_2" class="gt_row gt_center">111 (24%)</td>
+<td headers="stat_3" class="gt_row gt_center">129 (27%)</td>
+<td headers="stat_4" class="gt_row gt_center">85 (16%)</td>
+<td headers="stat_5" class="gt_row gt_center">27 (11%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    A few times</td>
+<td headers="stat_0" class="gt_row gt_center">808 (39%)</td>
+<td headers="stat_1" class="gt_row gt_center">146 (37%)</td>
+<td headers="stat_2" class="gt_row gt_center">215 (47%)</td>
+<td headers="stat_3" class="gt_row gt_center">227 (47%)</td>
+<td headers="stat_4" class="gt_row gt_center">165 (32%)</td>
+<td headers="stat_5" class="gt_row gt_center">55 (23%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Several times a week</td>
+<td headers="stat_0" class="gt_row gt_center">865 (41%)</td>
+<td headers="stat_1" class="gt_row gt_center">184 (47%)</td>
+<td headers="stat_2" class="gt_row gt_center">132 (29%)</td>
+<td headers="stat_3" class="gt_row gt_center">124 (26%)</td>
+<td headers="stat_4" class="gt_row gt_center">271 (52%)</td>
+<td headers="stat_5" class="gt_row gt_center">154 (65%)</td></tr>
+  </tbody>
+  &#10;  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="7"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> n (%)</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+<div id="snihtkrxka" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#snihtkrxka table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+&#10;#snihtkrxka thead, #snihtkrxka tbody, #snihtkrxka tfoot, #snihtkrxka tr, #snihtkrxka td, #snihtkrxka th {
+  border-style: none;
+}
+&#10;#snihtkrxka p {
+  margin: 0;
+  padding: 0;
+}
+&#10;#snihtkrxka .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+&#10;#snihtkrxka .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+&#10;#snihtkrxka .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+&#10;#snihtkrxka .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+&#10;#snihtkrxka .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+&#10;#snihtkrxka .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+&#10;#snihtkrxka .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+&#10;#snihtkrxka .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+&#10;#snihtkrxka .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+&#10;#snihtkrxka .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+&#10;#snihtkrxka .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+&#10;#snihtkrxka .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+&#10;#snihtkrxka .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+&#10;#snihtkrxka .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+&#10;#snihtkrxka .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+&#10;#snihtkrxka .gt_from_md > :first-child {
+  margin-top: 0;
+}
+&#10;#snihtkrxka .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+&#10;#snihtkrxka .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+&#10;#snihtkrxka .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+&#10;#snihtkrxka .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+&#10;#snihtkrxka .gt_row_group_first td {
+  border-top-width: 2px;
+}
+&#10;#snihtkrxka .gt_row_group_first th {
+  border-top-width: 2px;
+}
+&#10;#snihtkrxka .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+&#10;#snihtkrxka .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+&#10;#snihtkrxka .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+&#10;#snihtkrxka .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+&#10;#snihtkrxka .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+&#10;#snihtkrxka .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+&#10;#snihtkrxka .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+&#10;#snihtkrxka .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+&#10;#snihtkrxka .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+&#10;#snihtkrxka .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+&#10;#snihtkrxka .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+&#10;#snihtkrxka .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+&#10;#snihtkrxka .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+&#10;#snihtkrxka .gt_left {
+  text-align: left;
+}
+&#10;#snihtkrxka .gt_center {
+  text-align: center;
+}
+&#10;#snihtkrxka .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+&#10;#snihtkrxka .gt_font_normal {
+  font-weight: normal;
+}
+&#10;#snihtkrxka .gt_font_bold {
+  font-weight: bold;
+}
+&#10;#snihtkrxka .gt_font_italic {
+  font-style: italic;
+}
+&#10;#snihtkrxka .gt_super {
+  font-size: 65%;
+}
+&#10;#snihtkrxka .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+&#10;#snihtkrxka .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+&#10;#snihtkrxka .gt_indent_1 {
+  text-indent: 5px;
+}
+&#10;#snihtkrxka .gt_indent_2 {
+  text-indent: 10px;
+}
+&#10;#snihtkrxka .gt_indent_3 {
+  text-indent: 15px;
+}
+&#10;#snihtkrxka .gt_indent_4 {
+  text-indent: 20px;
+}
+&#10;#snihtkrxka .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <caption><strong>Table 2. Knowledge, attitudes, and practices of mosquito-borne diseases and prevention of the study population per UDA5 region</strong></caption>
+  <thead>
+    <tr class="gt_col_headings gt_spanner_row">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="&lt;strong&gt;Indicator&lt;/strong&gt;"><strong>Indicator</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" scope="col" id="&lt;strong&gt;Overall&lt;/strong&gt;, N = 2,087&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>Overall</strong>, N = 2,087<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="5" scope="colgroup" id="&lt;strong&gt;Region&lt;/strong&gt;">
+        <span class="gt_column_spanner"><strong>Region</strong></span>
+      </th>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Paris region&lt;/strong&gt;, N = 392&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>Paris region</strong>, N = 392<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;North East&lt;/strong&gt;, N = 458&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>North East</strong>, N = 458<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;North West&lt;/strong&gt;, N = 480&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>North West</strong>, N = 480<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;South East&lt;/strong&gt;, N = 521&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>South East</strong>, N = 521<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;South West&lt;/strong&gt;, N = 236&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>South West</strong>, N = 236<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">Count of preventive behaviour</td>
+<td headers="stat_0" class="gt_row gt_center">2 (1, 4)</td>
+<td headers="stat_1" class="gt_row gt_center">2 (1, 3)</td>
+<td headers="stat_2" class="gt_row gt_center">2 (1, 3)</td>
+<td headers="stat_3" class="gt_row gt_center">2 (0, 3)</td>
+<td headers="stat_4" class="gt_row gt_center">3 (1, 4)</td>
+<td headers="stat_5" class="gt_row gt_center">3 (2, 5)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Perceived likelihood of contracting a mosquito-borne disease</td>
+<td headers="stat_0" class="gt_row gt_center">5 (3, 6)</td>
+<td headers="stat_1" class="gt_row gt_center">5 (3, 6)</td>
+<td headers="stat_2" class="gt_row gt_center">5 (3, 6)</td>
+<td headers="stat_3" class="gt_row gt_center">5 (3, 6)</td>
+<td headers="stat_4" class="gt_row gt_center">5 (3, 6)</td>
+<td headers="stat_5" class="gt_row gt_center">5 (4, 6)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Concern of contracting a mosquito-borne disease</td>
+<td headers="stat_0" class="gt_row gt_center">6 (4, 8)</td>
+<td headers="stat_1" class="gt_row gt_center">6 (4, 8)</td>
+<td headers="stat_2" class="gt_row gt_center">6 (4, 8)</td>
+<td headers="stat_3" class="gt_row gt_center">6 (4, 7)</td>
+<td headers="stat_4" class="gt_row gt_center">6 (4, 8)</td>
+<td headers="stat_5" class="gt_row gt_center">6 (4, 8)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Confidence in national authorities in the management of health crises</td>
+<td headers="stat_0" class="gt_row gt_center">6 (5, 8)</td>
+<td headers="stat_1" class="gt_row gt_center">6 (5, 8)</td>
+<td headers="stat_2" class="gt_row gt_center">7 (5, 8)</td>
+<td headers="stat_3" class="gt_row gt_center">6 (5, 8)</td>
+<td headers="stat_4" class="gt_row gt_center">6 (5, 8)</td>
+<td headers="stat_5" class="gt_row gt_center">6 (5, 8)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Confidence in regional authorities in the management of health crises</td>
+<td headers="stat_0" class="gt_row gt_center">6 (5, 8)</td>
+<td headers="stat_1" class="gt_row gt_center">6 (5, 8)</td>
+<td headers="stat_2" class="gt_row gt_center">7 (5, 8)</td>
+<td headers="stat_3" class="gt_row gt_center">7 (5, 8)</td>
+<td headers="stat_4" class="gt_row gt_center">6 (5, 8)</td>
+<td headers="stat_5" class="gt_row gt_center">6 (5, 8)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Mosquito-borne disease knowledge score</td>
+<td headers="stat_0" class="gt_row gt_center">2.56 (1.41)</td>
+<td headers="stat_1" class="gt_row gt_center">2.38 (1.61)</td>
+<td headers="stat_2" class="gt_row gt_center">2.58 (1.36)</td>
+<td headers="stat_3" class="gt_row gt_center">2.47 (1.35)</td>
+<td headers="stat_4" class="gt_row gt_center">2.66 (1.44)</td>
+<td headers="stat_5" class="gt_row gt_center">2.82 (1.15)</td></tr>
+  </tbody>
+  &#10;  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="7"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> Median (IQR); Mean (SD)</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+<div id="phigtybafe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#phigtybafe table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+&#10;#phigtybafe thead, #phigtybafe tbody, #phigtybafe tfoot, #phigtybafe tr, #phigtybafe td, #phigtybafe th {
+  border-style: none;
+}
+&#10;#phigtybafe p {
+  margin: 0;
+  padding: 0;
+}
+&#10;#phigtybafe .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+&#10;#phigtybafe .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+&#10;#phigtybafe .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+&#10;#phigtybafe .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+&#10;#phigtybafe .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+&#10;#phigtybafe .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+&#10;#phigtybafe .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+&#10;#phigtybafe .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+&#10;#phigtybafe .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+&#10;#phigtybafe .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+&#10;#phigtybafe .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+&#10;#phigtybafe .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+&#10;#phigtybafe .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+&#10;#phigtybafe .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+&#10;#phigtybafe .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+&#10;#phigtybafe .gt_from_md > :first-child {
+  margin-top: 0;
+}
+&#10;#phigtybafe .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+&#10;#phigtybafe .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+&#10;#phigtybafe .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+&#10;#phigtybafe .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+&#10;#phigtybafe .gt_row_group_first td {
+  border-top-width: 2px;
+}
+&#10;#phigtybafe .gt_row_group_first th {
+  border-top-width: 2px;
+}
+&#10;#phigtybafe .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+&#10;#phigtybafe .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+&#10;#phigtybafe .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+&#10;#phigtybafe .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+&#10;#phigtybafe .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+&#10;#phigtybafe .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+&#10;#phigtybafe .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+&#10;#phigtybafe .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+&#10;#phigtybafe .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+&#10;#phigtybafe .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+&#10;#phigtybafe .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+&#10;#phigtybafe .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+&#10;#phigtybafe .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+&#10;#phigtybafe .gt_left {
+  text-align: left;
+}
+&#10;#phigtybafe .gt_center {
+  text-align: center;
+}
+&#10;#phigtybafe .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+&#10;#phigtybafe .gt_font_normal {
+  font-weight: normal;
+}
+&#10;#phigtybafe .gt_font_bold {
+  font-weight: bold;
+}
+&#10;#phigtybafe .gt_font_italic {
+  font-style: italic;
+}
+&#10;#phigtybafe .gt_super {
+  font-size: 65%;
+}
+&#10;#phigtybafe .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+&#10;#phigtybafe .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+&#10;#phigtybafe .gt_indent_1 {
+  text-indent: 5px;
+}
+&#10;#phigtybafe .gt_indent_2 {
+  text-indent: 10px;
+}
+&#10;#phigtybafe .gt_indent_3 {
+  text-indent: 15px;
+}
+&#10;#phigtybafe .gt_indent_4 {
+  text-indent: 20px;
+}
+&#10;#phigtybafe .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <caption><strong>Table 3. Mosquito-borne disease protective behaviours per region per UDA5 region</strong></caption>
+  <thead>
+    <tr class="gt_col_headings gt_spanner_row">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="&lt;strong&gt;Protective behaviour&lt;/strong&gt;"><strong>Protective behaviour</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" scope="col" id="&lt;strong&gt;Overall&lt;/strong&gt;, N = 2,087&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>Overall</strong>, N = 2,087<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="5" scope="colgroup" id="&lt;strong&gt;Region&lt;/strong&gt;">
+        <span class="gt_column_spanner"><strong>Region</strong></span>
+      </th>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Paris region&lt;/strong&gt;, N = 392&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>Paris region</strong>, N = 392<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;North East&lt;/strong&gt;, N = 458&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>North East</strong>, N = 458<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;North West&lt;/strong&gt;, N = 480&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>North West</strong>, N = 480<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;South East&lt;/strong&gt;, N = 521&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>South East</strong>, N = 521<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;South West&lt;/strong&gt;, N = 236&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>South West</strong>, N = 236<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">Maintaining gutters to ensure drainage</td>
+<td headers="stat_0" class="gt_row gt_center">327 (16%)</td>
+<td headers="stat_1" class="gt_row gt_center">42 (11%)</td>
+<td headers="stat_2" class="gt_row gt_center">74 (16%)</td>
+<td headers="stat_3" class="gt_row gt_center">69 (14%)</td>
+<td headers="stat_4" class="gt_row gt_center">86 (17%)</td>
+<td headers="stat_5" class="gt_row gt_center">56 (24%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Using mosquito traps</td>
+<td headers="stat_0" class="gt_row gt_center">390 (19%)</td>
+<td headers="stat_1" class="gt_row gt_center">90 (23%)</td>
+<td headers="stat_2" class="gt_row gt_center">77 (17%)</td>
+<td headers="stat_3" class="gt_row gt_center">73 (15%)</td>
+<td headers="stat_4" class="gt_row gt_center">99 (19%)</td>
+<td headers="stat_5" class="gt_row gt_center">51 (22%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Wearing long, loose, light-coloured clothing</td>
+<td headers="stat_0" class="gt_row gt_center">452 (22%)</td>
+<td headers="stat_1" class="gt_row gt_center">105 (27%)</td>
+<td headers="stat_2" class="gt_row gt_center">88 (19%)</td>
+<td headers="stat_3" class="gt_row gt_center">82 (17%)</td>
+<td headers="stat_4" class="gt_row gt_center">107 (21%)</td>
+<td headers="stat_5" class="gt_row gt_center">70 (30%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Using insecticide or fumigating</td>
+<td headers="stat_0" class="gt_row gt_center">504 (24%)</td>
+<td headers="stat_1" class="gt_row gt_center">100 (26%)</td>
+<td headers="stat_2" class="gt_row gt_center">108 (24%)</td>
+<td headers="stat_3" class="gt_row gt_center">84 (18%)</td>
+<td headers="stat_4" class="gt_row gt_center">138 (26%)</td>
+<td headers="stat_5" class="gt_row gt_center">74 (31%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Using mosquito nets in windows</td>
+<td headers="stat_0" class="gt_row gt_center">529 (25%)</td>
+<td headers="stat_1" class="gt_row gt_center">88 (22%)</td>
+<td headers="stat_2" class="gt_row gt_center">115 (25%)</td>
+<td headers="stat_3" class="gt_row gt_center">68 (14%)</td>
+<td headers="stat_4" class="gt_row gt_center">179 (34%)</td>
+<td headers="stat_5" class="gt_row gt_center">79 (33%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Avoiding stagnant water at the base of flowerpots and vases</td>
+<td headers="stat_0" class="gt_row gt_center">729 (35%)</td>
+<td headers="stat_1" class="gt_row gt_center">106 (27%)</td>
+<td headers="stat_2" class="gt_row gt_center">145 (32%)</td>
+<td headers="stat_3" class="gt_row gt_center">135 (28%)</td>
+<td headers="stat_4" class="gt_row gt_center">222 (43%)</td>
+<td headers="stat_5" class="gt_row gt_center">121 (51%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Using mosquito candles and coils</td>
+<td headers="stat_0" class="gt_row gt_center">734 (35%)</td>
+<td headers="stat_1" class="gt_row gt_center">127 (32%)</td>
+<td headers="stat_2" class="gt_row gt_center">129 (28%)</td>
+<td headers="stat_3" class="gt_row gt_center">124 (26%)</td>
+<td headers="stat_4" class="gt_row gt_center">229 (44%)</td>
+<td headers="stat_5" class="gt_row gt_center">125 (53%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Using skin repellents</td>
+<td headers="stat_0" class="gt_row gt_center">756 (36%)</td>
+<td headers="stat_1" class="gt_row gt_center">142 (36%)</td>
+<td headers="stat_2" class="gt_row gt_center">134 (29%)</td>
+<td headers="stat_3" class="gt_row gt_center">147 (31%)</td>
+<td headers="stat_4" class="gt_row gt_center">222 (43%)</td>
+<td headers="stat_5" class="gt_row gt_center">111 (47%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Storing containers out of the rain to avoid stagnant water</td>
+<td headers="stat_0" class="gt_row gt_center">777 (37%)</td>
+<td headers="stat_1" class="gt_row gt_center">106 (27%)</td>
+<td headers="stat_2" class="gt_row gt_center">159 (35%)</td>
+<td headers="stat_3" class="gt_row gt_center">161 (34%)</td>
+<td headers="stat_4" class="gt_row gt_center">224 (43%)</td>
+<td headers="stat_5" class="gt_row gt_center">127 (54%)</td></tr>
+  </tbody>
+  &#10;  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="7"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> n (%)</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
 
 # 2. Modelling
 
@@ -1392,6 +2956,286 @@ plotcompois.ranef(compois1)
 ```
 
 ![](elimip2025_files/figure-gfm/Count%20of%20protective%20behaviours:%20Random%20effects%20plot-1.png)<!-- -->
+
+\#Interactive map
+
+``` r
+#Departement geometry
+map_fr <- geojson_sf("departements.geojson")
+plot(map_fr$geometry)
+```
+
+![](elimip2025_files/figure-gfm/Interactive%20map-1.png)<!-- -->
+
+``` r
+map_fr$departement <- map_fr$code
+map_fr$departement <- paste(map_fr$nom,map_fr$code)
+
+fr <- stringdist_full_join(
+  df, map_fr,
+  by = "departement",  # Column to match on
+  method = "jw",  # Jaro-Winkler distance metric
+  max_dist = 0.21,  # Maximum allowable distance for a match
+  distance_col = "fuzzy_dist"
+) #fuzzy match departments in survey with geom map
+
+fr_check <- fr %>%
+  dplyr:: select(departement.x, departement.y)
+
+##Departement
+#get averages of count_prev for each departement
+mean_counts <- fr %>%
+  group_by(nom) %>%
+  summarise(count_prev_avg = mean(count_prev, na.rm = TRUE))
+map_fr <- map_fr %>%
+  full_join(mean_counts, by = "nom")
+#get medians of count_prev for each departement
+median_counts <- fr %>%
+  group_by(nom) %>%
+  summarise(count_prev_median = median(count_prev, na.rm = TRUE))
+map_fr <- map_fr %>%
+  full_join(median_counts, by = "nom")
+#get n of count_prev for each departement
+sample_counts <- fr %>%
+  group_by(nom) %>%
+  summarise(sample_size = n())
+map_fr <- map_fr %>%
+  full_join(sample_counts, by = "nom")
+
+#get region based on dpt
+dep2region <- read.csv("dep2region.csv")
+
+
+##REGION
+
+#Region geometry
+regions_fr <- geojson_sf("regions.geojson")
+plot(regions_fr$geometry)
+```
+
+![](elimip2025_files/figure-gfm/Interactive%20map-2.png)<!-- -->
+
+``` r
+#rename variable
+regions_fr <- regions_fr %>%
+  rename(region = nom)
+
+#fuzzy match names of regions
+regions_fr2 <- stringdist_inner_join(
+  df, regions_fr,
+  by = "region",  # Column to match on
+  method = "jw",  # Jaro-Winkler distance metric
+  max_dist = 0.21,  # Maximum allowable distance for a match
+  distance_col = "fuzzy_dist") #fuzzy match departments in survey with geom map
+#check that it fuzzy matched correctly
+regions_fr3 <- regions_fr2 %>%
+  dplyr::select(region.x, region.y)#checked
+regions_fr2 <- regions_fr2 %>%
+  rename(nom = region.y)
+regions_fr2 <- regions_fr2 %>%
+  rename(region = region.x)
+#rename variable
+regions_fr <- regions_fr %>%
+  rename(nom = region)
+
+#join both sides
+regions_fr2_unique <- regions_fr2 %>%
+  distinct(nom, .keep_all = TRUE)
+regions_fr <- regions_fr %>%
+  left_join(regions_fr2_unique %>% dplyr::select(nom, region), by = "nom")
+
+#get averages for each region
+mean_counts_region <- fr %>%
+  group_by(region) %>%
+  summarise(count_prev_avg_region = mean(count_prev, na.rm = TRUE))
+#join mean_counts_region to region map
+regions_fr <- regions_fr %>%
+  full_join(mean_counts_region, by = "region")
+
+#get median for each region
+median_counts_region <- fr %>%
+  group_by(region) %>%
+  summarise(count_prev_median_region = median(count_prev, na.rm = TRUE))
+#join mean_counts_region to region map
+regions_fr <- regions_fr %>%
+  full_join(median_counts_region, by = "region")
+
+#get n of count_prev for each departement
+sample_counts_region <- fr %>%
+  group_by(region) %>%
+  summarise(sample_size = n())
+regions_fr <- regions_fr %>%
+  full_join(sample_counts_region, by = "region")
+
+#get % of people who often protect themselves
+regions_fr <- regions_fr %>%
+  left_join(
+    fr %>%
+      filter(freq_prevention == "Several times a week") %>%
+      group_by(region) %>%
+      summarise(often_freq = n()) %>%
+      right_join(
+        fr %>%
+          group_by(region) %>%
+          summarise(total = n()),
+        by = "region"
+      ) %>%
+      mutate(often_freq = ifelse(is.na(often_freq), 0, often_freq / total * 100)) %>%
+      mutate(often_freq = paste0(format(round(often_freq, 2), nsmall = 2))),
+    by = "region"
+  )
+regions_fr$often_freq <- as.numeric(regions_fr$often_freq)
+
+#colour palette for department count_prev_avg
+pal1 <- colorNumeric("Greys", domain = map_fr$count_prev_avg)
+pal2 <- colorNumeric("Greys", domain = map_fr$count_prev_median)
+pal3 <- colorNumeric("Greys", domain = regions_fr$count_prev_avg_region)
+pal4 <- colorNumeric("Greys", domain = regions_fr$count_prev_median_region)
+pal5 <- colorNumeric("Greys", domain = regions_fr$often_freq)
+
+#make the interactive map
+basemap <- leaflet() %>%
+  #add map provider tiles
+  addProviderTiles(providers$OpenStreetMap) %>%
+  #add AVG COUNT polygons
+  addPolygons(
+    data = map_fr,
+    fillColor = ~pal1(count_prev_avg),
+    weight = 2,
+    opacity = 1,
+    color = "grey",
+    highlightOptions = highlightOptions(
+      weight = 5,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE),
+    dashArray = "3",
+    fillOpacity = 0.7,
+    label = ~paste0(nom, " (n=", sample_size, ") - Variety of protective behaviours (average): ",
+                    formatC(count_prev_avg, big.mark = "'")),
+    labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "15px",
+      direction = "auto"),
+    group = "Department:Variety of protective behaviours (average)"
+  ) %>%
+  addLegend(
+    pal = pal1,
+    values = map_fr$count_prev_avg,
+    opacity = 0.5, 
+    labFormat = labelFormat(big.mark = "'"),
+    title = "Variety of protective behaviours (average)",
+    position = "bottomright"
+  ) %>%
+  #add MEDIAN COUNT polygons
+  addPolygons(
+    data = map_fr,
+    fillColor = ~pal2(count_prev_median),
+    weight = 2,
+    opacity = 1,
+    color = "grey",
+    highlightOptions = highlightOptions(
+      weight = 5,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE),
+    dashArray = "3",
+    fillOpacity = 0.7,
+    label = ~paste0(nom, " (n=", sample_size, ") - Variety of protective behaviours: ",
+                    formatC(count_prev_median, big.mark = "'")),
+    labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "15px",
+      direction = "auto"),
+    group = "Department: Variety of protective behaviours (median)"
+  ) %>%
+  #add Count prev avg per region  
+  addPolygons(
+    data = regions_fr,
+    fillColor = ~pal3(count_prev_avg_region),
+    weight = 2,
+    opacity = 1,
+    color = "grey",
+    highlightOptions = highlightOptions(
+      weight = 5,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE),
+    dashArray = "3",
+    fillOpacity = 0.7,
+    label = ~paste0(nom, " (n=", sample_size, ") - Variety of protective behaviours (average): ",
+                    formatC(count_prev_avg_region, big.mark = "'")),
+    labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "15px",
+      direction = "auto"),
+    group = "Region: Variety of protective behaviours (average)"
+  ) %>%
+  #add Count prev median per region  
+  addPolygons(
+    data = regions_fr,
+    fillColor = ~pal4(count_prev_median_region),
+    weight = 2,
+    opacity = 1,
+    color = "grey",
+    highlightOptions = highlightOptions(
+      weight = 5,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE),
+    dashArray = "3",
+    fillOpacity = 0.7,
+    label = ~paste0(nom, " (n=", sample_size, ") - Variety of protective behaviours (median): ",
+                    formatC(count_prev_median_region, big.mark = "'")),
+    labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "15px",
+      direction = "auto"),
+    group = "Region: Variety of protective behaviours (median)"
+  ) %>%
+  # add often_freq polygon for region
+  addPolygons(
+    data = regions_fr,
+    fillColor = ~pal5(often_freq),
+    weight = 2,
+    opacity = 1,
+    color = "grey",
+    highlightOptions = highlightOptions(
+      weight = 5,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE),
+    dashArray = "3",
+    fillOpacity = 0.7,
+    label = ~paste0(nom, " (n=", sample_size, ") - High frequency of protective behaviour : ",
+                    formatC(often_freq, big.mark = "'"), "%"),
+    labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "15px",
+      direction = "auto"),
+    group = "Region: High frequency of protective behaviour (%)"
+  ) %>%
+  addLegend(
+    pal = pal5,
+    values = regions_fr$often_freq,
+    opacity = 0.5, 
+    labFormat = labelFormat(suffix = "%"),
+    title = "High frequency of protective behaviour",
+    position = "bottomright",
+    group = "Region: High frequency of protective behaviour (%)"
+  ) %>%
+  #add layer controls
+  addLayersControl(
+    overlayGroups = c("Department: Variety of protective behaviours (average)","Department: Variety of protective behaviours (median)", "Region: Variety of protective behaviours (average)", "Region: Variety of protective behaviours (median)","Region: High frequency of protective behaviour (%)"),
+    position = "topleft",
+    options = layersControlOptions(collapsed = FALSE, autoZIndex = T)) %>%
+    saveWidget(here::here("basemap.html"))
+```
 
 ``` r
 #Calculate likelihood profile CIs
