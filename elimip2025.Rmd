@@ -23,17 +23,14 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(dplyr) 
 library(labelled)
-
 #Modelling
 library(lme4)
 library(glmmTMB)
 library(ordinal)
-
 #Performance
 library(lmtest)
 library(performance)
 library(DHARMa)
-
 #Visuals
 library(ggplot2)
 library(sjPlot)
@@ -43,6 +40,7 @@ library(gtsummary)
 ```{r Packages: Versions, warning=FALSE, echo = FALSE}
 #Package versions
 installed.packages()[names(sessionInfo()$otherPkgs), "Version"]
+#packages
 ```
 
 ### Dataframe
