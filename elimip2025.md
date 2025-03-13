@@ -83,20 +83,32 @@ df <- read.csv("elimip.csv")
 
 **Table 1. Description of the study population.**
 
-<div id="ftttmniucr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ftttmniucr table {
+| **Indicator**                                                         | **Overall**, N = 2,087 | **Paris region**, N = 392 | **North East**, N = 458 | **North West**, N = 480 | **South East**, N = 521 | **South West**, N = 236 |
+|:----------------------------------------------------------------------|:----------------------:|:-------------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|
+| Count of preventive behaviour                                         |        2 (1, 4)        |         2 (1, 3)          |        2 (1, 3)         |        2 (0, 3)         |        3 (1, 4)         |        3 (2, 5)         |
+| Perceived likelihood of contracting a mosquito-borne disease          |        5 (3, 6)        |         5 (3, 6)          |        5 (3, 6)         |        5 (3, 6)         |        5 (3, 6)         |        5 (4, 6)         |
+| Concern of contracting a mosquito-borne disease                       |        6 (4, 8)        |         6 (4, 8)          |        6 (4, 8)         |        6 (4, 7)         |        6 (4, 8)         |        6 (4, 8)         |
+| Confidence in national authorities in the management of health crises |        6 (5, 8)        |         6 (5, 8)          |        7 (5, 8)         |        6 (5, 8)         |        6 (5, 8)         |        6 (5, 8)         |
+| Confidence in regional authorities in the management of health crises |        6 (5, 8)        |         6 (5, 8)          |        7 (5, 8)         |        7 (5, 8)         |        6 (5, 8)         |        6 (5, 8)         |
+| Mosquito-borne disease knowledge score                                |      2.56 (1.41)       |        2.38 (1.61)        |       2.58 (1.36)       |       2.47 (1.35)       |       2.66 (1.44)       |       2.82 (1.15)       |
+
+**Table 2. Knowledge, attitudes, and practices of mosquito-borne
+diseases and prevention of the study population per UDA5 region**
+
+<div id="xgzkcncjtp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xgzkcncjtp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-&#10;#ftttmniucr thead, #ftttmniucr tbody, #ftttmniucr tfoot, #ftttmniucr tr, #ftttmniucr td, #ftttmniucr th {
+&#10;#xgzkcncjtp thead, #xgzkcncjtp tbody, #xgzkcncjtp tfoot, #xgzkcncjtp tr, #xgzkcncjtp td, #xgzkcncjtp th {
   border-style: none;
 }
-&#10;#ftttmniucr p {
+&#10;#xgzkcncjtp p {
   margin: 0;
   padding: 0;
 }
-&#10;#ftttmniucr .gt_table {
+&#10;#xgzkcncjtp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -121,11 +133,11 @@ df <- read.csv("elimip.csv")
   border-left-width: 2px;
   border-left-color: #D3D3D3;
 }
-&#10;#ftttmniucr .gt_caption {
+&#10;#xgzkcncjtp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
-&#10;#ftttmniucr .gt_title {
+&#10;#xgzkcncjtp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -136,7 +148,7 @@ df <- read.csv("elimip.csv")
   border-bottom-color: #FFFFFF;
   border-bottom-width: 0;
 }
-&#10;#ftttmniucr .gt_subtitle {
+&#10;#xgzkcncjtp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -147,7 +159,7 @@ df <- read.csv("elimip.csv")
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
-&#10;#ftttmniucr .gt_heading {
+&#10;#xgzkcncjtp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -158,12 +170,12 @@ df <- read.csv("elimip.csv")
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#ftttmniucr .gt_bottom_border {
+&#10;#xgzkcncjtp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#ftttmniucr .gt_col_headings {
+&#10;#xgzkcncjtp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -177,7 +189,7 @@ df <- read.csv("elimip.csv")
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#ftttmniucr .gt_col_heading {
+&#10;#xgzkcncjtp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -196,7 +208,7 @@ df <- read.csv("elimip.csv")
   padding-right: 5px;
   overflow-x: hidden;
 }
-&#10;#ftttmniucr .gt_column_spanner_outer {
+&#10;#xgzkcncjtp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -207,13 +219,13 @@ df <- read.csv("elimip.csv")
   padding-left: 4px;
   padding-right: 4px;
 }
-&#10;#ftttmniucr .gt_column_spanner_outer:first-child {
+&#10;#xgzkcncjtp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
-&#10;#ftttmniucr .gt_column_spanner_outer:last-child {
+&#10;#xgzkcncjtp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
-&#10;#ftttmniucr .gt_column_spanner {
+&#10;#xgzkcncjtp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -224,10 +236,10 @@ df <- read.csv("elimip.csv")
   display: inline-block;
   width: 100%;
 }
-&#10;#ftttmniucr .gt_spanner_row {
+&#10;#xgzkcncjtp .gt_spanner_row {
   border-bottom-style: hidden;
 }
-&#10;#ftttmniucr .gt_group_heading {
+&#10;#xgzkcncjtp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -252,7 +264,7 @@ df <- read.csv("elimip.csv")
   vertical-align: middle;
   text-align: left;
 }
-&#10;#ftttmniucr .gt_empty_group_heading {
+&#10;#xgzkcncjtp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -266,13 +278,13 @@ df <- read.csv("elimip.csv")
   border-bottom-color: #D3D3D3;
   vertical-align: middle;
 }
-&#10;#ftttmniucr .gt_from_md > :first-child {
+&#10;#xgzkcncjtp .gt_from_md > :first-child {
   margin-top: 0;
 }
-&#10;#ftttmniucr .gt_from_md > :last-child {
+&#10;#xgzkcncjtp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
-&#10;#ftttmniucr .gt_row {
+&#10;#xgzkcncjtp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -290,7 +302,7 @@ df <- read.csv("elimip.csv")
   vertical-align: middle;
   overflow-x: hidden;
 }
-&#10;#ftttmniucr .gt_stub {
+&#10;#xgzkcncjtp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -302,465 +314,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#ftttmniucr .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-&#10;#ftttmniucr .gt_row_group_first td {
-  border-top-width: 2px;
-}
-&#10;#ftttmniucr .gt_row_group_first th {
-  border-top-width: 2px;
-}
-&#10;#ftttmniucr .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-&#10;#ftttmniucr .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-&#10;#ftttmniucr .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-&#10;#ftttmniucr .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-&#10;#ftttmniucr .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-&#10;#ftttmniucr .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-&#10;#ftttmniucr .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-&#10;#ftttmniucr .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-&#10;#ftttmniucr .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-&#10;#ftttmniucr .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-&#10;#ftttmniucr .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-&#10;#ftttmniucr .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-&#10;#ftttmniucr .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-&#10;#ftttmniucr .gt_left {
-  text-align: left;
-}
-&#10;#ftttmniucr .gt_center {
-  text-align: center;
-}
-&#10;#ftttmniucr .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-&#10;#ftttmniucr .gt_font_normal {
-  font-weight: normal;
-}
-&#10;#ftttmniucr .gt_font_bold {
-  font-weight: bold;
-}
-&#10;#ftttmniucr .gt_font_italic {
-  font-style: italic;
-}
-&#10;#ftttmniucr .gt_super {
-  font-size: 65%;
-}
-&#10;#ftttmniucr .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-&#10;#ftttmniucr .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-&#10;#ftttmniucr .gt_indent_1 {
-  text-indent: 5px;
-}
-&#10;#ftttmniucr .gt_indent_2 {
-  text-indent: 10px;
-}
-&#10;#ftttmniucr .gt_indent_3 {
-  text-indent: 15px;
-}
-&#10;#ftttmniucr .gt_indent_4 {
-  text-indent: 20px;
-}
-&#10;#ftttmniucr .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <caption><strong>Table 2. Knowledge, attitudes, and practices of mosquito-borne diseases and prevention of the study population per UDA5 region</strong></caption>
-  <thead>
-    <tr class="gt_col_headings gt_spanner_row">
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="&lt;strong&gt;Indicator&lt;/strong&gt;"><strong>Indicator</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" scope="col" id="&lt;strong&gt;Overall&lt;/strong&gt;, N = 2,087&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>Overall</strong>, N = 2,087<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
-      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="5" scope="colgroup" id="&lt;strong&gt;Region&lt;/strong&gt;">
-        <span class="gt_column_spanner"><strong>Region</strong></span>
-      </th>
-    </tr>
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Paris region&lt;/strong&gt;, N = 392&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>Paris region</strong>, N = 392<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;North East&lt;/strong&gt;, N = 458&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>North East</strong>, N = 458<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;North West&lt;/strong&gt;, N = 480&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>North West</strong>, N = 480<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;South East&lt;/strong&gt;, N = 521&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>South East</strong>, N = 521<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;South West&lt;/strong&gt;, N = 236&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>South West</strong>, N = 236<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="label" class="gt_row gt_left">Count of preventive behaviour</td>
-<td headers="stat_0" class="gt_row gt_center">2 (1, 4)</td>
-<td headers="stat_1" class="gt_row gt_center">2 (1, 3)</td>
-<td headers="stat_2" class="gt_row gt_center">2 (1, 3)</td>
-<td headers="stat_3" class="gt_row gt_center">2 (0, 3)</td>
-<td headers="stat_4" class="gt_row gt_center">3 (1, 4)</td>
-<td headers="stat_5" class="gt_row gt_center">3 (2, 5)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">Perceived likelihood of contracting a mosquito-borne disease</td>
-<td headers="stat_0" class="gt_row gt_center">5 (3, 6)</td>
-<td headers="stat_1" class="gt_row gt_center">5 (3, 6)</td>
-<td headers="stat_2" class="gt_row gt_center">5 (3, 6)</td>
-<td headers="stat_3" class="gt_row gt_center">5 (3, 6)</td>
-<td headers="stat_4" class="gt_row gt_center">5 (3, 6)</td>
-<td headers="stat_5" class="gt_row gt_center">5 (4, 6)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">Concern of contracting a mosquito-borne disease</td>
-<td headers="stat_0" class="gt_row gt_center">6 (4, 8)</td>
-<td headers="stat_1" class="gt_row gt_center">6 (4, 8)</td>
-<td headers="stat_2" class="gt_row gt_center">6 (4, 8)</td>
-<td headers="stat_3" class="gt_row gt_center">6 (4, 7)</td>
-<td headers="stat_4" class="gt_row gt_center">6 (4, 8)</td>
-<td headers="stat_5" class="gt_row gt_center">6 (4, 8)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">Confidence in national authorities in the management of health crises</td>
-<td headers="stat_0" class="gt_row gt_center">6 (5, 8)</td>
-<td headers="stat_1" class="gt_row gt_center">6 (5, 8)</td>
-<td headers="stat_2" class="gt_row gt_center">7 (5, 8)</td>
-<td headers="stat_3" class="gt_row gt_center">6 (5, 8)</td>
-<td headers="stat_4" class="gt_row gt_center">6 (5, 8)</td>
-<td headers="stat_5" class="gt_row gt_center">6 (5, 8)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">Confidence in regional authorities in the management of health crises</td>
-<td headers="stat_0" class="gt_row gt_center">6 (5, 8)</td>
-<td headers="stat_1" class="gt_row gt_center">6 (5, 8)</td>
-<td headers="stat_2" class="gt_row gt_center">7 (5, 8)</td>
-<td headers="stat_3" class="gt_row gt_center">7 (5, 8)</td>
-<td headers="stat_4" class="gt_row gt_center">6 (5, 8)</td>
-<td headers="stat_5" class="gt_row gt_center">6 (5, 8)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">Mosquito-borne disease knowledge score</td>
-<td headers="stat_0" class="gt_row gt_center">2.56 (1.41)</td>
-<td headers="stat_1" class="gt_row gt_center">2.38 (1.61)</td>
-<td headers="stat_2" class="gt_row gt_center">2.58 (1.36)</td>
-<td headers="stat_3" class="gt_row gt_center">2.47 (1.35)</td>
-<td headers="stat_4" class="gt_row gt_center">2.66 (1.44)</td>
-<td headers="stat_5" class="gt_row gt_center">2.82 (1.15)</td></tr>
-  </tbody>
-  &#10;  <tfoot class="gt_footnotes">
-    <tr>
-      <td class="gt_footnote" colspan="7"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> Median (IQR); Mean (SD)</td>
-    </tr>
-  </tfoot>
-</table>
-</div>
-<div id="svfjbuouva" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#svfjbuouva table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-&#10;#svfjbuouva thead, #svfjbuouva tbody, #svfjbuouva tfoot, #svfjbuouva tr, #svfjbuouva td, #svfjbuouva th {
-  border-style: none;
-}
-&#10;#svfjbuouva p {
-  margin: 0;
-  padding: 0;
-}
-&#10;#svfjbuouva .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-&#10;#svfjbuouva .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-&#10;#svfjbuouva .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-&#10;#svfjbuouva .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-&#10;#svfjbuouva .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-&#10;#svfjbuouva .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-&#10;#svfjbuouva .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-&#10;#svfjbuouva .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-&#10;#svfjbuouva .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-&#10;#svfjbuouva .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-&#10;#svfjbuouva .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-&#10;#svfjbuouva .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-&#10;#svfjbuouva .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-&#10;#svfjbuouva .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-&#10;#svfjbuouva .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-&#10;#svfjbuouva .gt_from_md > :first-child {
-  margin-top: 0;
-}
-&#10;#svfjbuouva .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-&#10;#svfjbuouva .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-&#10;#svfjbuouva .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-&#10;#svfjbuouva .gt_stub_row_group {
+&#10;#xgzkcncjtp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -773,13 +327,13 @@ df <- read.csv("elimip.csv")
   padding-right: 5px;
   vertical-align: top;
 }
-&#10;#svfjbuouva .gt_row_group_first td {
+&#10;#xgzkcncjtp .gt_row_group_first td {
   border-top-width: 2px;
 }
-&#10;#svfjbuouva .gt_row_group_first th {
+&#10;#xgzkcncjtp .gt_row_group_first th {
   border-top-width: 2px;
 }
-&#10;#svfjbuouva .gt_summary_row {
+&#10;#xgzkcncjtp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -788,14 +342,14 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#svfjbuouva .gt_first_summary_row {
+&#10;#xgzkcncjtp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
-&#10;#svfjbuouva .gt_first_summary_row.thick {
+&#10;#xgzkcncjtp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
-&#10;#svfjbuouva .gt_last_summary_row {
+&#10;#xgzkcncjtp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -804,7 +358,7 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#svfjbuouva .gt_grand_summary_row {
+&#10;#xgzkcncjtp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -813,7 +367,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#svfjbuouva .gt_first_grand_summary_row {
+&#10;#xgzkcncjtp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -822,7 +376,7 @@ df <- read.csv("elimip.csv")
   border-top-width: 6px;
   border-top-color: #D3D3D3;
 }
-&#10;#svfjbuouva .gt_last_grand_summary_row_top {
+&#10;#xgzkcncjtp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -831,10 +385,10 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 6px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#svfjbuouva .gt_striped {
+&#10;#xgzkcncjtp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
-&#10;#svfjbuouva .gt_table_body {
+&#10;#xgzkcncjtp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -842,7 +396,7 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#svfjbuouva .gt_footnotes {
+&#10;#xgzkcncjtp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -855,7 +409,7 @@ df <- read.csv("elimip.csv")
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#svfjbuouva .gt_footnote {
+&#10;#xgzkcncjtp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -863,7 +417,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#svfjbuouva .gt_sourcenotes {
+&#10;#xgzkcncjtp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -876,57 +430,57 @@ df <- read.csv("elimip.csv")
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#svfjbuouva .gt_sourcenote {
+&#10;#xgzkcncjtp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#svfjbuouva .gt_left {
+&#10;#xgzkcncjtp .gt_left {
   text-align: left;
 }
-&#10;#svfjbuouva .gt_center {
+&#10;#xgzkcncjtp .gt_center {
   text-align: center;
 }
-&#10;#svfjbuouva .gt_right {
+&#10;#xgzkcncjtp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
-&#10;#svfjbuouva .gt_font_normal {
+&#10;#xgzkcncjtp .gt_font_normal {
   font-weight: normal;
 }
-&#10;#svfjbuouva .gt_font_bold {
+&#10;#xgzkcncjtp .gt_font_bold {
   font-weight: bold;
 }
-&#10;#svfjbuouva .gt_font_italic {
+&#10;#xgzkcncjtp .gt_font_italic {
   font-style: italic;
 }
-&#10;#svfjbuouva .gt_super {
+&#10;#xgzkcncjtp .gt_super {
   font-size: 65%;
 }
-&#10;#svfjbuouva .gt_footnote_marks {
+&#10;#xgzkcncjtp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
-&#10;#svfjbuouva .gt_asterisk {
+&#10;#xgzkcncjtp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
-&#10;#svfjbuouva .gt_indent_1 {
+&#10;#xgzkcncjtp .gt_indent_1 {
   text-indent: 5px;
 }
-&#10;#svfjbuouva .gt_indent_2 {
+&#10;#xgzkcncjtp .gt_indent_2 {
   text-indent: 10px;
 }
-&#10;#svfjbuouva .gt_indent_3 {
+&#10;#xgzkcncjtp .gt_indent_3 {
   text-indent: 15px;
 }
-&#10;#svfjbuouva .gt_indent_4 {
+&#10;#xgzkcncjtp .gt_indent_4 {
   text-indent: 20px;
 }
-&#10;#svfjbuouva .gt_indent_5 {
+&#10;#xgzkcncjtp .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
