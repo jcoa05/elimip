@@ -2,8 +2,7 @@
 title: "Mosquito-borne disease and protective behavior in metropolitan France"
 author: "Juan Carlos Ocampo"
 date: "`r Sys.Date()`"
-output:
-  html_document: github_document
+output: rmarkdown::github_document
 ---
 
 ```{r setup, include=FALSE}

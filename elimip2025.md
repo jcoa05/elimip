@@ -16,58 +16,28 @@ Juan Carlos Ocampo
 library(tidyverse)
 library(dplyr) 
 library(labelled)
-
 #Modelling
 library(lme4)
 library(glmmTMB)
 library(ordinal)
-
 #Performance
 library(lmtest)
 library(performance)
 library(DHARMa)
-
 #Visuals
 library(ggplot2)
 library(sjPlot)
 library(gtsummary)
-
-#Spatial
-library(sf)
-library(terra)
-library(tmap)
-library(dplyr)
-library(geojsonsf)
-library(stringdist)
-library(fuzzyjoin)
-library(raster)
-library(spatstat)
-library(leaflet)
-library(htmlwidgets)
 ```
 
-    ##      htmlwidgets          leaflet         spatstat  spatstat.linnet 
-    ##          "1.6.4"          "2.2.2"          "3.1-1"          "3.2-1" 
-    ##   spatstat.model            rpart spatstat.explore             nlme 
-    ##          "3.3-1"         "4.1.23"          "3.3-2"        "3.1-164" 
-    ##  spatstat.random    spatstat.geom  spatstat.univar    spatstat.data 
-    ##          "3.3-1"          "3.3-2"          "3.0-1"          "3.1-2" 
-    ##           raster               sp        fuzzyjoin       stringdist 
-    ##         "3.6-26"          "2.1-3"          "0.1.6"         "0.9.12" 
-    ##        geojsonsf             tmap            terra               sf 
-    ##          "2.0.3"          "3.3-4"         "1.7-78"         "1.0-16" 
-    ##        gtsummary           sjPlot           DHARMa      performance 
-    ##          "1.7.2"         "2.8.15"          "0.4.6"         "0.11.0" 
-    ##           lmtest              zoo          ordinal          glmmTMB 
-    ##         "0.9-40"         "1.8-12"      "2023.12-4"          "1.1.9" 
-    ##             lme4           Matrix         labelled        lubridate 
-    ##       "1.1-35.1"          "1.6-5"         "2.12.0"          "1.9.3" 
-    ##          forcats          stringr            dplyr            purrr 
-    ##          "1.0.0"          "1.5.1"          "1.1.4"          "1.0.2" 
-    ##            readr            tidyr           tibble          ggplot2 
-    ##          "2.1.5"          "1.3.1"          "3.2.1"          "3.5.0" 
-    ##        tidyverse 
-    ##          "2.0.0"
+    ##   gtsummary      sjPlot      DHARMa performance      lmtest         zoo 
+    ##     "1.7.2"    "2.8.15"     "0.4.6"    "0.11.0"    "0.9-40"    "1.8-12" 
+    ##     ordinal     glmmTMB        lme4      Matrix    labelled   lubridate 
+    ## "2023.12-4"     "1.1.9"  "1.1-35.1"     "1.6-5"    "2.12.0"     "1.9.3" 
+    ##     forcats     stringr       dplyr       purrr       readr       tidyr 
+    ##     "1.0.0"     "1.5.1"     "1.1.4"     "1.0.2"     "2.1.5"     "1.3.1" 
+    ##      tibble     ggplot2   tidyverse 
+    ##     "3.2.1"     "3.5.0"     "2.0.0"
 
 ### Dataframe
 
@@ -80,20 +50,20 @@ df <- read.csv("elimip.csv")
 
 ## 1.2.Per UDA5 region
 
-<div id="qbisgbetrh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qbisgbetrh table {
+<div id="ccwmjypswu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ccwmjypswu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-&#10;#qbisgbetrh thead, #qbisgbetrh tbody, #qbisgbetrh tfoot, #qbisgbetrh tr, #qbisgbetrh td, #qbisgbetrh th {
+&#10;#ccwmjypswu thead, #ccwmjypswu tbody, #ccwmjypswu tfoot, #ccwmjypswu tr, #ccwmjypswu td, #ccwmjypswu th {
   border-style: none;
 }
-&#10;#qbisgbetrh p {
+&#10;#ccwmjypswu p {
   margin: 0;
   padding: 0;
 }
-&#10;#qbisgbetrh .gt_table {
+&#10;#ccwmjypswu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -118,11 +88,11 @@ df <- read.csv("elimip.csv")
   border-left-width: 2px;
   border-left-color: #D3D3D3;
 }
-&#10;#qbisgbetrh .gt_caption {
+&#10;#ccwmjypswu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
-&#10;#qbisgbetrh .gt_title {
+&#10;#ccwmjypswu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -133,7 +103,7 @@ df <- read.csv("elimip.csv")
   border-bottom-color: #FFFFFF;
   border-bottom-width: 0;
 }
-&#10;#qbisgbetrh .gt_subtitle {
+&#10;#ccwmjypswu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -144,7 +114,7 @@ df <- read.csv("elimip.csv")
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
-&#10;#qbisgbetrh .gt_heading {
+&#10;#ccwmjypswu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -155,12 +125,12 @@ df <- read.csv("elimip.csv")
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#qbisgbetrh .gt_bottom_border {
+&#10;#ccwmjypswu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#qbisgbetrh .gt_col_headings {
+&#10;#ccwmjypswu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -174,7 +144,7 @@ df <- read.csv("elimip.csv")
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#qbisgbetrh .gt_col_heading {
+&#10;#ccwmjypswu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -193,7 +163,7 @@ df <- read.csv("elimip.csv")
   padding-right: 5px;
   overflow-x: hidden;
 }
-&#10;#qbisgbetrh .gt_column_spanner_outer {
+&#10;#ccwmjypswu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -204,13 +174,13 @@ df <- read.csv("elimip.csv")
   padding-left: 4px;
   padding-right: 4px;
 }
-&#10;#qbisgbetrh .gt_column_spanner_outer:first-child {
+&#10;#ccwmjypswu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
-&#10;#qbisgbetrh .gt_column_spanner_outer:last-child {
+&#10;#ccwmjypswu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
-&#10;#qbisgbetrh .gt_column_spanner {
+&#10;#ccwmjypswu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -221,10 +191,10 @@ df <- read.csv("elimip.csv")
   display: inline-block;
   width: 100%;
 }
-&#10;#qbisgbetrh .gt_spanner_row {
+&#10;#ccwmjypswu .gt_spanner_row {
   border-bottom-style: hidden;
 }
-&#10;#qbisgbetrh .gt_group_heading {
+&#10;#ccwmjypswu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -249,7 +219,7 @@ df <- read.csv("elimip.csv")
   vertical-align: middle;
   text-align: left;
 }
-&#10;#qbisgbetrh .gt_empty_group_heading {
+&#10;#ccwmjypswu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -263,13 +233,13 @@ df <- read.csv("elimip.csv")
   border-bottom-color: #D3D3D3;
   vertical-align: middle;
 }
-&#10;#qbisgbetrh .gt_from_md > :first-child {
+&#10;#ccwmjypswu .gt_from_md > :first-child {
   margin-top: 0;
 }
-&#10;#qbisgbetrh .gt_from_md > :last-child {
+&#10;#ccwmjypswu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
-&#10;#qbisgbetrh .gt_row {
+&#10;#ccwmjypswu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -287,7 +257,7 @@ df <- read.csv("elimip.csv")
   vertical-align: middle;
   overflow-x: hidden;
 }
-&#10;#qbisgbetrh .gt_stub {
+&#10;#ccwmjypswu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -299,7 +269,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#qbisgbetrh .gt_stub_row_group {
+&#10;#ccwmjypswu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -312,13 +282,13 @@ df <- read.csv("elimip.csv")
   padding-right: 5px;
   vertical-align: top;
 }
-&#10;#qbisgbetrh .gt_row_group_first td {
+&#10;#ccwmjypswu .gt_row_group_first td {
   border-top-width: 2px;
 }
-&#10;#qbisgbetrh .gt_row_group_first th {
+&#10;#ccwmjypswu .gt_row_group_first th {
   border-top-width: 2px;
 }
-&#10;#qbisgbetrh .gt_summary_row {
+&#10;#ccwmjypswu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -327,14 +297,14 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#qbisgbetrh .gt_first_summary_row {
+&#10;#ccwmjypswu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
-&#10;#qbisgbetrh .gt_first_summary_row.thick {
+&#10;#ccwmjypswu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
-&#10;#qbisgbetrh .gt_last_summary_row {
+&#10;#ccwmjypswu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -343,7 +313,7 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#qbisgbetrh .gt_grand_summary_row {
+&#10;#ccwmjypswu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -352,7 +322,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#qbisgbetrh .gt_first_grand_summary_row {
+&#10;#ccwmjypswu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -361,7 +331,7 @@ df <- read.csv("elimip.csv")
   border-top-width: 6px;
   border-top-color: #D3D3D3;
 }
-&#10;#qbisgbetrh .gt_last_grand_summary_row_top {
+&#10;#ccwmjypswu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -370,10 +340,10 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 6px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#qbisgbetrh .gt_striped {
+&#10;#ccwmjypswu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
-&#10;#qbisgbetrh .gt_table_body {
+&#10;#ccwmjypswu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -381,7 +351,7 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#qbisgbetrh .gt_footnotes {
+&#10;#ccwmjypswu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -394,7 +364,7 @@ df <- read.csv("elimip.csv")
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#qbisgbetrh .gt_footnote {
+&#10;#ccwmjypswu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -402,7 +372,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#qbisgbetrh .gt_sourcenotes {
+&#10;#ccwmjypswu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -415,57 +385,57 @@ df <- read.csv("elimip.csv")
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#qbisgbetrh .gt_sourcenote {
+&#10;#ccwmjypswu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#qbisgbetrh .gt_left {
+&#10;#ccwmjypswu .gt_left {
   text-align: left;
 }
-&#10;#qbisgbetrh .gt_center {
+&#10;#ccwmjypswu .gt_center {
   text-align: center;
 }
-&#10;#qbisgbetrh .gt_right {
+&#10;#ccwmjypswu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
-&#10;#qbisgbetrh .gt_font_normal {
+&#10;#ccwmjypswu .gt_font_normal {
   font-weight: normal;
 }
-&#10;#qbisgbetrh .gt_font_bold {
+&#10;#ccwmjypswu .gt_font_bold {
   font-weight: bold;
 }
-&#10;#qbisgbetrh .gt_font_italic {
+&#10;#ccwmjypswu .gt_font_italic {
   font-style: italic;
 }
-&#10;#qbisgbetrh .gt_super {
+&#10;#ccwmjypswu .gt_super {
   font-size: 65%;
 }
-&#10;#qbisgbetrh .gt_footnote_marks {
+&#10;#ccwmjypswu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
-&#10;#qbisgbetrh .gt_asterisk {
+&#10;#ccwmjypswu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
-&#10;#qbisgbetrh .gt_indent_1 {
+&#10;#ccwmjypswu .gt_indent_1 {
   text-indent: 5px;
 }
-&#10;#qbisgbetrh .gt_indent_2 {
+&#10;#ccwmjypswu .gt_indent_2 {
   text-indent: 10px;
 }
-&#10;#qbisgbetrh .gt_indent_3 {
+&#10;#ccwmjypswu .gt_indent_3 {
   text-indent: 15px;
 }
-&#10;#qbisgbetrh .gt_indent_4 {
+&#10;#ccwmjypswu .gt_indent_4 {
   text-indent: 20px;
 }
-&#10;#qbisgbetrh .gt_indent_5 {
+&#10;#ccwmjypswu .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -685,20 +655,20 @@ df <- read.csv("elimip.csv")
   </tfoot>
 </table>
 </div>
-<div id="pnvbdbghhj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pnvbdbghhj table {
+<div id="wimsdtnmbz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wimsdtnmbz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-&#10;#pnvbdbghhj thead, #pnvbdbghhj tbody, #pnvbdbghhj tfoot, #pnvbdbghhj tr, #pnvbdbghhj td, #pnvbdbghhj th {
+&#10;#wimsdtnmbz thead, #wimsdtnmbz tbody, #wimsdtnmbz tfoot, #wimsdtnmbz tr, #wimsdtnmbz td, #wimsdtnmbz th {
   border-style: none;
 }
-&#10;#pnvbdbghhj p {
+&#10;#wimsdtnmbz p {
   margin: 0;
   padding: 0;
 }
-&#10;#pnvbdbghhj .gt_table {
+&#10;#wimsdtnmbz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -723,11 +693,11 @@ df <- read.csv("elimip.csv")
   border-left-width: 2px;
   border-left-color: #D3D3D3;
 }
-&#10;#pnvbdbghhj .gt_caption {
+&#10;#wimsdtnmbz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
-&#10;#pnvbdbghhj .gt_title {
+&#10;#wimsdtnmbz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -738,7 +708,7 @@ df <- read.csv("elimip.csv")
   border-bottom-color: #FFFFFF;
   border-bottom-width: 0;
 }
-&#10;#pnvbdbghhj .gt_subtitle {
+&#10;#wimsdtnmbz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -749,7 +719,7 @@ df <- read.csv("elimip.csv")
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
-&#10;#pnvbdbghhj .gt_heading {
+&#10;#wimsdtnmbz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -760,12 +730,12 @@ df <- read.csv("elimip.csv")
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#pnvbdbghhj .gt_bottom_border {
+&#10;#wimsdtnmbz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#pnvbdbghhj .gt_col_headings {
+&#10;#wimsdtnmbz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -779,7 +749,7 @@ df <- read.csv("elimip.csv")
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#pnvbdbghhj .gt_col_heading {
+&#10;#wimsdtnmbz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -798,7 +768,7 @@ df <- read.csv("elimip.csv")
   padding-right: 5px;
   overflow-x: hidden;
 }
-&#10;#pnvbdbghhj .gt_column_spanner_outer {
+&#10;#wimsdtnmbz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -809,13 +779,13 @@ df <- read.csv("elimip.csv")
   padding-left: 4px;
   padding-right: 4px;
 }
-&#10;#pnvbdbghhj .gt_column_spanner_outer:first-child {
+&#10;#wimsdtnmbz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
-&#10;#pnvbdbghhj .gt_column_spanner_outer:last-child {
+&#10;#wimsdtnmbz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
-&#10;#pnvbdbghhj .gt_column_spanner {
+&#10;#wimsdtnmbz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -826,10 +796,10 @@ df <- read.csv("elimip.csv")
   display: inline-block;
   width: 100%;
 }
-&#10;#pnvbdbghhj .gt_spanner_row {
+&#10;#wimsdtnmbz .gt_spanner_row {
   border-bottom-style: hidden;
 }
-&#10;#pnvbdbghhj .gt_group_heading {
+&#10;#wimsdtnmbz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -854,7 +824,7 @@ df <- read.csv("elimip.csv")
   vertical-align: middle;
   text-align: left;
 }
-&#10;#pnvbdbghhj .gt_empty_group_heading {
+&#10;#wimsdtnmbz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -868,13 +838,13 @@ df <- read.csv("elimip.csv")
   border-bottom-color: #D3D3D3;
   vertical-align: middle;
 }
-&#10;#pnvbdbghhj .gt_from_md > :first-child {
+&#10;#wimsdtnmbz .gt_from_md > :first-child {
   margin-top: 0;
 }
-&#10;#pnvbdbghhj .gt_from_md > :last-child {
+&#10;#wimsdtnmbz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
-&#10;#pnvbdbghhj .gt_row {
+&#10;#wimsdtnmbz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -892,7 +862,7 @@ df <- read.csv("elimip.csv")
   vertical-align: middle;
   overflow-x: hidden;
 }
-&#10;#pnvbdbghhj .gt_stub {
+&#10;#wimsdtnmbz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -904,7 +874,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#pnvbdbghhj .gt_stub_row_group {
+&#10;#wimsdtnmbz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -917,13 +887,13 @@ df <- read.csv("elimip.csv")
   padding-right: 5px;
   vertical-align: top;
 }
-&#10;#pnvbdbghhj .gt_row_group_first td {
+&#10;#wimsdtnmbz .gt_row_group_first td {
   border-top-width: 2px;
 }
-&#10;#pnvbdbghhj .gt_row_group_first th {
+&#10;#wimsdtnmbz .gt_row_group_first th {
   border-top-width: 2px;
 }
-&#10;#pnvbdbghhj .gt_summary_row {
+&#10;#wimsdtnmbz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -932,14 +902,14 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#pnvbdbghhj .gt_first_summary_row {
+&#10;#wimsdtnmbz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
-&#10;#pnvbdbghhj .gt_first_summary_row.thick {
+&#10;#wimsdtnmbz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
-&#10;#pnvbdbghhj .gt_last_summary_row {
+&#10;#wimsdtnmbz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -948,7 +918,7 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#pnvbdbghhj .gt_grand_summary_row {
+&#10;#wimsdtnmbz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -957,7 +927,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#pnvbdbghhj .gt_first_grand_summary_row {
+&#10;#wimsdtnmbz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -966,7 +936,7 @@ df <- read.csv("elimip.csv")
   border-top-width: 6px;
   border-top-color: #D3D3D3;
 }
-&#10;#pnvbdbghhj .gt_last_grand_summary_row_top {
+&#10;#wimsdtnmbz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -975,10 +945,10 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 6px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#pnvbdbghhj .gt_striped {
+&#10;#wimsdtnmbz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
-&#10;#pnvbdbghhj .gt_table_body {
+&#10;#wimsdtnmbz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -986,7 +956,7 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#pnvbdbghhj .gt_footnotes {
+&#10;#wimsdtnmbz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -999,7 +969,7 @@ df <- read.csv("elimip.csv")
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#pnvbdbghhj .gt_footnote {
+&#10;#wimsdtnmbz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1007,7 +977,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#pnvbdbghhj .gt_sourcenotes {
+&#10;#wimsdtnmbz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1020,57 +990,57 @@ df <- read.csv("elimip.csv")
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#pnvbdbghhj .gt_sourcenote {
+&#10;#wimsdtnmbz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#pnvbdbghhj .gt_left {
+&#10;#wimsdtnmbz .gt_left {
   text-align: left;
 }
-&#10;#pnvbdbghhj .gt_center {
+&#10;#wimsdtnmbz .gt_center {
   text-align: center;
 }
-&#10;#pnvbdbghhj .gt_right {
+&#10;#wimsdtnmbz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
-&#10;#pnvbdbghhj .gt_font_normal {
+&#10;#wimsdtnmbz .gt_font_normal {
   font-weight: normal;
 }
-&#10;#pnvbdbghhj .gt_font_bold {
+&#10;#wimsdtnmbz .gt_font_bold {
   font-weight: bold;
 }
-&#10;#pnvbdbghhj .gt_font_italic {
+&#10;#wimsdtnmbz .gt_font_italic {
   font-style: italic;
 }
-&#10;#pnvbdbghhj .gt_super {
+&#10;#wimsdtnmbz .gt_super {
   font-size: 65%;
 }
-&#10;#pnvbdbghhj .gt_footnote_marks {
+&#10;#wimsdtnmbz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
-&#10;#pnvbdbghhj .gt_asterisk {
+&#10;#wimsdtnmbz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
-&#10;#pnvbdbghhj .gt_indent_1 {
+&#10;#wimsdtnmbz .gt_indent_1 {
   text-indent: 5px;
 }
-&#10;#pnvbdbghhj .gt_indent_2 {
+&#10;#wimsdtnmbz .gt_indent_2 {
   text-indent: 10px;
 }
-&#10;#pnvbdbghhj .gt_indent_3 {
+&#10;#wimsdtnmbz .gt_indent_3 {
   text-indent: 15px;
 }
-&#10;#pnvbdbghhj .gt_indent_4 {
+&#10;#wimsdtnmbz .gt_indent_4 {
   text-indent: 20px;
 }
-&#10;#pnvbdbghhj .gt_indent_5 {
+&#10;#wimsdtnmbz .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1143,20 +1113,20 @@ df <- read.csv("elimip.csv")
   </tfoot>
 </table>
 </div>
-<div id="tdallifaxc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tdallifaxc table {
+<div id="jasrtnturg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jasrtnturg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-&#10;#tdallifaxc thead, #tdallifaxc tbody, #tdallifaxc tfoot, #tdallifaxc tr, #tdallifaxc td, #tdallifaxc th {
+&#10;#jasrtnturg thead, #jasrtnturg tbody, #jasrtnturg tfoot, #jasrtnturg tr, #jasrtnturg td, #jasrtnturg th {
   border-style: none;
 }
-&#10;#tdallifaxc p {
+&#10;#jasrtnturg p {
   margin: 0;
   padding: 0;
 }
-&#10;#tdallifaxc .gt_table {
+&#10;#jasrtnturg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1181,11 +1151,11 @@ df <- read.csv("elimip.csv")
   border-left-width: 2px;
   border-left-color: #D3D3D3;
 }
-&#10;#tdallifaxc .gt_caption {
+&#10;#jasrtnturg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
-&#10;#tdallifaxc .gt_title {
+&#10;#jasrtnturg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1196,7 +1166,7 @@ df <- read.csv("elimip.csv")
   border-bottom-color: #FFFFFF;
   border-bottom-width: 0;
 }
-&#10;#tdallifaxc .gt_subtitle {
+&#10;#jasrtnturg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1207,7 +1177,7 @@ df <- read.csv("elimip.csv")
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
-&#10;#tdallifaxc .gt_heading {
+&#10;#jasrtnturg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1218,12 +1188,12 @@ df <- read.csv("elimip.csv")
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#tdallifaxc .gt_bottom_border {
+&#10;#jasrtnturg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#tdallifaxc .gt_col_headings {
+&#10;#jasrtnturg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1237,7 +1207,7 @@ df <- read.csv("elimip.csv")
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#tdallifaxc .gt_col_heading {
+&#10;#jasrtnturg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1256,7 +1226,7 @@ df <- read.csv("elimip.csv")
   padding-right: 5px;
   overflow-x: hidden;
 }
-&#10;#tdallifaxc .gt_column_spanner_outer {
+&#10;#jasrtnturg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1267,13 +1237,13 @@ df <- read.csv("elimip.csv")
   padding-left: 4px;
   padding-right: 4px;
 }
-&#10;#tdallifaxc .gt_column_spanner_outer:first-child {
+&#10;#jasrtnturg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
-&#10;#tdallifaxc .gt_column_spanner_outer:last-child {
+&#10;#jasrtnturg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
-&#10;#tdallifaxc .gt_column_spanner {
+&#10;#jasrtnturg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1284,10 +1254,10 @@ df <- read.csv("elimip.csv")
   display: inline-block;
   width: 100%;
 }
-&#10;#tdallifaxc .gt_spanner_row {
+&#10;#jasrtnturg .gt_spanner_row {
   border-bottom-style: hidden;
 }
-&#10;#tdallifaxc .gt_group_heading {
+&#10;#jasrtnturg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1312,7 +1282,7 @@ df <- read.csv("elimip.csv")
   vertical-align: middle;
   text-align: left;
 }
-&#10;#tdallifaxc .gt_empty_group_heading {
+&#10;#jasrtnturg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1326,13 +1296,13 @@ df <- read.csv("elimip.csv")
   border-bottom-color: #D3D3D3;
   vertical-align: middle;
 }
-&#10;#tdallifaxc .gt_from_md > :first-child {
+&#10;#jasrtnturg .gt_from_md > :first-child {
   margin-top: 0;
 }
-&#10;#tdallifaxc .gt_from_md > :last-child {
+&#10;#jasrtnturg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
-&#10;#tdallifaxc .gt_row {
+&#10;#jasrtnturg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1350,7 +1320,7 @@ df <- read.csv("elimip.csv")
   vertical-align: middle;
   overflow-x: hidden;
 }
-&#10;#tdallifaxc .gt_stub {
+&#10;#jasrtnturg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1362,7 +1332,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#tdallifaxc .gt_stub_row_group {
+&#10;#jasrtnturg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1375,13 +1345,13 @@ df <- read.csv("elimip.csv")
   padding-right: 5px;
   vertical-align: top;
 }
-&#10;#tdallifaxc .gt_row_group_first td {
+&#10;#jasrtnturg .gt_row_group_first td {
   border-top-width: 2px;
 }
-&#10;#tdallifaxc .gt_row_group_first th {
+&#10;#jasrtnturg .gt_row_group_first th {
   border-top-width: 2px;
 }
-&#10;#tdallifaxc .gt_summary_row {
+&#10;#jasrtnturg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1390,14 +1360,14 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#tdallifaxc .gt_first_summary_row {
+&#10;#jasrtnturg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
-&#10;#tdallifaxc .gt_first_summary_row.thick {
+&#10;#jasrtnturg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
-&#10;#tdallifaxc .gt_last_summary_row {
+&#10;#jasrtnturg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1406,7 +1376,7 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#tdallifaxc .gt_grand_summary_row {
+&#10;#jasrtnturg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1415,7 +1385,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#tdallifaxc .gt_first_grand_summary_row {
+&#10;#jasrtnturg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1424,7 +1394,7 @@ df <- read.csv("elimip.csv")
   border-top-width: 6px;
   border-top-color: #D3D3D3;
 }
-&#10;#tdallifaxc .gt_last_grand_summary_row_top {
+&#10;#jasrtnturg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1433,10 +1403,10 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 6px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#tdallifaxc .gt_striped {
+&#10;#jasrtnturg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
-&#10;#tdallifaxc .gt_table_body {
+&#10;#jasrtnturg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1444,7 +1414,7 @@ df <- read.csv("elimip.csv")
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#tdallifaxc .gt_footnotes {
+&#10;#jasrtnturg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1457,7 +1427,7 @@ df <- read.csv("elimip.csv")
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#tdallifaxc .gt_footnote {
+&#10;#jasrtnturg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1465,7 +1435,7 @@ df <- read.csv("elimip.csv")
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#tdallifaxc .gt_sourcenotes {
+&#10;#jasrtnturg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1478,57 +1448,57 @@ df <- read.csv("elimip.csv")
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#tdallifaxc .gt_sourcenote {
+&#10;#jasrtnturg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#tdallifaxc .gt_left {
+&#10;#jasrtnturg .gt_left {
   text-align: left;
 }
-&#10;#tdallifaxc .gt_center {
+&#10;#jasrtnturg .gt_center {
   text-align: center;
 }
-&#10;#tdallifaxc .gt_right {
+&#10;#jasrtnturg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
-&#10;#tdallifaxc .gt_font_normal {
+&#10;#jasrtnturg .gt_font_normal {
   font-weight: normal;
 }
-&#10;#tdallifaxc .gt_font_bold {
+&#10;#jasrtnturg .gt_font_bold {
   font-weight: bold;
 }
-&#10;#tdallifaxc .gt_font_italic {
+&#10;#jasrtnturg .gt_font_italic {
   font-style: italic;
 }
-&#10;#tdallifaxc .gt_super {
+&#10;#jasrtnturg .gt_super {
   font-size: 65%;
 }
-&#10;#tdallifaxc .gt_footnote_marks {
+&#10;#jasrtnturg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
-&#10;#tdallifaxc .gt_asterisk {
+&#10;#jasrtnturg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
-&#10;#tdallifaxc .gt_indent_1 {
+&#10;#jasrtnturg .gt_indent_1 {
   text-indent: 5px;
 }
-&#10;#tdallifaxc .gt_indent_2 {
+&#10;#jasrtnturg .gt_indent_2 {
   text-indent: 10px;
 }
-&#10;#tdallifaxc .gt_indent_3 {
+&#10;#jasrtnturg .gt_indent_3 {
   text-indent: 15px;
 }
-&#10;#tdallifaxc .gt_indent_4 {
+&#10;#jasrtnturg .gt_indent_4 {
   text-indent: 20px;
 }
-&#10;#tdallifaxc .gt_indent_5 {
+&#10;#jasrtnturg .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2025,9 +1995,10 @@ plotcmm.ranef <- function(cmm1) {
          x = paste0(rn, "Departments"),
          y = paste0(rn, "Effect via conditional modes"))
 }
+plotcmm.ranef(cmm1)
 ```
 
-![](figures/Frequency%20of%20protective%20behaviour:%20Random%20effects%20plot-1.png)<!-- -->
+![](elimip2025_files/figure-gfm/Frequency%20of%20protective%20behaviour:%20Random%20effects%20plot-1.png)<!-- -->
 
 ## 2.2. Count of protective behaviours
 
@@ -2951,289 +2922,10 @@ plotcompois.ranef <- function(compois1) {
       y = "Effect via conditional modes"
     )
 }
+plotcompois.ranef(compois1)
 ```
 
-![](figures/Count%20of%20protective%20behaviour:%20Random%20effects%20plot-1.png)<!-- -->
-
-\#Interactive map
-
-``` r
-#Departement geometry
-map_fr <- geojson_sf("departements.geojson")
-plot(map_fr$geometry)
-```
-
-![](elimip2025_files/figure-gfm/Interactive%20map-1.png)<!-- -->
-
-``` r
-map_fr$departement <- map_fr$code
-map_fr$departement <- paste(map_fr$nom,map_fr$code)
-
-fr <- stringdist_full_join(
-  df, map_fr,
-  by = "departement",  # Column to match on
-  method = "jw",  # Jaro-Winkler distance metric
-  max_dist = 0.21,  # Maximum allowable distance for a match
-  distance_col = "fuzzy_dist"
-) #fuzzy match departments in survey with geom map
-
-fr_check <- fr %>%
-  dplyr:: select(departement.x, departement.y)
-
-##Departement
-#get averages of count_prev for each departement
-mean_counts <- fr %>%
-  group_by(nom) %>%
-  summarise(count_prev_avg = mean(count_prev, na.rm = TRUE))
-map_fr <- map_fr %>%
-  full_join(mean_counts, by = "nom")
-#get medians of count_prev for each departement
-median_counts <- fr %>%
-  group_by(nom) %>%
-  summarise(count_prev_median = median(count_prev, na.rm = TRUE))
-map_fr <- map_fr %>%
-  full_join(median_counts, by = "nom")
-#get n of count_prev for each departement
-sample_counts <- fr %>%
-  group_by(nom) %>%
-  summarise(sample_size = n())
-map_fr <- map_fr %>%
-  full_join(sample_counts, by = "nom")
-
-#get region based on dpt
-dep2region <- read.csv("dep2region.csv")
-
-
-##REGION
-
-#Region geometry
-regions_fr <- geojson_sf("regions.geojson")
-plot(regions_fr$geometry)
-```
-
-![](elimip2025_files/figure-gfm/Interactive%20map-2.png)<!-- -->
-
-``` r
-#rename variable
-regions_fr <- regions_fr %>%
-  rename(region = nom)
-
-#fuzzy match names of regions
-regions_fr2 <- stringdist_inner_join(
-  df, regions_fr,
-  by = "region",  # Column to match on
-  method = "jw",  # Jaro-Winkler distance metric
-  max_dist = 0.21,  # Maximum allowable distance for a match
-  distance_col = "fuzzy_dist") #fuzzy match departments in survey with geom map
-#check that it fuzzy matched correctly
-regions_fr3 <- regions_fr2 %>%
-  dplyr::select(region.x, region.y)#checked
-regions_fr2 <- regions_fr2 %>%
-  rename(nom = region.y)
-regions_fr2 <- regions_fr2 %>%
-  rename(region = region.x)
-#rename variable
-regions_fr <- regions_fr %>%
-  rename(nom = region)
-
-#join both sides
-regions_fr2_unique <- regions_fr2 %>%
-  distinct(nom, .keep_all = TRUE)
-regions_fr <- regions_fr %>%
-  left_join(regions_fr2_unique %>% dplyr::select(nom, region), by = "nom")
-
-#get averages for each region
-mean_counts_region <- fr %>%
-  group_by(region) %>%
-  summarise(count_prev_avg_region = mean(count_prev, na.rm = TRUE))
-#join mean_counts_region to region map
-regions_fr <- regions_fr %>%
-  full_join(mean_counts_region, by = "region")
-
-#get median for each region
-median_counts_region <- fr %>%
-  group_by(region) %>%
-  summarise(count_prev_median_region = median(count_prev, na.rm = TRUE))
-#join mean_counts_region to region map
-regions_fr <- regions_fr %>%
-  full_join(median_counts_region, by = "region")
-
-#get n of count_prev for each departement
-sample_counts_region <- fr %>%
-  group_by(region) %>%
-  summarise(sample_size = n())
-regions_fr <- regions_fr %>%
-  full_join(sample_counts_region, by = "region")
-
-#get % of people who often protect themselves
-regions_fr <- regions_fr %>%
-  left_join(
-    fr %>%
-      filter(freq_prevention == "Several times a week") %>%
-      group_by(region) %>%
-      summarise(often_freq = n()) %>%
-      right_join(
-        fr %>%
-          group_by(region) %>%
-          summarise(total = n()),
-        by = "region"
-      ) %>%
-      mutate(often_freq = ifelse(is.na(often_freq), 0, often_freq / total * 100)) %>%
-      mutate(often_freq = paste0(format(round(often_freq, 2), nsmall = 2))),
-    by = "region"
-  )
-regions_fr$often_freq <- as.numeric(regions_fr$often_freq)
-
-#colour palette for department count_prev_avg
-pal1 <- colorNumeric("Greys", domain = map_fr$count_prev_avg)
-pal2 <- colorNumeric("Greys", domain = map_fr$count_prev_median)
-pal3 <- colorNumeric("Greys", domain = regions_fr$count_prev_avg_region)
-pal4 <- colorNumeric("Greys", domain = regions_fr$count_prev_median_region)
-pal5 <- colorNumeric("Greys", domain = regions_fr$often_freq)
-
-#make the interactive map
-basemap <- leaflet() %>%
-  #add map provider tiles
-  addProviderTiles(providers$OpenStreetMap) %>%
-  #add AVG COUNT polygons
-  addPolygons(
-    data = map_fr,
-    fillColor = ~pal1(count_prev_avg),
-    weight = 2,
-    opacity = 1,
-    color = "grey",
-    highlightOptions = highlightOptions(
-      weight = 5,
-      color = "#666",
-      dashArray = "",
-      fillOpacity = 0.7,
-      bringToFront = TRUE),
-    dashArray = "3",
-    fillOpacity = 0.7,
-    label = ~paste0(nom, " (n=", sample_size, ") - Variety of protective behaviours (average): ",
-                    formatC(count_prev_avg, big.mark = "'")),
-    labelOptions = labelOptions(
-      style = list("font-weight" = "normal", padding = "3px 8px"),
-      textsize = "15px",
-      direction = "auto"),
-    group = "Department:Variety of protective behaviours (average)"
-  ) %>%
-  addLegend(
-    pal = pal1,
-    values = map_fr$count_prev_avg,
-    opacity = 0.5, 
-    labFormat = labelFormat(big.mark = "'"),
-    title = "Variety of protective behaviours (average)",
-    position = "bottomright"
-  ) %>%
-  #add MEDIAN COUNT polygons
-  addPolygons(
-    data = map_fr,
-    fillColor = ~pal2(count_prev_median),
-    weight = 2,
-    opacity = 1,
-    color = "grey",
-    highlightOptions = highlightOptions(
-      weight = 5,
-      color = "#666",
-      dashArray = "",
-      fillOpacity = 0.7,
-      bringToFront = TRUE),
-    dashArray = "3",
-    fillOpacity = 0.7,
-    label = ~paste0(nom, " (n=", sample_size, ") - Variety of protective behaviours: ",
-                    formatC(count_prev_median, big.mark = "'")),
-    labelOptions = labelOptions(
-      style = list("font-weight" = "normal", padding = "3px 8px"),
-      textsize = "15px",
-      direction = "auto"),
-    group = "Department: Variety of protective behaviours (median)"
-  ) %>%
-  #add Count prev avg per region  
-  addPolygons(
-    data = regions_fr,
-    fillColor = ~pal3(count_prev_avg_region),
-    weight = 2,
-    opacity = 1,
-    color = "grey",
-    highlightOptions = highlightOptions(
-      weight = 5,
-      color = "#666",
-      dashArray = "",
-      fillOpacity = 0.7,
-      bringToFront = TRUE),
-    dashArray = "3",
-    fillOpacity = 0.7,
-    label = ~paste0(nom, " (n=", sample_size, ") - Variety of protective behaviours (average): ",
-                    formatC(count_prev_avg_region, big.mark = "'")),
-    labelOptions = labelOptions(
-      style = list("font-weight" = "normal", padding = "3px 8px"),
-      textsize = "15px",
-      direction = "auto"),
-    group = "Region: Variety of protective behaviours (average)"
-  ) %>%
-  #add Count prev median per region  
-  addPolygons(
-    data = regions_fr,
-    fillColor = ~pal4(count_prev_median_region),
-    weight = 2,
-    opacity = 1,
-    color = "grey",
-    highlightOptions = highlightOptions(
-      weight = 5,
-      color = "#666",
-      dashArray = "",
-      fillOpacity = 0.7,
-      bringToFront = TRUE),
-    dashArray = "3",
-    fillOpacity = 0.7,
-    label = ~paste0(nom, " (n=", sample_size, ") - Variety of protective behaviours (median): ",
-                    formatC(count_prev_median_region, big.mark = "'")),
-    labelOptions = labelOptions(
-      style = list("font-weight" = "normal", padding = "3px 8px"),
-      textsize = "15px",
-      direction = "auto"),
-    group = "Region: Variety of protective behaviours (median)"
-  ) %>%
-  # add often_freq polygon for region
-  addPolygons(
-    data = regions_fr,
-    fillColor = ~pal5(often_freq),
-    weight = 2,
-    opacity = 1,
-    color = "grey",
-    highlightOptions = highlightOptions(
-      weight = 5,
-      color = "#666",
-      dashArray = "",
-      fillOpacity = 0.7,
-      bringToFront = TRUE),
-    dashArray = "3",
-    fillOpacity = 0.7,
-    label = ~paste0(nom, " (n=", sample_size, ") - High frequency of protective behaviour : ",
-                    formatC(often_freq, big.mark = "'"), "%"),
-    labelOptions = labelOptions(
-      style = list("font-weight" = "normal", padding = "3px 8px"),
-      textsize = "15px",
-      direction = "auto"),
-    group = "Region: High frequency of protective behaviour (%)"
-  ) %>%
-  addLegend(
-    pal = pal5,
-    values = regions_fr$often_freq,
-    opacity = 0.5, 
-    labFormat = labelFormat(suffix = "%"),
-    title = "High frequency of protective behaviour",
-    position = "bottomright",
-    group = "Region: High frequency of protective behaviour (%)"
-  ) %>%
-  #add layer controls
-  addLayersControl(
-    overlayGroups = c("Department: Variety of protective behaviours (average)","Department: Variety of protective behaviours (median)", "Region: Variety of protective behaviours (average)", "Region: Variety of protective behaviours (median)","Region: High frequency of protective behaviour (%)"),
-    position = "topleft",
-    options = layersControlOptions(collapsed = FALSE, autoZIndex = T)) %>%
-  saveWidget(here::here("basemap.html"))
-```
+![](elimip2025_files/figure-gfm/Count%20of%20protective%20behaviours:%20Random%20effects%20plot-1.png)<!-- -->
 
 ``` r
 #Calculate likelihood profile CIs
