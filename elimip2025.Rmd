@@ -274,7 +274,7 @@ var_label(df) <- list(
 
 ```{r Table: Sample description per UDA5 region, echo = FALSE}
 # Create a descriptive table per UDA5 region
-df %>% 
+tbl1 <- df %>% 
      dplyr::select(gender, age_group2, region_uda5, commune_type, edu2, precarity2, chronic_dis, freq_bites_cat, freq_prevention) %>%
   tbl_summary(percent = "column",
               by=region_uda5,
@@ -282,8 +282,9 @@ df %>%
   add_overall() %>%
   modify_spanning_header (c("stat_1", "stat_2", "stat_3", "stat_4", "stat_5") ~ "**Region**") %>%
   modify_header(label ~ "**Characteristic**") %>%
-  modify_caption("**Table 1. Description of the study population.**") %>%
-  as_flex_table()
+  modify_caption("**Table 1. Description of the study population.**")
+tbl1 <- as_kable(tbl1)
+tbl1
 ```
 
 ```{r Table: Knowledge, attitudes, and practices per UDA5 region, echo = FALSE}
@@ -300,12 +301,13 @@ df %>%
   add_overall() %>%
   modify_spanning_header(c("stat_1", "stat_2", "stat_3", "stat_4", "stat_5") ~ "**Region**") %>%
   modify_footnote(all_stat_cols() ~ "Median (IQR); Mean (SD)") %>%
-  modify_caption("**Table 2. Knowledge, attitudes, and practices of mosquito-borne diseases and prevention of the study population per UDA5 region**")
+  modify_caption("**Table 2. Knowledge, attitudes, and practices of mosquito-borne diseases and prevention of the study population per UDA5 region**") %>%
+  as_kable()
 ```
 
 ```{r Table: Protective behaviours per UDA5 region, echo = FALSE}
 # Create a protective behaviours table per UDA5 region
-df %>% 
+tbl3 <- df %>% 
      dplyr::select(region_uda5, activity_gouttieres, activity_pieges, activity_vetements, activity_insecticide, activity_moustiquaires, activity_vidage, activity_spirales, activity_repulsif, activity_recipients) %>%
   tbl_summary(percent = "column",
               by=region_uda5,
@@ -313,7 +315,8 @@ df %>%
   add_overall() %>%
   modify_spanning_header(c("stat_1", "stat_2", "stat_3", "stat_4", "stat_5") ~ "**Region**") %>%
   modify_header(label ~ "**Protective behaviour**") %>%
-  modify_caption("**Table 3. Mosquito-borne disease protective behaviours per region per UDA5 region**") %>% 
-  as_gt()
+  modify_caption("**Table 3. Mosquito-borne disease protective behaviours per region per UDA5 region**")
+tbl3 <- as_gt(tbl3)
+tbl3 %>% gt::as_raw_html(inline_css = FALSE)
 ```
 
