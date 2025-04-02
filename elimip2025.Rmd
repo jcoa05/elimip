@@ -273,7 +273,7 @@ var_label(df) <- list(
 
 ```{r Table: Sample description per UDA5 region, echo = FALSE}
 # Create a descriptive table per UDA5 region
-tbl1 <- df %>% 
+df %>% 
      dplyr::select(gender, age_group2, region_uda5, commune_type, edu2, precarity2, chronic_dis, freq_bites_cat, freq_prevention) %>%
   tbl_summary(percent = "column",
               by=region_uda5,
@@ -311,7 +311,7 @@ df %>%
 
 ```{r Table: Protective behaviours per UDA5 region, echo = FALSE}
 # Create a protective behaviours table per UDA5 region
-tbl3 <- df %>% 
+df %>% 
      dplyr::select(region_uda5, activity_gouttieres, activity_pieges, activity_vetements, activity_insecticide, activity_moustiquaires, activity_vidage, activity_spirales, activity_repulsif, activity_recipients) %>%
   tbl_summary(percent = "column",
               by=region_uda5,
