@@ -470,8 +470,4 @@ Marginal R<sup>2</sup> / Conditional R<sup>2</sup>
 plotcmm.ranef(cmm1)
 ```
 
-![](figs/plotcmmranef-1.png)<!-- -->
-
-``` r
-ggsave("figs/plotcmm.ranef.png", plot = last_plot(), dpi = "retina", width = 10, height = 6, units = "in")
-```
+![](elimip2025_files/figure-gfm/plotcmmranef-1.png)<!-- -->

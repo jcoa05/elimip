@@ -6,7 +6,7 @@ output: rmarkdown::github_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, fig.path = "figs/", fig.width = 10, fig.height = 6)
+knitr::opts_chunk$set(echo = TRUE, fig.width = 10, fig.height = 6)
 ```
 
 # Introduction
@@ -385,7 +385,7 @@ sapply(seq_along(nAGQ_values), function(i) {
 sjPlot:: tab_model(cmm1, show.se= T, show.stat= T)
 ```
 
-```{r Frequency of protective behaviour: Random effects plot, dpi=600, echo=FALSE, fig.show="asis", warning=FALSE, message=FALSE}
+```{r Frequency of protective behaviour: Random effects plot, echo=FALSE, warning=FALSE, message=FALSE}
 plotcmm.ranef <- function(cmm1) {
   rn <- names(cmm1[["stDev"]]) 
   nc <- length(cmm1[["ranef"]]) 
@@ -403,12 +403,8 @@ plotcmm.ranef <- function(cmm1) {
          x = paste0(rn, "Departments"),
          y = paste0(rn, "Effect via conditional modes"))
 }
-
-plotcmm.ranef(cmm1)
-
-ggsave("figs/plotcmm.ranef.png", plot = last_plot(), dpi = "retina", width = 10, height = 6, units = "in")
-
-
-
 ```
 
+```{r plotcmmranef}
+plotcmm.ranef(cmm1)
+```
