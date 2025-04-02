@@ -466,8 +466,4 @@ Marginal R<sup>2</sup> / Conditional R<sup>2</sup>
 </tr>
 </table>
 
-``` r
-plotcmm.ranef(cmm1)
-```
-
-![](elimip2025_files/figure-gfm/plotcmmranef-1.png)<!-- -->
+![](figs/plotcmmranef-1.png)<!-- -->

@@ -405,6 +405,6 @@ plotcmm.ranef <- function(cmm1) {
 }
 ```
 
-```{r plotcmmranef}
+```{r plotcmmranef, echo=FALSE, fig.path='figs/', fig.show='asis'}
 plotcmm.ranef(cmm1)
 ```
