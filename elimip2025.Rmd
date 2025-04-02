@@ -406,7 +406,7 @@ plotcmm.ranef <- function(cmm1) {
 
 plotcmm.ranef(cmm1)
 
-ggsave("plotcmm.ranef.png", plot = last_plot(), dpi = "retina", width = 10, height = 6, units = "in")
+ggsave("figs/plotcmm.ranef.png", plot = last_plot(), dpi = "retina", width = 10, height = 6, units = "in")
 
 
 
@@ -502,7 +502,7 @@ plotcompois.ranef <- function(compois1) {
 }
 plotcompois.ranef(compois1)
 
-ggsave("plotcompois.ranef.png", plot = last_plot(), dpi = "retina", width = 10, height = 6, units = "in")
+ggsave("figs/plotcompois.ranef.png", plot = last_plot(), dpi = "retina", width = 10, height = 6, units = "in")
 ```
 
 ```{r Extra bits}

@@ -1392,7 +1392,7 @@ plotcompois.ranef(compois1)
 ![](figs/Count%20of%20protective%20behaviours:%20Random%20effects%20plot-1.png)<!-- -->
 
 ``` r
-ggsave("plotcompois.ranef.png", plot = last_plot(), dpi = "retina", width = 10, height = 6, units = "in")
+ggsave("figs/plotcompois.ranef.png", plot = last_plot(), dpi = "retina", width = 10, height = 6, units = "in")
 ```
 
 ``` r
