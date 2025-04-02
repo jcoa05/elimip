@@ -403,8 +403,112 @@ plotcmm.ranef <- function(cmm1) {
          x = paste0(rn, "Departments"),
          y = paste0(rn, "Effect via conditional modes"))
 }
+#ggsave("figs/plotcmmranef.png", plot = last_plot(), dpi = "retina", width = 10, height = 6, units = "in")
 ```
 
-```{r plotcmmranef, echo=FALSE, fig.path='figs/', fig.show='asis'}
+```{r plotcmm, echo=FALSE, fig.path='figs/', fig.show='asis', fig.retina=2}
 plotcmm.ranef(cmm1)
+```
+
+## 2.2. Count of protective behaviours
+
+```{r Count of protective behaviours: Model selection, echo = TRUE, results = "hide"}
+# Theory-informed model that includes a minimally sufficient set of confounding variables of the exposure-outcome relationship
+compois2 <- glmmTMB(count_prev ~ freq_bites_num + disease_fear + disease_prob + age + precarity2 + gender + edu2 + mbd_know + chronic_dis + confiance_nat + confiance_reg + hist_mborne + commune_type + (1|departement), data=df, ziformula=~1+freq_bites_num, family=compois(), control = glmmTMBControl(optCtrl = list(trace = 1), parallel = 4))
+
+# We remove independent variables that have non significant associations with the outcome variable (p-value<0.05) in one block
+# Confounders age and sex are kept regardless
+compois1 <- glmmTMB(count_prev ~ freq_bites_num + disease_fear + edu2 + mbd_know + chronic_dis + + gender + age + (1|departement), data=df, ziformula=~1+freq_bites_num, family=compois(), control = glmmTMBControl(optCtrl = list(trace = 1), parallel = 4))
+
+# Likelihood-ratio test: It evaluates if the model with fewer parameters performs significantly worse than the full mode
+compois_lrt <- lrtest(compois1, compois2)
+#alternative: anova(compois1, compois2, test="LRT") #both are equivalent in this case
+compois_lrt
+```
+
+```{r Count of protective behaviours: LRT, echo=FALSE}
+# Interpretation of likelihood ratio test results
+if (compois_lrt$"Pr(>Chisq)"[2] < 0.05) 
+{
+  cat("Reject the null hypothesis. The full model is significantly better than 
+        the nested model.\n")
+} else {
+  cat("Fail to reject the null hypothesis. The nested model is sufficient.\n")
+}
+```
+
+```{r Count of protective behaviours: Model evaluation}
+#Check collinearity
+compois_coll <- check_collinearity(compois1, ci = 0.95, verbose = TRUE)
+compois_coll
+if (all(compois_coll$VIF < 2)) {
+  cat("All VIFs are below the conventional threshold of 2.\n")
+} else {
+  cat("At least one VIF is above the conventional threshold of 2.\n")
+}
+
+#Check dispersion
+check_overdispersion(compois1)
+
+#Check zero-inflation
+testZeroInflation(compois1)
+
+#Running diagnostics on the model
+diagnose(compois1)
+
+#Check simulated residuals
+simres_compois1 <- simulateResiduals(fittedModel = compois1, re.form = NULL)
+plot(simres_compois1)
+
+#Plot residuals for each predictor to examine misfits
+testCategorical(simres_compois1, catPred = df$freq_bites_num)
+testCategorical(simres_compois1, catPred = df$edu2)
+testCategorical(simres_compois1, catPred = df$chronic_dis)
+testCategorical(simres_compois1, catPred = df$gender)
+testCategorical(simres_compois1, catPred = df$mbd_know)
+plotResiduals(simres_compois1, form = df$disease_fear)
+plotResiduals(simres_compois1, form = df$age)
+```
+
+```{r Count of protective behaviours: Final model, echo=FALSE}
+sjPlot:: tab_model(compois1, show.se= T, show.stat= T)
+```
+
+```{r Count of protective behaviours: Random effects plot, dpi=500}
+plotcompois.ranef <- function(compois1) {
+  re_compois1_data <- data.frame(
+    "intercepts" = ranef(compois1)$cond$departement$`(Intercept)`,
+    "sd" = sqrt(TMB::sdreport(compois1$obj, getJointPrecision=TRUE)$diag.cov.random),
+    "departement" = factor(row.names(ranef(compois1)$cond$departement))
+  )
+  
+  re_compois1_data$ucl <- re_compois1_data$intercepts + (re_compois1_data$sd * 1.96)
+  re_compois1_data$lcl <- re_compois1_data$intercepts - (re_compois1_data$sd * 1.96)
+  
+  ggplot(re_compois1_data, aes(x = reorder(departement, intercepts), y = intercepts)) +
+    geom_point() + 
+    geom_errorbar(aes(ymin = lcl, ymax = ucl), width = 0.2) +
+    geom_hline(yintercept = 0, linetype = "dashed") +
+    theme_minimal() +
+    theme(axis.text.x = element_blank(),
+          axis.ticks.x = element_blank()) +
+    labs(
+      title = "Effect of department on variety of preventive behaviour via conditional modes",
+      x = "Departments",
+      y = "Effect via conditional modes"
+    )
+}
+#ggsave("figs/plotcompois.ranef.png", plot = last_plot(), dpi = "retina", width = 10, height = 6, units = "in")
+```
+
+```{r plotcompois, echo=FALSE, fig.path='figs/', fig.show='asis', fig.retina=2}
+plotcompois.ranef(compois1)
+```
+
+
+```{r Extra bits}
+#Calculate likelihood profile CIs
+#CI_zinbmm_final <- confint(zinbmm_final, trace=1, level = 0.95, method = c("profile"), estimate = TRUE, include_nonest = TRUE, full = TRUE) #similar to Wald-based CIs
+#likelihood profile CIs are more accurate but much slower
+#Fits natural splines separately to the points from each half of the profile for each specified parameter (i.e., values above and below the MLE), then finds the inverse functions to estimate the endpoints of the confidence interval
 ```
