@@ -1,7 +1,6 @@
 Mosquito-borne diseases and protective behavior in France, 2023
 ================
-Juan Carlos Ocampo
-2025-04-02
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # Introduction
 
