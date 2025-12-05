@@ -3,11 +3,7 @@
 ![R](https://img.shields.io/badge/R-%3E%3D4.4.0-blue?logo=r&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 
-This repository contains the source code and reproducibility scripts for the study **"Mosquito-borne disease knowledge, attitudes, and practices amongst the general population in metropolitan France"**, published in *Discover Public Health* (2025).
-
-## 📄 Publication
-
-If you use this code or methodology in your work, please cite the original article:
+This repository contains the source code and reproducibility scripts for the study **"Mosquito-borne disease knowledge, attitudes, and practices amongst the general population in metropolitan France"**, published in *Discover Public Health* (2025). If you use this code or methodology, please cite:
 
 > **Ocampo, J.C., Mueller, J.E. & Dussault, J.** (2025). Mosquito-borne disease knowledge, attitudes, and practices amongst the general population in metropolitan France. *Discover Public Health*, 22:545. [https://doi.org/10.1186/s12982-025-00934-7](https://doi.org/10.1186/s12982-025-00934-7)
 
