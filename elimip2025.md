@@ -1,12 +1,14 @@
 Mosquito-borne diseases and protective behavior in France, 2023
 ================
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![DOI](https://img.shields.io/badge/DOI-10.1186%2Fs12982--025--00934--7-blue)](https://doi.org/10.1186/s12982-025-00934-7)
+[![Made with R](https://img.shields.io/badge/Made%20with-R-276DC3.svg)](https://www.r-project.org/)
 
-These analyses are part of a published, peer-reviewed article accessible here: [https://link.springer.com/article/10.1186/s12982-025-00934-7](https://link.springer.com/article/10.1186/s12982-025-00934-7)
+These analyses are derived from a published, peer-reviewed article.
 
-If you use this work, please cite the article as:
+**Access the full article here:** [https://link.springer.com/article/10.1186/s12982-025-00934-7](https://link.springer.com/article/10.1186/s12982-025-00934-7)
 
-Ocampo Alvarado, J.C., Mueller, J.E. & Dussault, J. Mosquito-borne disease knowledge, attitudes, and practices amongst the general population in metropolitan France. *Discov Public Health* 22, 545 (2025). https://doi.org/10.1186/s12982-025-00934-7
+**Please cite this work as:** Ocampo, J.C., Mueller, J.E. & Dussault, J. Mosquito-borne disease knowledge, attitudes, and practices amongst the general population in metropolitan France. *Discov Public Health* 22, 545 (2025). https://doi.org/10.1186/s12982-025-00934-7
 
 # Introduction
 
