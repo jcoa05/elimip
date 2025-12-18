@@ -673,9 +673,9 @@ ui <- dashboardPage(
             solidHeader = TRUE,
             title = "Methodology and data sources",
             
-            h4("ELIM-IP project"),
-            p(HTML("<strong>ELIM-IP</strong> (Exploring Levers to Increase Mosquito-borne 
-                   Illness Prevention) is a research project combining a Knowledge, 
+            h4("Exploring Levers to Increase Mosquito-borne 
+                   Illness Prevention (ELIM-IP)"),
+            p(HTML("ELIM-IP is a research project combining a Knowledge, 
                    Attitudes, and Practices (KAP) survey with a Discrete Choice Experiment 
                    (DCE) to understand public preferences for mosquito control interventions 
                    in metropolitan France.")),
